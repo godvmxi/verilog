@@ -18,7 +18,11 @@
 
 int main()
 {
-  printf("Hello from Nios II!\n");
+   while(1){
+    printf("Hello from Nios II!\n");
+    usleep(1000000);
+    
+   }
 
   return 0;
 }

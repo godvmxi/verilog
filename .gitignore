@@ -25,6 +25,10 @@
 # ignore hdl source files in top level directory
 #*.vhd
 #*.v
+*.o
+*.log
+*.elf
+*/.metadata/*
 
 # ignore Quartus II generated files
 *sopc_*
