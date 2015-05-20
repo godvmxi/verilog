@@ -26,8 +26,9 @@ int main()
     while(1){
         for(i=0;i<4;i++){
             LED->DATA = 1 << i;
-            usleep(100000);
+            usleep(500000);
         }
+       // LCD_PWM->DATA = 1;
     }
 
   return 0;
