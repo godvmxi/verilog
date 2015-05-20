@@ -44,7 +44,7 @@ int main()
     int i = 0 ;
 
     uart.init();
-  printf("Hello from Nios II!\n");
+    printf("Hello from Nios II!\n");
   
     while(1){
         for(i=0;i<4;i++){
@@ -53,16 +53,17 @@ int main()
         }
         //uart.send_string(sizeof(buffer),buffer);
         syslog("-->on");
-
-       LCD_PWM->DATA = 1;
-       for(i=0;i<4;i++){
+        LCD_PWM->DATA = 1;
+       
+       
+        for(i=0;i<4;i++){
             LED->DATA = 1 << i;
             usleep(500000);
         }
         //uart.send_string(sizeof(buffer),buffer);
         syslog("-->off");
-       LCD_PWM->DATA = 0;
+        LCD_PWM->DATA = 0;
     }
 
-  return 0;
+    return 0;
 }
