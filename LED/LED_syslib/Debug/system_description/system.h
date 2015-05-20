@@ -3,7 +3,7 @@
  * Machine generated for a CPU named "cpu" as defined in:
  * D:\work\FPGA\quartus\nios_ii\LED\kernel.ptf
  *
- * Generated: 2015-05-19 00:50:57.346
+ * Generated: 2015-05-19 01:34:54.331
  *
  */
 
@@ -129,7 +129,7 @@ DO NOT MODIFY THIS FILE
 #define SYSID_BASE 0x00001810
 #define SYSID_SPAN 8
 #define SYSID_ID 12345678u
-#define SYSID_TIMESTAMP 1431967266u
+#define SYSID_TIMESTAMP 1431969997u
 #define SYSID_REGENERATE_VALUES 0
 #define ALT_MODULE_CLASS_sysid altera_avalon_sysid
 

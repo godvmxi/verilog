@@ -92,19 +92,19 @@
    element kernel
    {
    }
-   element PIO_LED.s1
-   {
-      datum baseAddress
-      {
-         value = "6144";
-         type = "long";
-      }
-   }
    element sdram.s1
    {
       datum baseAddress
       {
          value = "67108864";
+         type = "long";
+      }
+   }
+   element PIO_LED.s1
+   {
+      datum baseAddress
+      {
+         value = "6144";
          type = "long";
       }
    }
@@ -142,7 +142,7 @@
  <parameter name="projectName" value="HELLO.qpf" />
  <parameter name="sopcBorderPoints" value="true" />
  <parameter name="systemHash" value="3759891294" />
- <parameter name="timeStamp" value="1431967196477" />
+ <parameter name="timeStamp" value="1431969996549" />
  <module kind="clock_source" version="11.0" enabled="1" name="clk">
   <parameter name="clockFrequency" value="100000000" />
   <parameter name="clockFrequencyKnown" value="true" />

@@ -3,7 +3,7 @@
 # Machine generated for a CPU named "cpu" as defined in:
 # D:\work\FPGA\quartus\nios_ii\LED\kernel.ptf
 #
-# Generated: 2015-05-19 00:51:58.332
+# Generated: 2015-05-19 01:35:54.957
 
 # DO NOT MODIFY THIS FILE
 #
@@ -48,7 +48,7 @@ sim: $(SIMDIR)/dummy_file
 .PHONY: sim
 
 dummy_verifysysid_file:
-	nios2-download $(JTAG_CABLE)                                --sidp=0x00001810 --id=12345678 --timestamp=1431967266
+	nios2-download $(JTAG_CABLE)                                --sidp=0x00001810 --id=12345678 --timestamp=1431969997
 .PHONY: dummy_verifysysid_file
 
 do_delete_placeholder_warning:

@@ -1555,7 +1555,7 @@ SYSTEM kernel
          Has_Clock = "1";
          View 
          {
-            Settings_Summary = "System ID (at last Generate):<br> <b>00BC614E</b>    (unique ID tag) <br> <b>555A1622</b> (timestamp: Tue May 19, 2015 @0:41 AM)";
+            Settings_Summary = "System ID (at last Generate):<br> <b>00BC614E</b>    (unique ID tag) <br> <b>555A20CD</b> (timestamp: Tue May 19, 2015 @1:26 AM)";
             MESSAGES 
             {
             }
@@ -1564,7 +1564,7 @@ SYSTEM kernel
       WIZARD_SCRIPT_ARGUMENTS 
       {
          id = "12345678u";
-         timestamp = "1431967266u";
+         timestamp = "1431969997u";
          regenerate_values = "0";
          MAKE 
          {
@@ -1573,7 +1573,7 @@ SYSTEM kernel
                verifysysid 
                {
                   All_Depends_On = "0";
-                  Command = "nios2-download $(JTAG_CABLE)                                --sidp=0x00001810 --id=12345678 --timestamp=1431967266";
+                  Command = "nios2-download $(JTAG_CABLE)                                --sidp=0x00001810 --id=12345678 --timestamp=1431969997";
                   Is_Phony = "1";
                   Target_File = "dummy_verifysysid_file";
                }

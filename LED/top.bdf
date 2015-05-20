@@ -289,6 +289,7 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
+	(annotation_block (location)(rect 1280 240 1336 256))
 )
 (pin
 	(bidir)
@@ -496,15 +497,7 @@ applicable agreement for further details.
 	(pt 424 184)
 )
 (connector
-	(pt 704 232)
-	(pt 696 232)
-)
-(connector
 	(pt 184 440)
-	(pt 696 440)
-)
-(connector
-	(pt 696 232)
 	(pt 696 440)
 )
 (connector
@@ -587,4 +580,12 @@ applicable agreement for further details.
 	(pt 1048 232)
 	(pt 1104 232)
 	(bus)
+)
+(connector
+	(pt 696 264)
+	(pt 704 264)
+)
+(connector
+	(pt 696 440)
+	(pt 696 264)
 )

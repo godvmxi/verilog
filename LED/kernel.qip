@@ -8,5 +8,5 @@ set_global_assignment -name SOURCE_FILE [file join $::quartus(qip_path) cpu.ocp]
 # jtag_uart
 # PIO_LED
 # null
-set_global_assignment -name SOPC_BUILDER_SIGNATURE_ID 80FA5B0DEF630000014D67E68EAB 
+set_global_assignment -name SOPC_BUILDER_SIGNATURE_ID 80FA5B0DEF630000014D68118721 
  
