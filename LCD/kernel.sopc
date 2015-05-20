@@ -58,11 +58,19 @@
          type = "int";
       }
    }
+   element RS232
+   {
+      datum _sortIndex
+      {
+         value = "13";
+         type = "int";
+      }
+   }
    element jtag_uart.avalon_jtag_slave
    {
       datum baseAddress
       {
-         value = "6264";
+         value = "6296";
          type = "long";
       }
    }
@@ -78,7 +86,7 @@
    {
       datum baseAddress
       {
-         value = "6256";
+         value = "6288";
          type = "long";
       }
    }
@@ -140,19 +148,27 @@
    element kernel
    {
    }
-   element PIO_LED.s1
-   {
-      datum baseAddress
-      {
-         value = "6240";
-         type = "long";
-      }
-   }
    element PIO_LCD_CLK.s1
    {
       datum baseAddress
       {
-         value = "6224";
+         value = "6256";
+         type = "long";
+      }
+   }
+   element PIO_LED.s1
+   {
+      datum baseAddress
+      {
+         value = "6272";
+         type = "long";
+      }
+   }
+   element PIO_LCD_B.s1
+   {
+      datum baseAddress
+      {
+         value = "6208";
          type = "long";
       }
    }
@@ -164,19 +180,11 @@
          type = "long";
       }
    }
-   element PIO_LCD_G.s1
+   element PIO_LCD_R.s1
    {
       datum baseAddress
       {
-         value = "6192";
-         type = "long";
-      }
-   }
-   element PIO_LCD_B.s1
-   {
-      datum baseAddress
-      {
-         value = "6176";
+         value = "6240";
          type = "long";
       }
    }
@@ -184,15 +192,23 @@
    {
       datum baseAddress
       {
-         value = "6144";
+         value = "6176";
          type = "long";
       }
    }
-   element PIO_LCD_R.s1
+   element PIO_LCD_G.s1
    {
       datum baseAddress
       {
-         value = "6208";
+         value = "6224";
+         type = "long";
+      }
+   }
+   element RS232.s1
+   {
+      datum baseAddress
+      {
+         value = "6144";
          type = "long";
       }
    }
@@ -200,7 +216,7 @@
    {
       datum baseAddress
       {
-         value = "6160";
+         value = "6192";
          type = "long";
       }
    }
@@ -237,8 +253,8 @@
  <parameter name="maxAdditionalLatency" value="0" />
  <parameter name="projectName" value="LCD.qpf" />
  <parameter name="sopcBorderPoints" value="true" />
- <parameter name="systemHash" value="45104973681" />
- <parameter name="timeStamp" value="1432136927953" />
+ <parameter name="systemHash" value="49613113455" />
+ <parameter name="timeStamp" value="1432141006313" />
  <module kind="clock_source" version="11.0" enabled="1" name="clk">
   <parameter name="clockFrequency" value="100000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -313,7 +329,7 @@
   <parameter name="mmu_TLBMissExcSlave" value="" />
   <parameter name="mmu_TLBMissExcOffset" value="0" />
   <parameter name="manuallyAssignCpuID" value="false" />
-  <parameter name="internalIrqMaskSystemInfo" value="3" />
+  <parameter name="internalIrqMaskSystemInfo" value="7" />
   <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='epcs.epcs_control_port' start='0x0' end='0x800' /><slave name='cpu.jtag_debug_module' start='0x1000' end='0x1800' /><slave name='sdram.s1' start='0x4000000' end='0x6000000' /></address-map>]]></parameter>
   <parameter name="instAddrWidth" value="27" />
   <parameter name="impl" value="Fast" />
@@ -338,7 +354,7 @@
   <parameter name="dcache_numTCDM" value="_0" />
   <parameter name="dcache_lineSize" value="_32" />
   <parameter name="dcache_bursts" value="false" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='epcs.epcs_control_port' start='0x0' end='0x800' /><slave name='cpu.jtag_debug_module' start='0x1000' end='0x1800' /><slave name='PIO_LCD_PWM.s1' start='0x1800' end='0x1810' /><slave name='PIO_LCD_CTRL.s1' start='0x1810' end='0x1820' /><slave name='PIO_LCD_B.s1' start='0x1820' end='0x1830' /><slave name='PIO_LCD_G.s1' start='0x1830' end='0x1840' /><slave name='PIO_LCD_R.s1' start='0x1840' end='0x1850' /><slave name='PIO_LCD_CLK.s1' start='0x1850' end='0x1860' /><slave name='PIO_LED.s1' start='0x1860' end='0x1870' /><slave name='sysid.control_slave' start='0x1870' end='0x1878' /><slave name='jtag_uart.avalon_jtag_slave' start='0x1878' end='0x1880' /><slave name='sdram.s1' start='0x4000000' end='0x6000000' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='epcs.epcs_control_port' start='0x0' end='0x800' /><slave name='cpu.jtag_debug_module' start='0x1000' end='0x1800' /><slave name='RS232.s1' start='0x1800' end='0x1820' /><slave name='PIO_LCD_PWM.s1' start='0x1820' end='0x1830' /><slave name='PIO_LCD_CTRL.s1' start='0x1830' end='0x1840' /><slave name='PIO_LCD_B.s1' start='0x1840' end='0x1850' /><slave name='PIO_LCD_G.s1' start='0x1850' end='0x1860' /><slave name='PIO_LCD_R.s1' start='0x1860' end='0x1870' /><slave name='PIO_LCD_CLK.s1' start='0x1870' end='0x1880' /><slave name='PIO_LED.s1' start='0x1880' end='0x1890' /><slave name='sysid.control_slave' start='0x1890' end='0x1898' /><slave name='jtag_uart.avalon_jtag_slave' start='0x1898' end='0x18A0' /><slave name='sdram.s1' start='0x4000000' end='0x6000000' /></address-map>]]></parameter>
   <parameter name="dataAddrWidth" value="27" />
   <parameter name="customInstSlavesSystemInfo" value="&lt;info/&gt;" />
   <parameter name="cpuReset" value="false" />
@@ -514,6 +530,22 @@
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="4" />
  </module>
+ <module kind="altera_avalon_uart" version="11.0" enabled="1" name="RS232">
+  <parameter name="baud" value="115200" />
+  <parameter name="clockRate" value="100000000" />
+  <parameter name="dataBits" value="8" />
+  <parameter name="fixedBaud" value="true" />
+  <parameter name="parity" value="NONE" />
+  <parameter name="simCharStream" value="" />
+  <parameter name="simInteractiveInputEnable" value="false" />
+  <parameter name="simInteractiveOutputEnable" value="false" />
+  <parameter name="simTrueBaud" value="false" />
+  <parameter name="stopBits" value="1" />
+  <parameter name="syncRegDepth" value="2" />
+  <parameter name="useCtsRts" value="false" />
+  <parameter name="useEopRegister" value="false" />
+  <parameter name="useRelativePathForSimFile" value="false" />
+ </module>
  <connection kind="clock" version="11.0" start="clk.clk" end="cpu.clk" />
  <connection
    kind="avalon"
@@ -538,7 +570,7 @@
    start="cpu.data_master"
    end="sysid.control_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x1870" />
+  <parameter name="baseAddress" value="0x1890" />
  </connection>
  <connection kind="clock" version="11.0" start="clk.clk" end="sdram.clk" />
  <connection
@@ -580,7 +612,7 @@
    start="cpu.data_master"
    end="jtag_uart.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x1878" />
+  <parameter name="baseAddress" value="0x1898" />
  </connection>
  <connection kind="interrupt" version="11.0" start="cpu.d_irq" end="jtag_uart.irq">
   <parameter name="irqNumber" value="1" />
@@ -592,7 +624,7 @@
    start="cpu.data_master"
    end="PIO_LCD_PWM.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x1800" />
+  <parameter name="baseAddress" value="0x1820" />
  </connection>
  <connection kind="clock" version="11.0" start="clk.clk" end="PIO_LCD_CTRL.clk" />
  <connection
@@ -601,7 +633,7 @@
    start="cpu.data_master"
    end="PIO_LCD_CTRL.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x1810" />
+  <parameter name="baseAddress" value="0x1830" />
  </connection>
  <connection kind="clock" version="11.0" start="clk.clk" end="PIO_LCD_B.clk" />
  <connection
@@ -610,7 +642,7 @@
    start="cpu.data_master"
    end="PIO_LCD_B.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x1820" />
+  <parameter name="baseAddress" value="0x1840" />
  </connection>
  <connection kind="clock" version="11.0" start="clk.clk" end="PIO_LCD_G.clk" />
  <connection
@@ -619,7 +651,7 @@
    start="cpu.data_master"
    end="PIO_LCD_G.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x1830" />
+  <parameter name="baseAddress" value="0x1850" />
  </connection>
  <connection kind="clock" version="11.0" start="clk.clk" end="PIO_LCD_R.clk" />
  <connection
@@ -628,7 +660,7 @@
    start="cpu.data_master"
    end="PIO_LCD_R.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x1840" />
+  <parameter name="baseAddress" value="0x1860" />
  </connection>
  <connection kind="clock" version="11.0" start="clk.clk" end="PIO_LCD_CLK.clk" />
  <connection
@@ -637,11 +669,19 @@
    start="cpu.data_master"
    end="PIO_LCD_CLK.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x1850" />
+  <parameter name="baseAddress" value="0x1870" />
  </connection>
  <connection kind="clock" version="11.0" start="clk.clk" end="PIO_LED.clk" />
  <connection kind="avalon" version="11.0" start="cpu.data_master" end="PIO_LED.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x1860" />
+  <parameter name="baseAddress" value="0x1880" />
+ </connection>
+ <connection kind="clock" version="11.0" start="clk.clk" end="RS232.clk" />
+ <connection kind="avalon" version="11.0" start="cpu.data_master" end="RS232.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x1800" />
+ </connection>
+ <connection kind="interrupt" version="11.0" start="cpu.d_irq" end="RS232.irq">
+  <parameter name="irqNumber" value="2" />
  </connection>
 </system>

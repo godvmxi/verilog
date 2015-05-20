@@ -15,5 +15,10 @@ obj/main/main.o: ../main/main.c \
   /cygdrive/c/altera/11.0/nios2eds/bin/nios2-gnutools/H-i686-pc-cygwin/bin/../lib/gcc/nios2-elf/3.4.6/../../../../nios2-elf/include/unistd.h \
   /cygdrive/c/altera/11.0/nios2eds/bin/nios2-gnutools/H-i686-pc-cygwin/bin/../lib/gcc/nios2-elf/3.4.6/../../../../nios2-elf/include/sys/unistd.h \
   /cygdrive/c/altera/11.0/nios2eds/bin/nios2-gnutools/H-i686-pc-cygwin/bin/../lib/gcc/nios2-elf/3.4.6/../../../../nios2-elf/include/sys/features.h \
+  /cygdrive/c/altera/11.0/nios2eds/bin/nios2-gnutools/H-i686-pc-cygwin/bin/../lib/gcc/nios2-elf/3.4.6/../../../../nios2-elf/include/stdlib.h \
+  /cygdrive/c/altera/11.0/nios2eds/bin/nios2-gnutools/H-i686-pc-cygwin/bin/../lib/gcc/nios2-elf/3.4.6/../../../../nios2-elf/include/machine/stdlib.h \
+  /cygdrive/c/altera/11.0/nios2eds/bin/nios2-gnutools/H-i686-pc-cygwin/bin/../lib/gcc/nios2-elf/3.4.6/../../../../nios2-elf/include/alloca.h \
+  /cygdrive/c/altera/11.0/nios2eds/bin/nios2-gnutools/H-i686-pc-cygwin/bin/../lib/gcc/nios2-elf/3.4.6/../../../../nios2-elf/include/string.h \
   ../main/../inc/sopc.h \
-  /cygdrive/d/work/FPGA/quartus/nios_ii/LCD/LCD_syslib/Debug/system_description/system.h
+  /cygdrive/d/work/FPGA/quartus/nios_ii/LCD/LCD_syslib/Debug/system_description/system.h \
+  ../main/../inc/uart.h ../main/../inc/../inc/sopc.h

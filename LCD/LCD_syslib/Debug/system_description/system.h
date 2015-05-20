@@ -3,7 +3,7 @@
  * Machine generated for a CPU named "cpu" as defined in:
  * D:\work\FPGA\quartus\nios_ii\LCD\kernel.ptf
  *
- * Generated: 2015-05-21 00:08:33.777
+ * Generated: 2015-05-21 01:34:53.919
  *
  */
 
@@ -65,17 +65,17 @@ DO NOT MODIFY THIS FILE
 #define ALT_DEVICE_FAMILY "CYCLONEIVE"
 #define ALT_STDIN "/dev/jtag_uart"
 #define ALT_STDIN_TYPE "altera_avalon_jtag_uart"
-#define ALT_STDIN_BASE 0x00001878
+#define ALT_STDIN_BASE 0x00001898
 #define ALT_STDIN_DEV jtag_uart
 #define ALT_STDIN_PRESENT
 #define ALT_STDOUT "/dev/jtag_uart"
 #define ALT_STDOUT_TYPE "altera_avalon_jtag_uart"
-#define ALT_STDOUT_BASE 0x00001878
+#define ALT_STDOUT_BASE 0x00001898
 #define ALT_STDOUT_DEV jtag_uart
 #define ALT_STDOUT_PRESENT
 #define ALT_STDERR "/dev/jtag_uart"
 #define ALT_STDERR_TYPE "altera_avalon_jtag_uart"
-#define ALT_STDERR_BASE 0x00001878
+#define ALT_STDERR_BASE 0x00001898
 #define ALT_STDERR_DEV jtag_uart
 #define ALT_STDERR_PRESENT
 #define ALT_CPU_FREQ 100000000
@@ -118,6 +118,7 @@ DO NOT MODIFY THIS FILE
 #define __ALTERA_AVALON_EPCS_FLASH_CONTROLLER
 #define __ALTERA_AVALON_JTAG_UART
 #define __ALTERA_AVALON_PIO
+#define __ALTERA_AVALON_UART
 
 /*
  * sysid configuration
@@ -126,10 +127,10 @@ DO NOT MODIFY THIS FILE
 
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_TYPE "altera_avalon_sysid"
-#define SYSID_BASE 0x00001870
+#define SYSID_BASE 0x00001890
 #define SYSID_SPAN 8
 #define SYSID_ID 12345678u
-#define SYSID_TIMESTAMP 1432136928u
+#define SYSID_TIMESTAMP 1432141006u
 #define SYSID_REGENERATE_VALUES 0
 #define ALT_MODULE_CLASS_sysid altera_avalon_sysid
 
@@ -210,7 +211,7 @@ DO NOT MODIFY THIS FILE
 
 #define JTAG_UART_NAME "/dev/jtag_uart"
 #define JTAG_UART_TYPE "altera_avalon_jtag_uart"
-#define JTAG_UART_BASE 0x00001878
+#define JTAG_UART_BASE 0x00001898
 #define JTAG_UART_SPAN 8
 #define JTAG_UART_IRQ 1
 #define JTAG_UART_IRQ_INTERRUPT_CONTROLLER_ID 0
@@ -233,7 +234,7 @@ DO NOT MODIFY THIS FILE
 
 #define PIO_LCD_PWM_NAME "/dev/PIO_LCD_PWM"
 #define PIO_LCD_PWM_TYPE "altera_avalon_pio"
-#define PIO_LCD_PWM_BASE 0x00001800
+#define PIO_LCD_PWM_BASE 0x00001820
 #define PIO_LCD_PWM_SPAN 16
 #define PIO_LCD_PWM_DO_TEST_BENCH_WIRING 0
 #define PIO_LCD_PWM_DRIVEN_SIM_VALUE 0
@@ -257,7 +258,7 @@ DO NOT MODIFY THIS FILE
 
 #define PIO_LCD_CTRL_NAME "/dev/PIO_LCD_CTRL"
 #define PIO_LCD_CTRL_TYPE "altera_avalon_pio"
-#define PIO_LCD_CTRL_BASE 0x00001810
+#define PIO_LCD_CTRL_BASE 0x00001830
 #define PIO_LCD_CTRL_SPAN 16
 #define PIO_LCD_CTRL_DO_TEST_BENCH_WIRING 0
 #define PIO_LCD_CTRL_DRIVEN_SIM_VALUE 0
@@ -281,7 +282,7 @@ DO NOT MODIFY THIS FILE
 
 #define PIO_LCD_B_NAME "/dev/PIO_LCD_B"
 #define PIO_LCD_B_TYPE "altera_avalon_pio"
-#define PIO_LCD_B_BASE 0x00001820
+#define PIO_LCD_B_BASE 0x00001840
 #define PIO_LCD_B_SPAN 16
 #define PIO_LCD_B_DO_TEST_BENCH_WIRING 0
 #define PIO_LCD_B_DRIVEN_SIM_VALUE 0
@@ -305,7 +306,7 @@ DO NOT MODIFY THIS FILE
 
 #define PIO_LCD_G_NAME "/dev/PIO_LCD_G"
 #define PIO_LCD_G_TYPE "altera_avalon_pio"
-#define PIO_LCD_G_BASE 0x00001830
+#define PIO_LCD_G_BASE 0x00001850
 #define PIO_LCD_G_SPAN 16
 #define PIO_LCD_G_DO_TEST_BENCH_WIRING 0
 #define PIO_LCD_G_DRIVEN_SIM_VALUE 0
@@ -329,7 +330,7 @@ DO NOT MODIFY THIS FILE
 
 #define PIO_LCD_R_NAME "/dev/PIO_LCD_R"
 #define PIO_LCD_R_TYPE "altera_avalon_pio"
-#define PIO_LCD_R_BASE 0x00001840
+#define PIO_LCD_R_BASE 0x00001860
 #define PIO_LCD_R_SPAN 16
 #define PIO_LCD_R_DO_TEST_BENCH_WIRING 0
 #define PIO_LCD_R_DRIVEN_SIM_VALUE 0
@@ -353,7 +354,7 @@ DO NOT MODIFY THIS FILE
 
 #define PIO_LCD_CLK_NAME "/dev/PIO_LCD_CLK"
 #define PIO_LCD_CLK_TYPE "altera_avalon_pio"
-#define PIO_LCD_CLK_BASE 0x00001850
+#define PIO_LCD_CLK_BASE 0x00001870
 #define PIO_LCD_CLK_SPAN 16
 #define PIO_LCD_CLK_DO_TEST_BENCH_WIRING 0
 #define PIO_LCD_CLK_DRIVEN_SIM_VALUE 0
@@ -377,7 +378,7 @@ DO NOT MODIFY THIS FILE
 
 #define PIO_LED_NAME "/dev/PIO_LED"
 #define PIO_LED_TYPE "altera_avalon_pio"
-#define PIO_LED_BASE 0x00001860
+#define PIO_LED_BASE 0x00001880
 #define PIO_LED_SPAN 16
 #define PIO_LED_DO_TEST_BENCH_WIRING 0
 #define PIO_LED_DRIVEN_SIM_VALUE 0
@@ -393,6 +394,31 @@ DO NOT MODIFY THIS FILE
 #define PIO_LED_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define PIO_LED_FREQ 100000000
 #define ALT_MODULE_CLASS_PIO_LED altera_avalon_pio
+
+/*
+ * RS232 configuration
+ *
+ */
+
+#define RS232_NAME "/dev/RS232"
+#define RS232_TYPE "altera_avalon_uart"
+#define RS232_BASE 0x00001800
+#define RS232_SPAN 32
+#define RS232_IRQ 2
+#define RS232_IRQ_INTERRUPT_CONTROLLER_ID 0
+#define RS232_BAUD 115200
+#define RS232_DATA_BITS 8
+#define RS232_FIXED_BAUD 1
+#define RS232_PARITY 'N'
+#define RS232_STOP_BITS 1
+#define RS232_SYNC_REG_DEPTH 2
+#define RS232_USE_CTS_RTS 0
+#define RS232_USE_EOP_REGISTER 0
+#define RS232_SIM_TRUE_BAUD 0
+#define RS232_SIM_CHAR_STREAM ""
+#define RS232_RELATIVEPATH 1
+#define RS232_FREQ 100000000
+#define ALT_MODULE_CLASS_RS232 altera_avalon_uart
 
 /*
  * system library configuration

@@ -7,12 +7,13 @@ set_global_assignment -name SOURCE_FILE [file join $::quartus(qip_path) cpu.ocp]
 # epcs
 # jtag_uart
 # PIO_LCD_PWM
-# null
 # PIO_LCD_CTRL
 # PIO_LCD_B
 # PIO_LCD_G
 # PIO_LCD_R
 # PIO_LCD_CLK
 # PIO_LED
-set_global_assignment -name SOPC_BUILDER_SIGNATURE_ID 80FA5B0DEF630000014D72039070 
+# null
+# RS232
+set_global_assignment -name SOPC_BUILDER_SIGNATURE_ID 80FA5B0DEF630000014D72418D41 
  

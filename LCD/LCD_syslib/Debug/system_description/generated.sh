@@ -5,7 +5,7 @@
 # Machine generated for a CPU named "cpu" as defined in:
 # D:\work\FPGA\quartus\nios_ii\LCD\kernel.ptf
 #
-# Generated: 2015-05-21 00:09:48.456
+# Generated: 2015-05-21 01:03:41.328
 
 # DO NOT MODIFY THIS FILE
 #
@@ -30,9 +30,9 @@ nios2_instance=0
 nios2_cpu_name=cpu
 
 # These variables indicate what the System ID peripheral should hold
-sidp=0x00001870
+sidp=0x00001890
 id=12345678u
-timestamp=1432136928u
+timestamp=1432141006u
 
 # Include operating system specific parameters, if they are supplied.
 

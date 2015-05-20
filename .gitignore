@@ -68,3 +68,8 @@
 */timing/
 */testbench/
 *_sim/
+
+
+#eclipse
+*/Debug/*
+*.d

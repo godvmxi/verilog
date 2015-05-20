@@ -3,7 +3,7 @@
  * Machine generated for a CPU named "cpu" as defined in:
  * D:\work\FPGA\quartus\nios_ii\LCD\kernel.ptf
  *
- * Generated: 2015-05-21 00:09:17.535
+ * Generated: 2015-05-21 01:02:49.908
  *
  */
 
@@ -66,6 +66,7 @@ DO NOT MODIFY THIS FILE
 #include "altera_avalon_sysid.h"
 #include "altera_avalon_epcs_flash_controller.h"
 #include "altera_avalon_jtag_uart.h"
+#include "altera_avalon_uart.h"
 
 /*
  * Allocate the device storage
@@ -75,6 +76,7 @@ DO NOT MODIFY THIS FILE
 ALTERA_AVALON_SYSID_INSTANCE( SYSID, sysid );
 ALTERA_AVALON_EPCS_FLASH_CONTROLLER_INSTANCE( EPCS, epcs );
 ALTERA_AVALON_JTAG_UART_INSTANCE( JTAG_UART, jtag_uart );
+ALTERA_AVALON_UART_INSTANCE( RS232, rs232 );
 
 /*
  * Initialize the interrupt controller devices
@@ -100,4 +102,5 @@ void alt_sys_init( void )
     ALTERA_AVALON_SYSID_INIT( SYSID, sysid );
     ALTERA_AVALON_EPCS_FLASH_CONTROLLER_INIT( EPCS, epcs );
     ALTERA_AVALON_JTAG_UART_INIT( JTAG_UART, jtag_uart );
+    ALTERA_AVALON_UART_INIT( RS232, rs232 );
 }

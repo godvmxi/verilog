@@ -42,4 +42,12 @@ obj/alt_sys_init.o: system_description/alt_sys_init.c \
   /cygdrive/c/altera/11.0/nios2eds/components/altera_hal/HAL/inc/os/alt_flag.h \
   /cygdrive/c/altera/11.0/ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/HAL/inc/altera_avalon_jtag_uart_fd.h \
   /cygdrive/c/altera/11.0/nios2eds/components/altera_hal/HAL/inc/sys/alt_dev.h \
-  system_description/system.h
+  system_description/system.h \
+  /cygdrive/c/altera/11.0/ip/altera/sopc_builder_ip/altera_avalon_uart/HAL/inc/altera_avalon_uart.h \
+  /cygdrive/c/altera/11.0/nios2eds/components/altera_hal/HAL/inc/sys/termios.h \
+  /cygdrive/c/altera/11.0/ip/altera/nios2_ip/altera_nios2/HAL/inc/sys/alt_warning.h \
+  /cygdrive/c/altera/11.0/nios2eds/components/altera_hal/HAL/inc/os/alt_sem.h \
+  /cygdrive/c/altera/11.0/nios2eds/components/altera_hal/HAL/inc/os/alt_flag.h \
+  /cygdrive/c/altera/11.0/ip/altera/nios2_ip/altera_nios2/HAL/inc/alt_types.h \
+  /cygdrive/c/altera/11.0/ip/altera/sopc_builder_ip/altera_avalon_uart/HAL/inc/altera_avalon_uart_fd.h \
+  /cygdrive/c/altera/11.0/nios2eds/components/altera_hal/HAL/inc/sys/alt_dev.h

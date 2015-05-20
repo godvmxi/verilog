@@ -87,6 +87,7 @@ endif
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 main \
+driver \
 
 # Include the makefiles for each source subdirectory
 -include ${patsubst %, %/subdir.mk, $(SUBDIRS)}

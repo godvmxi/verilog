@@ -3,7 +3,7 @@
 # Machine generated for a CPU named "cpu" as defined in:
 # D:\work\FPGA\quartus\nios_ii\LCD\kernel.ptf
 #
-# Generated: 2015-05-21 00:08:10.177
+# Generated: 2015-05-21 01:38:42.637
 
 # ******************************************************************************
 # *                                                                            *
@@ -64,13 +64,15 @@ COMPONENTS_OS             := /cygdrive/c/altera/11.0/nios2eds/components/altera_
 COMPONENTS_DEVICE_DRIVERS := /cygdrive/c/altera/11.0/ip/altera/sopc_builder_ip/altera_avalon_sysid \
                              /cygdrive/c/altera/11.0/ip/altera/sopc_builder_ip/altera_avalon_epcs_flash_controller \
                              /cygdrive/c/altera/11.0/ip/altera/sopc_builder_ip/altera_avalon_jtag_uart \
-                             /cygdrive/c/altera/11.0/ip/altera/sopc_builder_ip/altera_avalon_pio
+                             /cygdrive/c/altera/11.0/ip/altera/sopc_builder_ip/altera_avalon_pio \
+                             /cygdrive/c/altera/11.0/ip/altera/sopc_builder_ip/altera_avalon_uart
 
 
 CPU = cpu
 
-CPPFLAGS += -DSYSTEM_BUS_WIDTH=32 -DALT_NO_INSTRUCTION_EMULATION
+CPPFLAGS += -DSYSTEM_BUS_WIDTH=32 -DALT_NO_C_PLUS_PLUS -DALT_NO_INSTRUCTION_EMULATION
 CFLAGS   += -mhw-mul -mno-hw-mulx -mno-hw-div
+LDFLAGS  += -msmallc
 
 #
 # none (single-threaded) macros

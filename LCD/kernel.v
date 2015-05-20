@@ -127,7 +127,7 @@ module PIO_LCD_B_s1_arbitrator (
   //assign PIO_LCD_B_s1_readdata_from_sa = PIO_LCD_B_s1_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign PIO_LCD_B_s1_readdata_from_sa = PIO_LCD_B_s1_readdata;
 
-  assign cpu_data_master_requests_PIO_LCD_B_s1 = ({cpu_data_master_address_to_slave[26 : 4] , 4'b0} == 27'h1820) & (cpu_data_master_read | cpu_data_master_write);
+  assign cpu_data_master_requests_PIO_LCD_B_s1 = ({cpu_data_master_address_to_slave[26 : 4] , 4'b0} == 27'h1840) & (cpu_data_master_read | cpu_data_master_write);
   //PIO_LCD_B_s1_arb_share_counter set values, which is an e_mux
   assign PIO_LCD_B_s1_arb_share_set_values = 1;
 
@@ -398,7 +398,7 @@ module PIO_LCD_CLK_s1_arbitrator (
   //assign PIO_LCD_CLK_s1_readdata_from_sa = PIO_LCD_CLK_s1_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign PIO_LCD_CLK_s1_readdata_from_sa = PIO_LCD_CLK_s1_readdata;
 
-  assign cpu_data_master_requests_PIO_LCD_CLK_s1 = ({cpu_data_master_address_to_slave[26 : 4] , 4'b0} == 27'h1850) & (cpu_data_master_read | cpu_data_master_write);
+  assign cpu_data_master_requests_PIO_LCD_CLK_s1 = ({cpu_data_master_address_to_slave[26 : 4] , 4'b0} == 27'h1870) & (cpu_data_master_read | cpu_data_master_write);
   //PIO_LCD_CLK_s1_arb_share_counter set values, which is an e_mux
   assign PIO_LCD_CLK_s1_arb_share_set_values = 1;
 
@@ -669,7 +669,7 @@ module PIO_LCD_CTRL_s1_arbitrator (
   //assign PIO_LCD_CTRL_s1_readdata_from_sa = PIO_LCD_CTRL_s1_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign PIO_LCD_CTRL_s1_readdata_from_sa = PIO_LCD_CTRL_s1_readdata;
 
-  assign cpu_data_master_requests_PIO_LCD_CTRL_s1 = ({cpu_data_master_address_to_slave[26 : 4] , 4'b0} == 27'h1810) & (cpu_data_master_read | cpu_data_master_write);
+  assign cpu_data_master_requests_PIO_LCD_CTRL_s1 = ({cpu_data_master_address_to_slave[26 : 4] , 4'b0} == 27'h1830) & (cpu_data_master_read | cpu_data_master_write);
   //PIO_LCD_CTRL_s1_arb_share_counter set values, which is an e_mux
   assign PIO_LCD_CTRL_s1_arb_share_set_values = 1;
 
@@ -940,7 +940,7 @@ module PIO_LCD_G_s1_arbitrator (
   //assign PIO_LCD_G_s1_readdata_from_sa = PIO_LCD_G_s1_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign PIO_LCD_G_s1_readdata_from_sa = PIO_LCD_G_s1_readdata;
 
-  assign cpu_data_master_requests_PIO_LCD_G_s1 = ({cpu_data_master_address_to_slave[26 : 4] , 4'b0} == 27'h1830) & (cpu_data_master_read | cpu_data_master_write);
+  assign cpu_data_master_requests_PIO_LCD_G_s1 = ({cpu_data_master_address_to_slave[26 : 4] , 4'b0} == 27'h1850) & (cpu_data_master_read | cpu_data_master_write);
   //PIO_LCD_G_s1_arb_share_counter set values, which is an e_mux
   assign PIO_LCD_G_s1_arb_share_set_values = 1;
 
@@ -1211,7 +1211,7 @@ module PIO_LCD_PWM_s1_arbitrator (
   //assign PIO_LCD_PWM_s1_readdata_from_sa = PIO_LCD_PWM_s1_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign PIO_LCD_PWM_s1_readdata_from_sa = PIO_LCD_PWM_s1_readdata;
 
-  assign cpu_data_master_requests_PIO_LCD_PWM_s1 = ({cpu_data_master_address_to_slave[26 : 4] , 4'b0} == 27'h1800) & (cpu_data_master_read | cpu_data_master_write);
+  assign cpu_data_master_requests_PIO_LCD_PWM_s1 = ({cpu_data_master_address_to_slave[26 : 4] , 4'b0} == 27'h1820) & (cpu_data_master_read | cpu_data_master_write);
   //PIO_LCD_PWM_s1_arb_share_counter set values, which is an e_mux
   assign PIO_LCD_PWM_s1_arb_share_set_values = 1;
 
@@ -1482,7 +1482,7 @@ module PIO_LCD_R_s1_arbitrator (
   //assign PIO_LCD_R_s1_readdata_from_sa = PIO_LCD_R_s1_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign PIO_LCD_R_s1_readdata_from_sa = PIO_LCD_R_s1_readdata;
 
-  assign cpu_data_master_requests_PIO_LCD_R_s1 = ({cpu_data_master_address_to_slave[26 : 4] , 4'b0} == 27'h1840) & (cpu_data_master_read | cpu_data_master_write);
+  assign cpu_data_master_requests_PIO_LCD_R_s1 = ({cpu_data_master_address_to_slave[26 : 4] , 4'b0} == 27'h1860) & (cpu_data_master_read | cpu_data_master_write);
   //PIO_LCD_R_s1_arb_share_counter set values, which is an e_mux
   assign PIO_LCD_R_s1_arb_share_set_values = 1;
 
@@ -1753,7 +1753,7 @@ module PIO_LED_s1_arbitrator (
   //assign PIO_LED_s1_readdata_from_sa = PIO_LED_s1_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign PIO_LED_s1_readdata_from_sa = PIO_LED_s1_readdata;
 
-  assign cpu_data_master_requests_PIO_LED_s1 = ({cpu_data_master_address_to_slave[26 : 4] , 4'b0} == 27'h1860) & (cpu_data_master_read | cpu_data_master_write);
+  assign cpu_data_master_requests_PIO_LED_s1 = ({cpu_data_master_address_to_slave[26 : 4] , 4'b0} == 27'h1880) & (cpu_data_master_read | cpu_data_master_write);
   //PIO_LED_s1_arb_share_counter set values, which is an e_mux
   assign PIO_LED_s1_arb_share_set_values = 1;
 
@@ -1895,6 +1895,309 @@ module PIO_LED_s1_arbitrator (
 //synthesis translate_off
 //////////////// SIMULATION-ONLY CONTENTS
   //PIO_LED/s1 enable non-zero assertions, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          enable_nonzero_assertions <= 0;
+      else 
+        enable_nonzero_assertions <= 1'b1;
+    end
+
+
+
+//////////////// END SIMULATION-ONLY CONTENTS
+
+//synthesis translate_on
+
+endmodule
+
+
+// synthesis translate_off
+`timescale 1ns / 1ps
+// synthesis translate_on
+
+// turn off superfluous verilog processor warnings 
+// altera message_level Level1 
+// altera message_off 10034 10035 10036 10037 10230 10240 10030 
+
+module RS232_s1_arbitrator (
+                             // inputs:
+                              RS232_s1_dataavailable,
+                              RS232_s1_irq,
+                              RS232_s1_readdata,
+                              RS232_s1_readyfordata,
+                              clk,
+                              cpu_data_master_address_to_slave,
+                              cpu_data_master_read,
+                              cpu_data_master_write,
+                              cpu_data_master_writedata,
+                              reset_n,
+
+                             // outputs:
+                              RS232_s1_address,
+                              RS232_s1_begintransfer,
+                              RS232_s1_chipselect,
+                              RS232_s1_dataavailable_from_sa,
+                              RS232_s1_irq_from_sa,
+                              RS232_s1_read_n,
+                              RS232_s1_readdata_from_sa,
+                              RS232_s1_readyfordata_from_sa,
+                              RS232_s1_reset_n,
+                              RS232_s1_write_n,
+                              RS232_s1_writedata,
+                              cpu_data_master_granted_RS232_s1,
+                              cpu_data_master_qualified_request_RS232_s1,
+                              cpu_data_master_read_data_valid_RS232_s1,
+                              cpu_data_master_requests_RS232_s1,
+                              d1_RS232_s1_end_xfer
+                           )
+;
+
+  output  [  2: 0] RS232_s1_address;
+  output           RS232_s1_begintransfer;
+  output           RS232_s1_chipselect;
+  output           RS232_s1_dataavailable_from_sa;
+  output           RS232_s1_irq_from_sa;
+  output           RS232_s1_read_n;
+  output  [ 15: 0] RS232_s1_readdata_from_sa;
+  output           RS232_s1_readyfordata_from_sa;
+  output           RS232_s1_reset_n;
+  output           RS232_s1_write_n;
+  output  [ 15: 0] RS232_s1_writedata;
+  output           cpu_data_master_granted_RS232_s1;
+  output           cpu_data_master_qualified_request_RS232_s1;
+  output           cpu_data_master_read_data_valid_RS232_s1;
+  output           cpu_data_master_requests_RS232_s1;
+  output           d1_RS232_s1_end_xfer;
+  input            RS232_s1_dataavailable;
+  input            RS232_s1_irq;
+  input   [ 15: 0] RS232_s1_readdata;
+  input            RS232_s1_readyfordata;
+  input            clk;
+  input   [ 26: 0] cpu_data_master_address_to_slave;
+  input            cpu_data_master_read;
+  input            cpu_data_master_write;
+  input   [ 31: 0] cpu_data_master_writedata;
+  input            reset_n;
+
+  wire    [  2: 0] RS232_s1_address;
+  wire             RS232_s1_allgrants;
+  wire             RS232_s1_allow_new_arb_cycle;
+  wire             RS232_s1_any_bursting_master_saved_grant;
+  wire             RS232_s1_any_continuerequest;
+  wire             RS232_s1_arb_counter_enable;
+  reg     [  1: 0] RS232_s1_arb_share_counter;
+  wire    [  1: 0] RS232_s1_arb_share_counter_next_value;
+  wire    [  1: 0] RS232_s1_arb_share_set_values;
+  wire             RS232_s1_beginbursttransfer_internal;
+  wire             RS232_s1_begins_xfer;
+  wire             RS232_s1_begintransfer;
+  wire             RS232_s1_chipselect;
+  wire             RS232_s1_dataavailable_from_sa;
+  wire             RS232_s1_end_xfer;
+  wire             RS232_s1_firsttransfer;
+  wire             RS232_s1_grant_vector;
+  wire             RS232_s1_in_a_read_cycle;
+  wire             RS232_s1_in_a_write_cycle;
+  wire             RS232_s1_irq_from_sa;
+  wire             RS232_s1_master_qreq_vector;
+  wire             RS232_s1_non_bursting_master_requests;
+  wire             RS232_s1_read_n;
+  wire    [ 15: 0] RS232_s1_readdata_from_sa;
+  wire             RS232_s1_readyfordata_from_sa;
+  reg              RS232_s1_reg_firsttransfer;
+  wire             RS232_s1_reset_n;
+  reg              RS232_s1_slavearbiterlockenable;
+  wire             RS232_s1_slavearbiterlockenable2;
+  wire             RS232_s1_unreg_firsttransfer;
+  wire             RS232_s1_waits_for_read;
+  wire             RS232_s1_waits_for_write;
+  wire             RS232_s1_write_n;
+  wire    [ 15: 0] RS232_s1_writedata;
+  wire             cpu_data_master_arbiterlock;
+  wire             cpu_data_master_arbiterlock2;
+  wire             cpu_data_master_continuerequest;
+  wire             cpu_data_master_granted_RS232_s1;
+  wire             cpu_data_master_qualified_request_RS232_s1;
+  wire             cpu_data_master_read_data_valid_RS232_s1;
+  wire             cpu_data_master_requests_RS232_s1;
+  wire             cpu_data_master_saved_grant_RS232_s1;
+  reg              d1_RS232_s1_end_xfer;
+  reg              d1_reasons_to_wait;
+  reg              enable_nonzero_assertions;
+  wire             end_xfer_arb_share_counter_term_RS232_s1;
+  wire             in_a_read_cycle;
+  wire             in_a_write_cycle;
+  wire    [ 26: 0] shifted_address_to_RS232_s1_from_cpu_data_master;
+  wire             wait_for_RS232_s1_counter;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d1_reasons_to_wait <= 0;
+      else 
+        d1_reasons_to_wait <= ~RS232_s1_end_xfer;
+    end
+
+
+  assign RS232_s1_begins_xfer = ~d1_reasons_to_wait & ((cpu_data_master_qualified_request_RS232_s1));
+  //assign RS232_s1_readdata_from_sa = RS232_s1_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign RS232_s1_readdata_from_sa = RS232_s1_readdata;
+
+  assign cpu_data_master_requests_RS232_s1 = ({cpu_data_master_address_to_slave[26 : 5] , 5'b0} == 27'h1800) & (cpu_data_master_read | cpu_data_master_write);
+  //assign RS232_s1_dataavailable_from_sa = RS232_s1_dataavailable so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign RS232_s1_dataavailable_from_sa = RS232_s1_dataavailable;
+
+  //assign RS232_s1_readyfordata_from_sa = RS232_s1_readyfordata so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign RS232_s1_readyfordata_from_sa = RS232_s1_readyfordata;
+
+  //RS232_s1_arb_share_counter set values, which is an e_mux
+  assign RS232_s1_arb_share_set_values = 1;
+
+  //RS232_s1_non_bursting_master_requests mux, which is an e_mux
+  assign RS232_s1_non_bursting_master_requests = cpu_data_master_requests_RS232_s1;
+
+  //RS232_s1_any_bursting_master_saved_grant mux, which is an e_mux
+  assign RS232_s1_any_bursting_master_saved_grant = 0;
+
+  //RS232_s1_arb_share_counter_next_value assignment, which is an e_assign
+  assign RS232_s1_arb_share_counter_next_value = RS232_s1_firsttransfer ? (RS232_s1_arb_share_set_values - 1) : |RS232_s1_arb_share_counter ? (RS232_s1_arb_share_counter - 1) : 0;
+
+  //RS232_s1_allgrants all slave grants, which is an e_mux
+  assign RS232_s1_allgrants = |RS232_s1_grant_vector;
+
+  //RS232_s1_end_xfer assignment, which is an e_assign
+  assign RS232_s1_end_xfer = ~(RS232_s1_waits_for_read | RS232_s1_waits_for_write);
+
+  //end_xfer_arb_share_counter_term_RS232_s1 arb share counter enable term, which is an e_assign
+  assign end_xfer_arb_share_counter_term_RS232_s1 = RS232_s1_end_xfer & (~RS232_s1_any_bursting_master_saved_grant | in_a_read_cycle | in_a_write_cycle);
+
+  //RS232_s1_arb_share_counter arbitration counter enable, which is an e_assign
+  assign RS232_s1_arb_counter_enable = (end_xfer_arb_share_counter_term_RS232_s1 & RS232_s1_allgrants) | (end_xfer_arb_share_counter_term_RS232_s1 & ~RS232_s1_non_bursting_master_requests);
+
+  //RS232_s1_arb_share_counter counter, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          RS232_s1_arb_share_counter <= 0;
+      else if (RS232_s1_arb_counter_enable)
+          RS232_s1_arb_share_counter <= RS232_s1_arb_share_counter_next_value;
+    end
+
+
+  //RS232_s1_slavearbiterlockenable slave enables arbiterlock, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          RS232_s1_slavearbiterlockenable <= 0;
+      else if ((|RS232_s1_master_qreq_vector & end_xfer_arb_share_counter_term_RS232_s1) | (end_xfer_arb_share_counter_term_RS232_s1 & ~RS232_s1_non_bursting_master_requests))
+          RS232_s1_slavearbiterlockenable <= |RS232_s1_arb_share_counter_next_value;
+    end
+
+
+  //cpu/data_master RS232/s1 arbiterlock, which is an e_assign
+  assign cpu_data_master_arbiterlock = RS232_s1_slavearbiterlockenable & cpu_data_master_continuerequest;
+
+  //RS232_s1_slavearbiterlockenable2 slave enables arbiterlock2, which is an e_assign
+  assign RS232_s1_slavearbiterlockenable2 = |RS232_s1_arb_share_counter_next_value;
+
+  //cpu/data_master RS232/s1 arbiterlock2, which is an e_assign
+  assign cpu_data_master_arbiterlock2 = RS232_s1_slavearbiterlockenable2 & cpu_data_master_continuerequest;
+
+  //RS232_s1_any_continuerequest at least one master continues requesting, which is an e_assign
+  assign RS232_s1_any_continuerequest = 1;
+
+  //cpu_data_master_continuerequest continued request, which is an e_assign
+  assign cpu_data_master_continuerequest = 1;
+
+  assign cpu_data_master_qualified_request_RS232_s1 = cpu_data_master_requests_RS232_s1;
+  //RS232_s1_writedata mux, which is an e_mux
+  assign RS232_s1_writedata = cpu_data_master_writedata;
+
+  //master is always granted when requested
+  assign cpu_data_master_granted_RS232_s1 = cpu_data_master_qualified_request_RS232_s1;
+
+  //cpu/data_master saved-grant RS232/s1, which is an e_assign
+  assign cpu_data_master_saved_grant_RS232_s1 = cpu_data_master_requests_RS232_s1;
+
+  //allow new arb cycle for RS232/s1, which is an e_assign
+  assign RS232_s1_allow_new_arb_cycle = 1;
+
+  //placeholder chosen master
+  assign RS232_s1_grant_vector = 1;
+
+  //placeholder vector of master qualified-requests
+  assign RS232_s1_master_qreq_vector = 1;
+
+  assign RS232_s1_begintransfer = RS232_s1_begins_xfer;
+  //RS232_s1_reset_n assignment, which is an e_assign
+  assign RS232_s1_reset_n = reset_n;
+
+  assign RS232_s1_chipselect = cpu_data_master_granted_RS232_s1;
+  //RS232_s1_firsttransfer first transaction, which is an e_assign
+  assign RS232_s1_firsttransfer = RS232_s1_begins_xfer ? RS232_s1_unreg_firsttransfer : RS232_s1_reg_firsttransfer;
+
+  //RS232_s1_unreg_firsttransfer first transaction, which is an e_assign
+  assign RS232_s1_unreg_firsttransfer = ~(RS232_s1_slavearbiterlockenable & RS232_s1_any_continuerequest);
+
+  //RS232_s1_reg_firsttransfer first transaction, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          RS232_s1_reg_firsttransfer <= 1'b1;
+      else if (RS232_s1_begins_xfer)
+          RS232_s1_reg_firsttransfer <= RS232_s1_unreg_firsttransfer;
+    end
+
+
+  //RS232_s1_beginbursttransfer_internal begin burst transfer, which is an e_assign
+  assign RS232_s1_beginbursttransfer_internal = RS232_s1_begins_xfer;
+
+  //~RS232_s1_read_n assignment, which is an e_mux
+  assign RS232_s1_read_n = ~(cpu_data_master_granted_RS232_s1 & cpu_data_master_read);
+
+  //~RS232_s1_write_n assignment, which is an e_mux
+  assign RS232_s1_write_n = ~(cpu_data_master_granted_RS232_s1 & cpu_data_master_write);
+
+  assign shifted_address_to_RS232_s1_from_cpu_data_master = cpu_data_master_address_to_slave;
+  //RS232_s1_address mux, which is an e_mux
+  assign RS232_s1_address = shifted_address_to_RS232_s1_from_cpu_data_master >> 2;
+
+  //d1_RS232_s1_end_xfer register, which is an e_register
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          d1_RS232_s1_end_xfer <= 1;
+      else 
+        d1_RS232_s1_end_xfer <= RS232_s1_end_xfer;
+    end
+
+
+  //RS232_s1_waits_for_read in a cycle, which is an e_mux
+  assign RS232_s1_waits_for_read = RS232_s1_in_a_read_cycle & RS232_s1_begins_xfer;
+
+  //RS232_s1_in_a_read_cycle assignment, which is an e_assign
+  assign RS232_s1_in_a_read_cycle = cpu_data_master_granted_RS232_s1 & cpu_data_master_read;
+
+  //in_a_read_cycle assignment, which is an e_mux
+  assign in_a_read_cycle = RS232_s1_in_a_read_cycle;
+
+  //RS232_s1_waits_for_write in a cycle, which is an e_mux
+  assign RS232_s1_waits_for_write = RS232_s1_in_a_write_cycle & RS232_s1_begins_xfer;
+
+  //RS232_s1_in_a_write_cycle assignment, which is an e_assign
+  assign RS232_s1_in_a_write_cycle = cpu_data_master_granted_RS232_s1 & cpu_data_master_write;
+
+  //in_a_write_cycle assignment, which is an e_mux
+  assign in_a_write_cycle = RS232_s1_in_a_write_cycle;
+
+  assign wait_for_RS232_s1_counter = 0;
+  //assign RS232_s1_irq_from_sa = RS232_s1_irq so that symbol knows where to group signals which may go to master only, which is an e_assign
+  assign RS232_s1_irq_from_sa = RS232_s1_irq;
+
+
+//synthesis translate_off
+//////////////// SIMULATION-ONLY CONTENTS
+  //RS232/s1 enable non-zero assertions, which is an e_register
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
@@ -2370,6 +2673,8 @@ module cpu_data_master_arbitrator (
                                      PIO_LCD_PWM_s1_readdata_from_sa,
                                      PIO_LCD_R_s1_readdata_from_sa,
                                      PIO_LED_s1_readdata_from_sa,
+                                     RS232_s1_irq_from_sa,
+                                     RS232_s1_readdata_from_sa,
                                      clk,
                                      cpu_data_master_address,
                                      cpu_data_master_byteenable_sdram_s1,
@@ -2380,6 +2685,7 @@ module cpu_data_master_arbitrator (
                                      cpu_data_master_granted_PIO_LCD_PWM_s1,
                                      cpu_data_master_granted_PIO_LCD_R_s1,
                                      cpu_data_master_granted_PIO_LED_s1,
+                                     cpu_data_master_granted_RS232_s1,
                                      cpu_data_master_granted_cpu_jtag_debug_module,
                                      cpu_data_master_granted_epcs_epcs_control_port,
                                      cpu_data_master_granted_jtag_uart_avalon_jtag_slave,
@@ -2392,6 +2698,7 @@ module cpu_data_master_arbitrator (
                                      cpu_data_master_qualified_request_PIO_LCD_PWM_s1,
                                      cpu_data_master_qualified_request_PIO_LCD_R_s1,
                                      cpu_data_master_qualified_request_PIO_LED_s1,
+                                     cpu_data_master_qualified_request_RS232_s1,
                                      cpu_data_master_qualified_request_cpu_jtag_debug_module,
                                      cpu_data_master_qualified_request_epcs_epcs_control_port,
                                      cpu_data_master_qualified_request_jtag_uart_avalon_jtag_slave,
@@ -2405,6 +2712,7 @@ module cpu_data_master_arbitrator (
                                      cpu_data_master_read_data_valid_PIO_LCD_PWM_s1,
                                      cpu_data_master_read_data_valid_PIO_LCD_R_s1,
                                      cpu_data_master_read_data_valid_PIO_LED_s1,
+                                     cpu_data_master_read_data_valid_RS232_s1,
                                      cpu_data_master_read_data_valid_cpu_jtag_debug_module,
                                      cpu_data_master_read_data_valid_epcs_epcs_control_port,
                                      cpu_data_master_read_data_valid_jtag_uart_avalon_jtag_slave,
@@ -2418,6 +2726,7 @@ module cpu_data_master_arbitrator (
                                      cpu_data_master_requests_PIO_LCD_PWM_s1,
                                      cpu_data_master_requests_PIO_LCD_R_s1,
                                      cpu_data_master_requests_PIO_LED_s1,
+                                     cpu_data_master_requests_RS232_s1,
                                      cpu_data_master_requests_cpu_jtag_debug_module,
                                      cpu_data_master_requests_epcs_epcs_control_port,
                                      cpu_data_master_requests_jtag_uart_avalon_jtag_slave,
@@ -2433,6 +2742,7 @@ module cpu_data_master_arbitrator (
                                      d1_PIO_LCD_PWM_s1_end_xfer,
                                      d1_PIO_LCD_R_s1_end_xfer,
                                      d1_PIO_LED_s1_end_xfer,
+                                     d1_RS232_s1_end_xfer,
                                      d1_cpu_jtag_debug_module_end_xfer,
                                      d1_epcs_epcs_control_port_end_xfer,
                                      d1_jtag_uart_avalon_jtag_slave_end_xfer,
@@ -2473,6 +2783,8 @@ module cpu_data_master_arbitrator (
   input   [ 31: 0] PIO_LCD_PWM_s1_readdata_from_sa;
   input   [ 31: 0] PIO_LCD_R_s1_readdata_from_sa;
   input   [ 31: 0] PIO_LED_s1_readdata_from_sa;
+  input            RS232_s1_irq_from_sa;
+  input   [ 15: 0] RS232_s1_readdata_from_sa;
   input            clk;
   input   [ 26: 0] cpu_data_master_address;
   input   [  1: 0] cpu_data_master_byteenable_sdram_s1;
@@ -2483,6 +2795,7 @@ module cpu_data_master_arbitrator (
   input            cpu_data_master_granted_PIO_LCD_PWM_s1;
   input            cpu_data_master_granted_PIO_LCD_R_s1;
   input            cpu_data_master_granted_PIO_LED_s1;
+  input            cpu_data_master_granted_RS232_s1;
   input            cpu_data_master_granted_cpu_jtag_debug_module;
   input            cpu_data_master_granted_epcs_epcs_control_port;
   input            cpu_data_master_granted_jtag_uart_avalon_jtag_slave;
@@ -2495,6 +2808,7 @@ module cpu_data_master_arbitrator (
   input            cpu_data_master_qualified_request_PIO_LCD_PWM_s1;
   input            cpu_data_master_qualified_request_PIO_LCD_R_s1;
   input            cpu_data_master_qualified_request_PIO_LED_s1;
+  input            cpu_data_master_qualified_request_RS232_s1;
   input            cpu_data_master_qualified_request_cpu_jtag_debug_module;
   input            cpu_data_master_qualified_request_epcs_epcs_control_port;
   input            cpu_data_master_qualified_request_jtag_uart_avalon_jtag_slave;
@@ -2508,6 +2822,7 @@ module cpu_data_master_arbitrator (
   input            cpu_data_master_read_data_valid_PIO_LCD_PWM_s1;
   input            cpu_data_master_read_data_valid_PIO_LCD_R_s1;
   input            cpu_data_master_read_data_valid_PIO_LED_s1;
+  input            cpu_data_master_read_data_valid_RS232_s1;
   input            cpu_data_master_read_data_valid_cpu_jtag_debug_module;
   input            cpu_data_master_read_data_valid_epcs_epcs_control_port;
   input            cpu_data_master_read_data_valid_jtag_uart_avalon_jtag_slave;
@@ -2521,6 +2836,7 @@ module cpu_data_master_arbitrator (
   input            cpu_data_master_requests_PIO_LCD_PWM_s1;
   input            cpu_data_master_requests_PIO_LCD_R_s1;
   input            cpu_data_master_requests_PIO_LED_s1;
+  input            cpu_data_master_requests_RS232_s1;
   input            cpu_data_master_requests_cpu_jtag_debug_module;
   input            cpu_data_master_requests_epcs_epcs_control_port;
   input            cpu_data_master_requests_jtag_uart_avalon_jtag_slave;
@@ -2536,6 +2852,7 @@ module cpu_data_master_arbitrator (
   input            d1_PIO_LCD_PWM_s1_end_xfer;
   input            d1_PIO_LCD_R_s1_end_xfer;
   input            d1_PIO_LED_s1_end_xfer;
+  input            d1_RS232_s1_end_xfer;
   input            d1_cpu_jtag_debug_module_end_xfer;
   input            d1_epcs_epcs_control_port_end_xfer;
   input            d1_jtag_uart_avalon_jtag_slave_end_xfer;
@@ -2579,10 +2896,10 @@ module cpu_data_master_arbitrator (
   assign cpu_data_master_run = r_0 & r_1 & r_2;
 
   //r_1 master_run cascaded wait assignment, which is an e_assign
-  assign r_1 = 1 & (cpu_data_master_qualified_request_PIO_LCD_R_s1 | ~cpu_data_master_requests_PIO_LCD_R_s1) & ((~cpu_data_master_qualified_request_PIO_LCD_R_s1 | ~cpu_data_master_read | (1 & 1 & cpu_data_master_read))) & ((~cpu_data_master_qualified_request_PIO_LCD_R_s1 | ~cpu_data_master_write | (1 & cpu_data_master_write))) & 1 & (cpu_data_master_qualified_request_PIO_LED_s1 | ~cpu_data_master_requests_PIO_LED_s1) & ((~cpu_data_master_qualified_request_PIO_LED_s1 | ~cpu_data_master_read | (1 & 1 & cpu_data_master_read))) & ((~cpu_data_master_qualified_request_PIO_LED_s1 | ~cpu_data_master_write | (1 & cpu_data_master_write))) & 1 & (cpu_data_master_qualified_request_cpu_jtag_debug_module | ~cpu_data_master_requests_cpu_jtag_debug_module) & (cpu_data_master_granted_cpu_jtag_debug_module | ~cpu_data_master_qualified_request_cpu_jtag_debug_module) & ((~cpu_data_master_qualified_request_cpu_jtag_debug_module | ~cpu_data_master_read | (1 & 1 & cpu_data_master_read))) & ((~cpu_data_master_qualified_request_cpu_jtag_debug_module | ~cpu_data_master_write | (1 & cpu_data_master_write))) & 1 & (cpu_data_master_qualified_request_epcs_epcs_control_port | ~cpu_data_master_requests_epcs_epcs_control_port) & (cpu_data_master_granted_epcs_epcs_control_port | ~cpu_data_master_qualified_request_epcs_epcs_control_port) & ((~cpu_data_master_qualified_request_epcs_epcs_control_port | ~(cpu_data_master_read | cpu_data_master_write) | (1 & 1 & (cpu_data_master_read | cpu_data_master_write)))) & ((~cpu_data_master_qualified_request_epcs_epcs_control_port | ~(cpu_data_master_read | cpu_data_master_write) | (1 & 1 & (cpu_data_master_read | cpu_data_master_write)))) & 1 & (cpu_data_master_qualified_request_jtag_uart_avalon_jtag_slave | ~cpu_data_master_requests_jtag_uart_avalon_jtag_slave);
+  assign r_1 = 1 & (cpu_data_master_qualified_request_PIO_LCD_R_s1 | ~cpu_data_master_requests_PIO_LCD_R_s1) & ((~cpu_data_master_qualified_request_PIO_LCD_R_s1 | ~cpu_data_master_read | (1 & 1 & cpu_data_master_read))) & ((~cpu_data_master_qualified_request_PIO_LCD_R_s1 | ~cpu_data_master_write | (1 & cpu_data_master_write))) & 1 & (cpu_data_master_qualified_request_PIO_LED_s1 | ~cpu_data_master_requests_PIO_LED_s1) & ((~cpu_data_master_qualified_request_PIO_LED_s1 | ~cpu_data_master_read | (1 & 1 & cpu_data_master_read))) & ((~cpu_data_master_qualified_request_PIO_LED_s1 | ~cpu_data_master_write | (1 & cpu_data_master_write))) & 1 & ((~cpu_data_master_qualified_request_RS232_s1 | ~(cpu_data_master_read | cpu_data_master_write) | (1 & 1 & (cpu_data_master_read | cpu_data_master_write)))) & ((~cpu_data_master_qualified_request_RS232_s1 | ~(cpu_data_master_read | cpu_data_master_write) | (1 & 1 & (cpu_data_master_read | cpu_data_master_write)))) & 1 & (cpu_data_master_qualified_request_cpu_jtag_debug_module | ~cpu_data_master_requests_cpu_jtag_debug_module) & (cpu_data_master_granted_cpu_jtag_debug_module | ~cpu_data_master_qualified_request_cpu_jtag_debug_module) & ((~cpu_data_master_qualified_request_cpu_jtag_debug_module | ~cpu_data_master_read | (1 & 1 & cpu_data_master_read))) & ((~cpu_data_master_qualified_request_cpu_jtag_debug_module | ~cpu_data_master_write | (1 & cpu_data_master_write))) & 1 & (cpu_data_master_qualified_request_epcs_epcs_control_port | ~cpu_data_master_requests_epcs_epcs_control_port) & (cpu_data_master_granted_epcs_epcs_control_port | ~cpu_data_master_qualified_request_epcs_epcs_control_port) & ((~cpu_data_master_qualified_request_epcs_epcs_control_port | ~(cpu_data_master_read | cpu_data_master_write) | (1 & 1 & (cpu_data_master_read | cpu_data_master_write))));
 
   //r_2 master_run cascaded wait assignment, which is an e_assign
-  assign r_2 = ((~cpu_data_master_qualified_request_jtag_uart_avalon_jtag_slave | ~(cpu_data_master_read | cpu_data_master_write) | (1 & ~jtag_uart_avalon_jtag_slave_waitrequest_from_sa & (cpu_data_master_read | cpu_data_master_write)))) & ((~cpu_data_master_qualified_request_jtag_uart_avalon_jtag_slave | ~(cpu_data_master_read | cpu_data_master_write) | (1 & ~jtag_uart_avalon_jtag_slave_waitrequest_from_sa & (cpu_data_master_read | cpu_data_master_write)))) & 1 & (cpu_data_master_qualified_request_sdram_s1 | (cpu_data_master_read_data_valid_sdram_s1 & cpu_data_master_dbs_address[1]) | (cpu_data_master_write & !cpu_data_master_byteenable_sdram_s1 & cpu_data_master_dbs_address[1]) | ~cpu_data_master_requests_sdram_s1) & (cpu_data_master_granted_sdram_s1 | ~cpu_data_master_qualified_request_sdram_s1) & ((~cpu_data_master_qualified_request_sdram_s1 | ~cpu_data_master_read | (cpu_data_master_read_data_valid_sdram_s1 & (cpu_data_master_dbs_address[1]) & cpu_data_master_read))) & ((~cpu_data_master_qualified_request_sdram_s1 | ~cpu_data_master_write | (1 & ~sdram_s1_waitrequest_from_sa & (cpu_data_master_dbs_address[1]) & cpu_data_master_write))) & 1 & ((~cpu_data_master_qualified_request_sysid_control_slave | ~cpu_data_master_read | (1 & 1 & cpu_data_master_read))) & ((~cpu_data_master_qualified_request_sysid_control_slave | ~cpu_data_master_write | (1 & cpu_data_master_write)));
+  assign r_2 = ((~cpu_data_master_qualified_request_epcs_epcs_control_port | ~(cpu_data_master_read | cpu_data_master_write) | (1 & 1 & (cpu_data_master_read | cpu_data_master_write)))) & 1 & (cpu_data_master_qualified_request_jtag_uart_avalon_jtag_slave | ~cpu_data_master_requests_jtag_uart_avalon_jtag_slave) & ((~cpu_data_master_qualified_request_jtag_uart_avalon_jtag_slave | ~(cpu_data_master_read | cpu_data_master_write) | (1 & ~jtag_uart_avalon_jtag_slave_waitrequest_from_sa & (cpu_data_master_read | cpu_data_master_write)))) & ((~cpu_data_master_qualified_request_jtag_uart_avalon_jtag_slave | ~(cpu_data_master_read | cpu_data_master_write) | (1 & ~jtag_uart_avalon_jtag_slave_waitrequest_from_sa & (cpu_data_master_read | cpu_data_master_write)))) & 1 & (cpu_data_master_qualified_request_sdram_s1 | (cpu_data_master_read_data_valid_sdram_s1 & cpu_data_master_dbs_address[1]) | (cpu_data_master_write & !cpu_data_master_byteenable_sdram_s1 & cpu_data_master_dbs_address[1]) | ~cpu_data_master_requests_sdram_s1) & (cpu_data_master_granted_sdram_s1 | ~cpu_data_master_qualified_request_sdram_s1) & ((~cpu_data_master_qualified_request_sdram_s1 | ~cpu_data_master_read | (cpu_data_master_read_data_valid_sdram_s1 & (cpu_data_master_dbs_address[1]) & cpu_data_master_read))) & ((~cpu_data_master_qualified_request_sdram_s1 | ~cpu_data_master_write | (1 & ~sdram_s1_waitrequest_from_sa & (cpu_data_master_dbs_address[1]) & cpu_data_master_write))) & 1 & ((~cpu_data_master_qualified_request_sysid_control_slave | ~cpu_data_master_read | (1 & 1 & cpu_data_master_read))) & ((~cpu_data_master_qualified_request_sysid_control_slave | ~cpu_data_master_write | (1 & cpu_data_master_write)));
 
   //optimize select-logic by passing only those address bits which matter.
   assign cpu_data_master_address_to_slave = {cpu_data_master_address[26],
@@ -2597,6 +2914,7 @@ module cpu_data_master_arbitrator (
     ({32 {~cpu_data_master_requests_PIO_LCD_PWM_s1}} | PIO_LCD_PWM_s1_readdata_from_sa) &
     ({32 {~cpu_data_master_requests_PIO_LCD_R_s1}} | PIO_LCD_R_s1_readdata_from_sa) &
     ({32 {~cpu_data_master_requests_PIO_LED_s1}} | PIO_LED_s1_readdata_from_sa) &
+    ({32 {~cpu_data_master_requests_RS232_s1}} | RS232_s1_readdata_from_sa) &
     ({32 {~cpu_data_master_requests_cpu_jtag_debug_module}} | cpu_jtag_debug_module_readdata_from_sa) &
     ({32 {~cpu_data_master_requests_epcs_epcs_control_port}} | epcs_epcs_control_port_readdata_from_sa) &
     ({32 {~cpu_data_master_requests_jtag_uart_avalon_jtag_slave}} | registered_cpu_data_master_readdata) &
@@ -2643,7 +2961,7 @@ module cpu_data_master_arbitrator (
     1'b0,
     1'b0,
     1'b0,
-    1'b0,
+    RS232_s1_irq_from_sa,
     jtag_uart_avalon_jtag_slave_irq_from_sa,
     epcs_epcs_control_port_irq_from_sa};
 
@@ -2831,13 +3149,13 @@ module cpu_instruction_master_arbitrator (
   wire             r_1;
   wire             r_2;
   //r_1 master_run cascaded wait assignment, which is an e_assign
-  assign r_1 = 1 & (cpu_instruction_master_qualified_request_cpu_jtag_debug_module | ~cpu_instruction_master_requests_cpu_jtag_debug_module) & (cpu_instruction_master_granted_cpu_jtag_debug_module | ~cpu_instruction_master_qualified_request_cpu_jtag_debug_module) & ((~cpu_instruction_master_qualified_request_cpu_jtag_debug_module | ~cpu_instruction_master_read | (1 & ~d1_cpu_jtag_debug_module_end_xfer & cpu_instruction_master_read))) & 1 & (cpu_instruction_master_qualified_request_epcs_epcs_control_port | ~cpu_instruction_master_requests_epcs_epcs_control_port) & (cpu_instruction_master_granted_epcs_epcs_control_port | ~cpu_instruction_master_qualified_request_epcs_epcs_control_port) & ((~cpu_instruction_master_qualified_request_epcs_epcs_control_port | ~(cpu_instruction_master_read) | (1 & ~d1_epcs_epcs_control_port_end_xfer & (cpu_instruction_master_read))));
+  assign r_1 = 1 & (cpu_instruction_master_qualified_request_cpu_jtag_debug_module | ~cpu_instruction_master_requests_cpu_jtag_debug_module) & (cpu_instruction_master_granted_cpu_jtag_debug_module | ~cpu_instruction_master_qualified_request_cpu_jtag_debug_module) & ((~cpu_instruction_master_qualified_request_cpu_jtag_debug_module | ~cpu_instruction_master_read | (1 & ~d1_cpu_jtag_debug_module_end_xfer & cpu_instruction_master_read))) & 1 & (cpu_instruction_master_qualified_request_epcs_epcs_control_port | ~cpu_instruction_master_requests_epcs_epcs_control_port) & (cpu_instruction_master_granted_epcs_epcs_control_port | ~cpu_instruction_master_qualified_request_epcs_epcs_control_port);
 
   //cascaded wait assignment, which is an e_assign
   assign cpu_instruction_master_run = r_1 & r_2;
 
   //r_2 master_run cascaded wait assignment, which is an e_assign
-  assign r_2 = 1 & (cpu_instruction_master_qualified_request_sdram_s1 | ~cpu_instruction_master_requests_sdram_s1) & (cpu_instruction_master_granted_sdram_s1 | ~cpu_instruction_master_qualified_request_sdram_s1) & ((~cpu_instruction_master_qualified_request_sdram_s1 | ~cpu_instruction_master_read | (1 & ~sdram_s1_waitrequest_from_sa & (cpu_instruction_master_dbs_address[1]) & cpu_instruction_master_read)));
+  assign r_2 = ((~cpu_instruction_master_qualified_request_epcs_epcs_control_port | ~(cpu_instruction_master_read) | (1 & ~d1_epcs_epcs_control_port_end_xfer & (cpu_instruction_master_read)))) & 1 & (cpu_instruction_master_qualified_request_sdram_s1 | ~cpu_instruction_master_requests_sdram_s1) & (cpu_instruction_master_granted_sdram_s1 | ~cpu_instruction_master_qualified_request_sdram_s1) & ((~cpu_instruction_master_qualified_request_sdram_s1 | ~cpu_instruction_master_read | (1 & ~sdram_s1_waitrequest_from_sa & (cpu_instruction_master_dbs_address[1]) & cpu_instruction_master_read)));
 
   //optimize select-logic by passing only those address bits which matter.
   assign cpu_instruction_master_address_to_slave = {cpu_instruction_master_address[26],
@@ -3605,7 +3923,7 @@ module jtag_uart_avalon_jtag_slave_arbitrator (
   //assign jtag_uart_avalon_jtag_slave_readdata_from_sa = jtag_uart_avalon_jtag_slave_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign jtag_uart_avalon_jtag_slave_readdata_from_sa = jtag_uart_avalon_jtag_slave_readdata;
 
-  assign cpu_data_master_requests_jtag_uart_avalon_jtag_slave = ({cpu_data_master_address_to_slave[26 : 3] , 3'b0} == 27'h1878) & (cpu_data_master_read | cpu_data_master_write);
+  assign cpu_data_master_requests_jtag_uart_avalon_jtag_slave = ({cpu_data_master_address_to_slave[26 : 3] , 3'b0} == 27'h1898) & (cpu_data_master_read | cpu_data_master_write);
   //assign jtag_uart_avalon_jtag_slave_dataavailable_from_sa = jtag_uart_avalon_jtag_slave_dataavailable so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign jtag_uart_avalon_jtag_slave_dataavailable_from_sa = jtag_uart_avalon_jtag_slave_dataavailable;
 
@@ -5019,7 +5337,7 @@ module sysid_control_slave_arbitrator (
   //assign sysid_control_slave_readdata_from_sa = sysid_control_slave_readdata so that symbol knows where to group signals which may go to master only, which is an e_assign
   assign sysid_control_slave_readdata_from_sa = sysid_control_slave_readdata;
 
-  assign cpu_data_master_requests_sysid_control_slave = (({cpu_data_master_address_to_slave[26 : 3] , 3'b0} == 27'h1870) & (cpu_data_master_read | cpu_data_master_write)) & cpu_data_master_read;
+  assign cpu_data_master_requests_sysid_control_slave = (({cpu_data_master_address_to_slave[26 : 3] , 3'b0} == 27'h1890) & (cpu_data_master_read | cpu_data_master_write)) & cpu_data_master_read;
   //sysid_control_slave_arb_share_counter set values, which is an e_mux
   assign sysid_control_slave_arb_share_set_values = 1;
 
@@ -5253,6 +5571,10 @@ module kernel (
                 // the_PIO_LED
                  out_port_from_the_PIO_LED,
 
+                // the_RS232
+                 rxd_to_the_RS232,
+                 txd_from_the_RS232,
+
                 // the_epcs
                  data0_to_the_epcs,
                  dclk_from_the_epcs,
@@ -5282,6 +5604,7 @@ module kernel (
   output  [  3: 0] out_port_from_the_PIO_LED;
   output           sce_from_the_epcs;
   output           sdo_from_the_epcs;
+  output           txd_from_the_RS232;
   output  [ 12: 0] zs_addr_from_the_sdram;
   output  [  1: 0] zs_ba_from_the_sdram;
   output           zs_cas_n_from_the_sdram;
@@ -5294,6 +5617,7 @@ module kernel (
   input            clk;
   input            data0_to_the_epcs;
   input            reset_n;
+  input            rxd_to_the_RS232;
 
   wire    [  1: 0] PIO_LCD_B_s1_address;
   wire             PIO_LCD_B_s1_chipselect;
@@ -5344,6 +5668,21 @@ module kernel (
   wire             PIO_LED_s1_reset_n;
   wire             PIO_LED_s1_write_n;
   wire    [ 31: 0] PIO_LED_s1_writedata;
+  wire    [  2: 0] RS232_s1_address;
+  wire             RS232_s1_begintransfer;
+  wire             RS232_s1_chipselect;
+  wire             RS232_s1_dataavailable;
+  wire             RS232_s1_dataavailable_from_sa;
+  wire             RS232_s1_irq;
+  wire             RS232_s1_irq_from_sa;
+  wire             RS232_s1_read_n;
+  wire    [ 15: 0] RS232_s1_readdata;
+  wire    [ 15: 0] RS232_s1_readdata_from_sa;
+  wire             RS232_s1_readyfordata;
+  wire             RS232_s1_readyfordata_from_sa;
+  wire             RS232_s1_reset_n;
+  wire             RS232_s1_write_n;
+  wire    [ 15: 0] RS232_s1_writedata;
   wire             clk_reset_n;
   wire    [ 26: 0] cpu_data_master_address;
   wire    [ 26: 0] cpu_data_master_address_to_slave;
@@ -5359,6 +5698,7 @@ module kernel (
   wire             cpu_data_master_granted_PIO_LCD_PWM_s1;
   wire             cpu_data_master_granted_PIO_LCD_R_s1;
   wire             cpu_data_master_granted_PIO_LED_s1;
+  wire             cpu_data_master_granted_RS232_s1;
   wire             cpu_data_master_granted_cpu_jtag_debug_module;
   wire             cpu_data_master_granted_epcs_epcs_control_port;
   wire             cpu_data_master_granted_jtag_uart_avalon_jtag_slave;
@@ -5373,6 +5713,7 @@ module kernel (
   wire             cpu_data_master_qualified_request_PIO_LCD_PWM_s1;
   wire             cpu_data_master_qualified_request_PIO_LCD_R_s1;
   wire             cpu_data_master_qualified_request_PIO_LED_s1;
+  wire             cpu_data_master_qualified_request_RS232_s1;
   wire             cpu_data_master_qualified_request_cpu_jtag_debug_module;
   wire             cpu_data_master_qualified_request_epcs_epcs_control_port;
   wire             cpu_data_master_qualified_request_jtag_uart_avalon_jtag_slave;
@@ -5386,6 +5727,7 @@ module kernel (
   wire             cpu_data_master_read_data_valid_PIO_LCD_PWM_s1;
   wire             cpu_data_master_read_data_valid_PIO_LCD_R_s1;
   wire             cpu_data_master_read_data_valid_PIO_LED_s1;
+  wire             cpu_data_master_read_data_valid_RS232_s1;
   wire             cpu_data_master_read_data_valid_cpu_jtag_debug_module;
   wire             cpu_data_master_read_data_valid_epcs_epcs_control_port;
   wire             cpu_data_master_read_data_valid_jtag_uart_avalon_jtag_slave;
@@ -5400,6 +5742,7 @@ module kernel (
   wire             cpu_data_master_requests_PIO_LCD_PWM_s1;
   wire             cpu_data_master_requests_PIO_LCD_R_s1;
   wire             cpu_data_master_requests_PIO_LED_s1;
+  wire             cpu_data_master_requests_RS232_s1;
   wire             cpu_data_master_requests_cpu_jtag_debug_module;
   wire             cpu_data_master_requests_epcs_epcs_control_port;
   wire             cpu_data_master_requests_jtag_uart_avalon_jtag_slave;
@@ -5448,6 +5791,7 @@ module kernel (
   wire             d1_PIO_LCD_PWM_s1_end_xfer;
   wire             d1_PIO_LCD_R_s1_end_xfer;
   wire             d1_PIO_LED_s1_end_xfer;
+  wire             d1_RS232_s1_end_xfer;
   wire             d1_cpu_jtag_debug_module_end_xfer;
   wire             d1_epcs_epcs_control_port_end_xfer;
   wire             d1_jtag_uart_avalon_jtag_slave_end_xfer;
@@ -5513,6 +5857,7 @@ module kernel (
   wire    [ 31: 0] sysid_control_slave_readdata;
   wire    [ 31: 0] sysid_control_slave_readdata_from_sa;
   wire             sysid_control_slave_reset_n;
+  wire             txd_from_the_RS232;
   wire    [ 12: 0] zs_addr_from_the_sdram;
   wire    [  1: 0] zs_ba_from_the_sdram;
   wire             zs_cas_n_from_the_sdram;
@@ -5767,6 +6112,54 @@ module kernel (
       .writedata  (PIO_LED_s1_writedata)
     );
 
+  RS232_s1_arbitrator the_RS232_s1
+    (
+      .RS232_s1_address                           (RS232_s1_address),
+      .RS232_s1_begintransfer                     (RS232_s1_begintransfer),
+      .RS232_s1_chipselect                        (RS232_s1_chipselect),
+      .RS232_s1_dataavailable                     (RS232_s1_dataavailable),
+      .RS232_s1_dataavailable_from_sa             (RS232_s1_dataavailable_from_sa),
+      .RS232_s1_irq                               (RS232_s1_irq),
+      .RS232_s1_irq_from_sa                       (RS232_s1_irq_from_sa),
+      .RS232_s1_read_n                            (RS232_s1_read_n),
+      .RS232_s1_readdata                          (RS232_s1_readdata),
+      .RS232_s1_readdata_from_sa                  (RS232_s1_readdata_from_sa),
+      .RS232_s1_readyfordata                      (RS232_s1_readyfordata),
+      .RS232_s1_readyfordata_from_sa              (RS232_s1_readyfordata_from_sa),
+      .RS232_s1_reset_n                           (RS232_s1_reset_n),
+      .RS232_s1_write_n                           (RS232_s1_write_n),
+      .RS232_s1_writedata                         (RS232_s1_writedata),
+      .clk                                        (clk),
+      .cpu_data_master_address_to_slave           (cpu_data_master_address_to_slave),
+      .cpu_data_master_granted_RS232_s1           (cpu_data_master_granted_RS232_s1),
+      .cpu_data_master_qualified_request_RS232_s1 (cpu_data_master_qualified_request_RS232_s1),
+      .cpu_data_master_read                       (cpu_data_master_read),
+      .cpu_data_master_read_data_valid_RS232_s1   (cpu_data_master_read_data_valid_RS232_s1),
+      .cpu_data_master_requests_RS232_s1          (cpu_data_master_requests_RS232_s1),
+      .cpu_data_master_write                      (cpu_data_master_write),
+      .cpu_data_master_writedata                  (cpu_data_master_writedata),
+      .d1_RS232_s1_end_xfer                       (d1_RS232_s1_end_xfer),
+      .reset_n                                    (clk_reset_n)
+    );
+
+  RS232 the_RS232
+    (
+      .address       (RS232_s1_address),
+      .begintransfer (RS232_s1_begintransfer),
+      .chipselect    (RS232_s1_chipselect),
+      .clk           (clk),
+      .dataavailable (RS232_s1_dataavailable),
+      .irq           (RS232_s1_irq),
+      .read_n        (RS232_s1_read_n),
+      .readdata      (RS232_s1_readdata),
+      .readyfordata  (RS232_s1_readyfordata),
+      .reset_n       (RS232_s1_reset_n),
+      .rxd           (rxd_to_the_RS232),
+      .txd           (txd_from_the_RS232),
+      .write_n       (RS232_s1_write_n),
+      .writedata     (RS232_s1_writedata)
+    );
+
   cpu_jtag_debug_module_arbitrator the_cpu_jtag_debug_module
     (
       .clk                                                            (clk),
@@ -5814,6 +6207,8 @@ module kernel (
       .PIO_LCD_PWM_s1_readdata_from_sa                               (PIO_LCD_PWM_s1_readdata_from_sa),
       .PIO_LCD_R_s1_readdata_from_sa                                 (PIO_LCD_R_s1_readdata_from_sa),
       .PIO_LED_s1_readdata_from_sa                                   (PIO_LED_s1_readdata_from_sa),
+      .RS232_s1_irq_from_sa                                          (RS232_s1_irq_from_sa),
+      .RS232_s1_readdata_from_sa                                     (RS232_s1_readdata_from_sa),
       .clk                                                           (clk),
       .cpu_data_master_address                                       (cpu_data_master_address),
       .cpu_data_master_address_to_slave                              (cpu_data_master_address_to_slave),
@@ -5827,6 +6222,7 @@ module kernel (
       .cpu_data_master_granted_PIO_LCD_PWM_s1                        (cpu_data_master_granted_PIO_LCD_PWM_s1),
       .cpu_data_master_granted_PIO_LCD_R_s1                          (cpu_data_master_granted_PIO_LCD_R_s1),
       .cpu_data_master_granted_PIO_LED_s1                            (cpu_data_master_granted_PIO_LED_s1),
+      .cpu_data_master_granted_RS232_s1                              (cpu_data_master_granted_RS232_s1),
       .cpu_data_master_granted_cpu_jtag_debug_module                 (cpu_data_master_granted_cpu_jtag_debug_module),
       .cpu_data_master_granted_epcs_epcs_control_port                (cpu_data_master_granted_epcs_epcs_control_port),
       .cpu_data_master_granted_jtag_uart_avalon_jtag_slave           (cpu_data_master_granted_jtag_uart_avalon_jtag_slave),
@@ -5841,6 +6237,7 @@ module kernel (
       .cpu_data_master_qualified_request_PIO_LCD_PWM_s1              (cpu_data_master_qualified_request_PIO_LCD_PWM_s1),
       .cpu_data_master_qualified_request_PIO_LCD_R_s1                (cpu_data_master_qualified_request_PIO_LCD_R_s1),
       .cpu_data_master_qualified_request_PIO_LED_s1                  (cpu_data_master_qualified_request_PIO_LED_s1),
+      .cpu_data_master_qualified_request_RS232_s1                    (cpu_data_master_qualified_request_RS232_s1),
       .cpu_data_master_qualified_request_cpu_jtag_debug_module       (cpu_data_master_qualified_request_cpu_jtag_debug_module),
       .cpu_data_master_qualified_request_epcs_epcs_control_port      (cpu_data_master_qualified_request_epcs_epcs_control_port),
       .cpu_data_master_qualified_request_jtag_uart_avalon_jtag_slave (cpu_data_master_qualified_request_jtag_uart_avalon_jtag_slave),
@@ -5854,6 +6251,7 @@ module kernel (
       .cpu_data_master_read_data_valid_PIO_LCD_PWM_s1                (cpu_data_master_read_data_valid_PIO_LCD_PWM_s1),
       .cpu_data_master_read_data_valid_PIO_LCD_R_s1                  (cpu_data_master_read_data_valid_PIO_LCD_R_s1),
       .cpu_data_master_read_data_valid_PIO_LED_s1                    (cpu_data_master_read_data_valid_PIO_LED_s1),
+      .cpu_data_master_read_data_valid_RS232_s1                      (cpu_data_master_read_data_valid_RS232_s1),
       .cpu_data_master_read_data_valid_cpu_jtag_debug_module         (cpu_data_master_read_data_valid_cpu_jtag_debug_module),
       .cpu_data_master_read_data_valid_epcs_epcs_control_port        (cpu_data_master_read_data_valid_epcs_epcs_control_port),
       .cpu_data_master_read_data_valid_jtag_uart_avalon_jtag_slave   (cpu_data_master_read_data_valid_jtag_uart_avalon_jtag_slave),
@@ -5868,6 +6266,7 @@ module kernel (
       .cpu_data_master_requests_PIO_LCD_PWM_s1                       (cpu_data_master_requests_PIO_LCD_PWM_s1),
       .cpu_data_master_requests_PIO_LCD_R_s1                         (cpu_data_master_requests_PIO_LCD_R_s1),
       .cpu_data_master_requests_PIO_LED_s1                           (cpu_data_master_requests_PIO_LED_s1),
+      .cpu_data_master_requests_RS232_s1                             (cpu_data_master_requests_RS232_s1),
       .cpu_data_master_requests_cpu_jtag_debug_module                (cpu_data_master_requests_cpu_jtag_debug_module),
       .cpu_data_master_requests_epcs_epcs_control_port               (cpu_data_master_requests_epcs_epcs_control_port),
       .cpu_data_master_requests_jtag_uart_avalon_jtag_slave          (cpu_data_master_requests_jtag_uart_avalon_jtag_slave),
@@ -5884,6 +6283,7 @@ module kernel (
       .d1_PIO_LCD_PWM_s1_end_xfer                                    (d1_PIO_LCD_PWM_s1_end_xfer),
       .d1_PIO_LCD_R_s1_end_xfer                                      (d1_PIO_LCD_R_s1_end_xfer),
       .d1_PIO_LED_s1_end_xfer                                        (d1_PIO_LED_s1_end_xfer),
+      .d1_RS232_s1_end_xfer                                          (d1_RS232_s1_end_xfer),
       .d1_cpu_jtag_debug_module_end_xfer                             (d1_cpu_jtag_debug_module_end_xfer),
       .d1_epcs_epcs_control_port_end_xfer                            (d1_epcs_epcs_control_port_end_xfer),
       .d1_jtag_uart_avalon_jtag_slave_end_xfer                       (d1_jtag_uart_avalon_jtag_slave_end_xfer),
@@ -6222,6 +6622,7 @@ endmodule
 `include "PIO_LCD_CTRL.v"
 `include "PIO_LCD_CLK.v"
 `include "PIO_LCD_B.v"
+`include "RS232.v"
 
 `timescale 1ns / 1ps
 
@@ -6229,6 +6630,8 @@ module test_bench
 ;
 
 
+  wire             RS232_s1_dataavailable_from_sa;
+  wire             RS232_s1_readyfordata_from_sa;
   reg              clk;
   wire             data0_to_the_epcs;
   wire             dclk_from_the_epcs;
@@ -6245,9 +6648,11 @@ module test_bench
   wire    [  5: 0] out_port_from_the_PIO_LCD_R;
   wire    [  3: 0] out_port_from_the_PIO_LED;
   reg              reset_n;
+  wire             rxd_to_the_RS232;
   wire             sce_from_the_epcs;
   wire             sdo_from_the_epcs;
   wire             sysid_control_slave_clock;
+  wire             txd_from_the_RS232;
   wire    [ 12: 0] zs_addr_from_the_sdram;
   wire    [  1: 0] zs_ba_from_the_sdram;
   wire             zs_cas_n_from_the_sdram;
@@ -6277,8 +6682,10 @@ module test_bench
       .out_port_from_the_PIO_LCD_R    (out_port_from_the_PIO_LCD_R),
       .out_port_from_the_PIO_LED      (out_port_from_the_PIO_LED),
       .reset_n                        (reset_n),
+      .rxd_to_the_RS232               (rxd_to_the_RS232),
       .sce_from_the_epcs              (sce_from_the_epcs),
       .sdo_from_the_epcs              (sdo_from_the_epcs),
+      .txd_from_the_RS232             (txd_from_the_RS232),
       .zs_addr_from_the_sdram         (zs_addr_from_the_sdram),
       .zs_ba_from_the_sdram           (zs_ba_from_the_sdram),
       .zs_cas_n_from_the_sdram        (zs_cas_n_from_the_sdram),

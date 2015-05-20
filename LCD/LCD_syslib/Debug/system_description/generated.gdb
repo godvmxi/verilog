@@ -3,7 +3,7 @@
 # Machine generated for a CPU named "cpu" as defined in:
 # D:\work\FPGA\quartus\nios_ii\LCD\kernel.ptf
 #
-# Generated: 2015-05-21 00:09:49.532
+# Generated: 2015-05-21 01:03:42.734
 
 # DO NOT MODIFY THIS FILE
 #

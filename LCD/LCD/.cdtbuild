@@ -7,6 +7,7 @@
 <toolChain id="com.altera.nj.ui.exe.Debug.60405366" name="com.altera.nj.ui.exe.Debug" superClass="com.altera.nj.ui.exe.Debug">
 <tool id="com.altera.nj.ui.tool.compiler.exe.debug.607989444" name="Nios II Compiler" superClass="com.altera.nj.ui.tool.compiler.exe.debug"/>
 <tool id="com.altera.nj.ui.tool.linker.exe.debug.988050244" name="Linker" superClass="com.altera.nj.ui.tool.linker.exe.debug"/>
+<macros expandEnvironmentMacros="true"/>
 </toolChain>
 </configuration>
 <configuration artifactExtension="elf" artifactName="LCD" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="nios2.exec.release.1547732201" name="Release" parent="nios2.exec.release">

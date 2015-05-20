@@ -16,11 +16,29 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 #include "../inc/sopc.h"
+#include "../inc/uart.h"
 
+
+void receive(void){
+    unsigned char buffer[50] = {0};
+    if(uart.receive_flag){
+            memset(buffer,0,50);// clear buffer
+
+            strcpy(buffer,uart.receive_buffer);//copy uart.receive_buffer to buffer
+
+            uart.receive_flag = 0;//clear flags
+        }
+        uart.send_string(sizeof(buffer),buffer);
+        
+}
 int main()
 {
     int i = 0 ;
+    unsigned char buffer[50]="Hello FPGA!\r\n";
+    uart.init();
   printf("Hello from Nios II!\n");
   
     while(1){
@@ -28,6 +46,8 @@ int main()
             LED->DATA = 1 << i;
             usleep(500000);
         }
+        uart.send_string(sizeof(buffer),buffer);
+//        printf("Hello from Nios II!\n");
        // LCD_PWM->DATA = 1;
     }
 
