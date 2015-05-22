@@ -27,7 +27,7 @@ void lcd_power_off(void){
  
     
 }
-
+int refresh_conter  = 0;
 //#define LCD_CTRL_UD_PIN        0x20
 //#define LCD_CTRL_VS_PIN        0x10
 //#define LCD_CTRL_HS_PIN        0x8
@@ -52,9 +52,16 @@ void lcd_mode_init(void){
 
 void lcd_dlck_data_send_cycle(unsigned short data,int mode){
         //set data ready  //will change data
-    LCD_DATA_RGB_R->DATA  = 0xff;
-    LCD_DATA_RGB_G->DATA  = 0x00;
-    LCD_DATA_RGB_B->DATA  = 0x30;
+    if (refresh_conter == 0 ){
+        LCD_DATA_RGB_R->DATA  = 0xff;
+        LCD_DATA_RGB_G->DATA  = 0x00;
+        LCD_DATA_RGB_B->DATA  = 0x00;
+    }
+    if(refresh_conter %5 == 0){
+    LCD_DATA_RGB_R->DATA  += 5;
+    LCD_DATA_RGB_G->DATA  += 14;
+    LCD_DATA_RGB_B->DATA  += 34;
+    }
     
     LCD_DCLK_UP ;
     DCLK_DELAY ;    //wait for data stable
@@ -130,8 +137,13 @@ void lcd_scan_whole_vsync_cycle(unsigned short *data,int width,int heigh,int mod
 void lcd_prepare_data(unsigned short *data,int width,int heigh,int mode){
     lcd_mode_init();
     lcd_set_init_signal_statue();
+    
     while(1){
+        
+        printf("try fill screen -> %d\r\n",refresh_conter);
         lcd_scan_whole_vsync_cycle(0,480,800,0);
+        refresh_conter++;
+        
     }
 }
 
