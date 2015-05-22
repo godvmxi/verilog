@@ -128,15 +128,21 @@ typedef struct
 //#define LCD_SCL           ((PIO_STR *) LCD_SCL_BASE)
 //#define LCD_A0            ((PIO_STR *) LCD_A0_BASE)
 //#define LCD_SI            ((PIO_STR *) LCD_SI_BASE)
-#define LCD_CTRL_UD        0x20
-#define LCD_CTRL_VS        0x10
-#define LCD_CTRL_HS        0x8
-#define LCD_CTRL_DE        0x4
-#define LCD_CTRL_MODE      0x2
-#define LCD_CTRL_LR        0x1
+#define LCD_CTRL_UD_PIN        0x20
+#define LCD_CTRL_VS_PIN        0x10
+#define LCD_CTRL_HS_PIN        0x8
+#define LCD_CTRL_DE_PIN        0x4
+#define LCD_CTRL_MODE_PIN      0x2
+#define LCD_CTRL_LR_PIN        0x1
 
 #define LCD_CTRL           ((PIO_STR *) PIO_LCD_CTRL_BASE)
 #define LCD_PWM           ((PIO_STR *) PIO_LCD_PWM_BASE)
+#define LCD_DCLK           ((PIO_STR *) PIO_LCD_CLK_BASE)
+
+#defin LCD_DATA_RGB_B   ((PIO_STR *)PIO_LCD_B_BASE )
+#defin LCD_DATA_RGB_G   ((PIO_STR *)PIO_LCD_G_BASE )
+#defin LCD_DATA_RGB_R   ((PIO_STR *)PIO_LCD_R_BASE )
+
 #endif /* _LCD */
 
 
