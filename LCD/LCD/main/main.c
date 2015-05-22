@@ -54,6 +54,7 @@ int main()
         //uart.send_string(sizeof(buffer),buffer);
         syslog("-->on");
         LCD_PWM->DATA = 1;
+        lcd_prepare_data();
        
        
         for(i=0;i<4;i++){

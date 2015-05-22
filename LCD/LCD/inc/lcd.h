@@ -17,9 +17,9 @@
 
 
 #define TVW_DELAY    //include 2 HSYNC cycles
-#define THK_DELAY    udelay()  //1.5DCLK
+#define THK_DELAY    usleep(1)  //1.5DCLK
 
-#define DCLK_DELAY   udelay(10)
+#define DCLK_DELAY   usleep(10)
 
 
 

@@ -1,5 +1,13 @@
 #include "../inc/lcd.h"
-#define LCD_PIN_CTRL(PIN,value) if(value){ LCD_CTRL->DATA = LCD_CTRL->DATA | PIN } else { LCD_CTRL->DATA = LCD_CTRL->DATA & (^PIN) };
+
+#define LCD_PIN_CTRL(PIN,value)  if(1){ \
+            if(value){\
+                LCD_CTRL->DATA = LCD_CTRL->DATA | ( PIN) ;\
+            } \
+            else { \
+                LCD_CTRL->DATA = LCD_CTRL->DATA & ( ~(PIN) ) ;\
+            } \
+        }
 
 #define LCD_DCLK_UP    LCD_DCLK->DATA=0xffffffff;
 #define LCD_DCLK_DOWN  LCD_DCLK->DATA=0;
@@ -42,11 +50,11 @@ void lcd_mode_init(void){
 }
 
 
-void lcd_dlck_data_send_cycle(unsigned short *data,int mode){
+void lcd_dlck_data_send_cycle(unsigned short data,int mode){
         //set data ready  //will change data
-    LCD_DATA_RGB_R  = 0xce;
-    LCD_DATA_RGB_G  = 0xde;
-    LCD_DATA_RGB_B  = 0x30;
+    LCD_DATA_RGB_R->DATA  = 0xff;
+    LCD_DATA_RGB_G->DATA  = 0x00;
+    LCD_DATA_RGB_B->DATA  = 0x30;
     
     LCD_DCLK_UP ;
     DCLK_DELAY ;    //wait for data stable
@@ -54,7 +62,7 @@ void lcd_dlck_data_send_cycle(unsigned short *data,int mode){
     DCLK_DELAY ;   
 }
     
-void lcd_hsync_single_cycle(unsigned short *data,int hsyncNum ;int mode){
+void lcd_hsync_single_cycle(unsigned short *picBuf,int hsyncNum ,int mode){
     //set data ready  //will change data
     int i = 0;
     //TW part    
@@ -67,7 +75,7 @@ void lcd_hsync_single_cycle(unsigned short *data,int hsyncNum ;int mode){
     lcd_dlck_data_send_cycle(0xff,0);
     LCD_PIN_CTRL(LCD_CTRL_HS_PIN,1);
     //HV part
-    if (data == NULL)
+    if (picBuf == 0)
     {
         for (i=0;i< hsyncNum;i++){
             lcd_dlck_data_send_cycle(0xff,mode);
@@ -75,7 +83,7 @@ void lcd_hsync_single_cycle(unsigned short *data,int hsyncNum ;int mode){
     }
     else {
         for (i=0;i< hsyncNum;i++){
-            lcd_dlck_data_send_cycle(data[i],mode);
+            lcd_dlck_data_send_cycle(picBuf[i],mode);
         }
     }
     //HFP part
@@ -86,55 +94,45 @@ void lcd_hsync_single_cycle(unsigned short *data,int hsyncNum ;int mode){
     
 }
 
-
-void lcd_scan_whole_screen(unsigned short *data,int width.int heigh,int mode){
-    int i  = 0;
+void lcd_set_init_signal_statue(void){
     LCD_PIN_CTRL(LCD_CTRL_HS_PIN,1);
     LCD_PIN_CTRL(LCD_CTRL_VS_PIN,1);
     DCLK_DELAY ;
     LCD_PIN_CTRL(LCD_CTRL_DE_PIN,0);//disable de
     LCD_DCLK_DOWN ;//prepare DCLK DOWN
-    for (i = 0;i<LCD_VSYNC_VW ;i++){ //LCD_VSYNC_VW  ==  HSYNC CYCLES .
-        
-        LCD_PIN_CTRL(LCD_CTRL_VS_PIN,0);
-        DCLK_DELAY ;
-        LCD_PIN_CTRL(LCD_CTRL_VS_PIN,1);
-        //LCD_CTRL_HS_PIN actions ,de not eable 
-        lcd_hsync_single_cycle(0xff,0); 
-        
-        
-    }
-    LCD_DCLK_DOWN;
-    //vsync tvb
+}
+void lcd_scan_whole_vsync_cycle(unsigned short *data,int width,int heigh,int mode){
+    int j  = 0;
 
-    for (i = 0;i<LCD_VSYNC_VW ;i++){
-        
-        lcd_hsync_single_cycle(0xff,0); 
-        
-        
-    }
-    LCD_DCLK_DOWN;
-    LCD_PIN_CTRL(LCD_CTRL_DE_PIN,1);  //valid DE signal ,ready for data
-    for (i = 0;i<LCD_VSYNC_W ;i++){
-        lcd_hsync_single_cycle(0xff,0);  //fill valid data to lcd
-    }
-    LCD_PIN_CTRL(LCD_CTRL_DE_PIN,0);
-    for (i = 0;i<LCD_VSYNC_VFP ;i++){
-        LCD_PIN_CTRL(LCD_CTRL_DE_PIN,0);//disable de
-        LCD_PIN_CTRL(LCD_CTRL_VS_PIN,0);
-        DCLK_DELAY ;
-        LCD_PIN_CTRL(LCD_CTRL_VS_PIN,1);
-        //LCD_CTRL_HS_PIN actions ,de not eable 
-        
-        
-    }
+        //vsync VW part
+        LCD_PIN_CTRL(LCD_CTRL_VS_PIN,0);//generate vsync start signal
+        for (j = 0;j<LCD_VSYNC_VW ;j++){ //
+            lcd_hsync_single_cycle(0,width,mode);             
+        }
+        LCD_PIN_CTRL(LCD_CTRL_VS_PIN,1);//generate vsync start signal over,begin hsync actions
+
+        //vsync VBP part
+        lcd_hsync_single_cycle(0,width,mode);
+
+        LCD_PIN_CTRL(LCD_CTRL_DE_PIN,1);  //valid DE signal ,ready for data
+        for (j = 0;j<heigh ;j++){
+            lcd_hsync_single_cycle(data,width,mode); //should fill usefull data
+            data+=j;
+        }
+        for (j = 0;j<LCD_VSYNC_VFP ;j++){
+            lcd_hsync_single_cycle(0,width,mode);        
+        }
+    
+
     
     
 }
-void lcd_prepare_data(unsigned short *data),int width.int heigh,int mode{
-        while(1){
-            lcd_scan_whole_screen(0,800,480,0);
-        }
+void lcd_prepare_data(unsigned short *data,int width,int heigh,int mode){
+    lcd_mode_init();
+    lcd_set_init_signal_statue();
+    while(1){
+        lcd_scan_whole_vsync_cycle(0,480,800,0);
+    }
 }
 
 
