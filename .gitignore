@@ -74,3 +74,8 @@
 */Debug/*
 *.d
 *cdtproject*
+
+#wim temp 
+*.swp
+*cache*
+*run*
