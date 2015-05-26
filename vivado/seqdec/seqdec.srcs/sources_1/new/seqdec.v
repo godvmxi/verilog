@@ -47,10 +47,10 @@ always @( posedge clk or negedge rst)
     else 
         casex ( state ) 
             IDLE :
-				if ( x == 1)
-					state <= A ;
-				else 
+				if ( x == 0)
 					state <= IDLE ;
+				else 
+					state <= A ;
 			A   :
 				if ( x == 0 )
 					state <= B ;
