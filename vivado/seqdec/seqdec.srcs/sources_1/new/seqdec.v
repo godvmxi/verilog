@@ -23,8 +23,11 @@
 module seqdec(x,z,clk,rst );
 input x,clk,rst;
 output z;
+
 reg[2:0] state ;  //state station
+
 wire z;
+
 parameter  IDLE = 3'd0,
             A   = 3'd1,
             B   = 3'd2,
@@ -47,10 +50,10 @@ always @( posedge clk or negedge rst)
 				if ( x == 1)
 					state <= A ;
 				else 
-					state <= B ;
+					state <= IDLE ;
 			A   :
 				if ( x == 0 )
-					state <= C ;
+					state <= B ;
 				else 
 					state <= A ;
 			B   :
@@ -80,9 +83,9 @@ always @( posedge clk or negedge rst)
 					state <= A ;
 			G   :
 				if ( x == 0 )
-					state <= F ;
+					state <= B ;
 				else 
-					state <= A ;
+					state <= F ;
 			default :
 					state <= IDLE ;
 		endcase 
