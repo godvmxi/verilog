@@ -8,6 +8,6 @@ run : $(target)
 	@vvp $(target)
 .PHONY  : clean scan
 clean :
-	@rm $(target)
+	@rm -rfv $(target)
 scan :
 	@find . -name "*.v" > files.lst
