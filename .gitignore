@@ -77,5 +77,6 @@
 
 #wim temp 
 *.swp
-*cache*
-*run*
+*.cache/
+*.runs/
+*.sim/

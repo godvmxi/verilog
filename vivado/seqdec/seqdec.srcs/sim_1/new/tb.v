@@ -35,7 +35,7 @@ inital
 		#2 rst = 0;
 		#30 rst = 1 ;
 		data = 20 'b1100_1001_0000_1001_0100 ;
-		#( 'halfperiod * 1000 ) $top ;
+		#( 'halfperiod * 1000 ) $stop ;
 	end
 always #('halfperiod ) clk = ~clk ;
 always @ (posedge clk )
