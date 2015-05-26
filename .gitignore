@@ -80,3 +80,8 @@
 *.cache/
 *.runs/
 *.sim/
+
+
+#iverilog
+*.o
+*.vcd
