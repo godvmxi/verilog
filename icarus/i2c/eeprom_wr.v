@@ -1,34 +1,45 @@
-ï»¿`timescale 1ns/1ns 
+
+
+/****************************************************************************
+Ä£¿éÃû³Æ£ºEEPROM_WR  ÎÄ¼şÃû£ºeeprom_wr.v
+Ä£¿é¹¦ÄÜ£ºEEPROM¶ÁĞ´Æ÷£¬¿ÉÒÔ¸ù¾İMCUµÄ²¢ĞĞÊı¾İ¡¢µØÖ·ÏßºÍ¶Á/Ğ´µÄ¿ØÖÆ
+          Ïß¶ÔEEPROM (AT24C02/4/8/16)µÄĞĞÎªÄ£¿é½øĞĞËæ»úµÄ¶ÁĞ´²Ù×÷¡£
+          ¶øÇÒ±¾Ä£¿éÎª½ÌÑ§Ä¿µÄ×öÁËĞí¶à¼ò»¯£¬Ö»ÄÜ×öËæ»úµÄ¶ÁĞ´²Ù×÷£¬¹¦ÄÜ
+          ²»ÍêÕû£¬²»ÄÜÓÃ×öÉÌÒµÄ¿µÄ¡£
+Ä£¿éËµÃ÷£º±¾Ä£¿éÎª¿É×ÛºÏÄ£¿é,¿É×ÛºÏÎªÃÅ¼¶Íø±í¡£
+****************************************************************************/
+
+`timescale 1ns/1ns 
 module EEPROM_WR(SDA,SCL,ACK,RESET,CLK,WR,RD,ADDR,DATA);
-output SCL;                //ä¸²è¡Œæ—¶é’Ÿçº¿
-output ACK;               //è¯»å†™ä¸€ä¸ªå‘¨æœŸçš„åº”ç­”ä¿¡å·
-input  RESET;             //å¤ä½ä¿¡å·
-input  CLK;               //æ—¶é’Ÿä¿¡å·è¾“å…¥
-input  WR,RD;             //è¯»å†™ä¿¡å· 
-input[10:0] ADDR;           //åœ°å€çº¿
-inout SDA;                 //ä¸²è¡Œæ•°æ®çº¿
-inout[7:0] DATA;            //å¹¶è¡Œæ•°æ®çº¿
+output SCL;                //´®ĞĞÊ±ÖÓÏß
+output ACK;               //¶ÁĞ´Ò»¸öÖÜÆÚµÄÓ¦´ğĞÅºÅ
+input  RESET;             //¸´Î»ĞÅºÅ
+input  CLK;               //Ê±ÖÓĞÅºÅÊäÈë
+input  WR,RD;             //¶ÁĞ´ĞÅºÅ 
+input[10:0] ADDR;           //µØÖ·Ïß
+inout SDA;                 //´®ĞĞÊı¾İÏß
+inout[7:0] DATA;            //²¢ĞĞÊı¾İÏß
 reg ACK;
 reg SCL;
-reg WF,RF;                //è¯»å†™æ“ä½œæ ‡å¿—
-reg FF;                    //æ ‡å¿—å¯„å­˜å™¨
-reg [1:0] head_buf;        //å¯åŠ¨ä¿¡å·å¯„å­˜å™¨
-reg[1:0] stop_buf;           //åœæ­¢ä¿¡å·å¯„å­˜å™¨ 
-reg [7:0] sh8out_buf;         //EEPROMå†™å¯„å­˜å™¨
-reg [8:0] sh8out_state;        //EEPROM å†™çŠ¶æ€å¯„å­˜å™¨
-reg [9:0] sh8in_state;         //EEPROM è¯»çŠ¶æ€å¯„å­˜å™¨
-reg [2:0] head_state;          //å¯åŠ¨çŠ¶æ€å¯„å­˜å™¨
-reg [2:0] stop_state;          //åœæ­¢çŠ¶æ€å¯„å­˜å™¨
-reg [10:0] main_state;        //ä¸»çŠ¶æ€å¯„å­˜å™¨  
-reg [7:0] data_from_rm;      //EEPROMè¯»å¯„å­˜å™¨
-reg link_sda;               //SDA æ•°æ®è¾“å…¥EEPROMå¼€å…³  
-reg link_read;               //EEPROMè¯»æ“ä½œå¼€å…³   
-reg link_head;               //å¯åŠ¨ä¿¡å·å¼€å…³
-reg link_write;              //EEPROMå†™æ“ä½œå¼€å…³
-reg link_stop;               //åœæ­¢ä¿¡å·å¼€å…³ 
+reg WF,RF;                //¶ÁĞ´²Ù×÷±êÖ¾
+reg FF;                    //±êÖ¾¼Ä´æÆ÷
+reg [1:0] head_buf;        //Æô¶¯ĞÅºÅ¼Ä´æÆ÷
+reg[1:0] stop_buf;           //Í£Ö¹ĞÅºÅ¼Ä´æÆ÷ 
+reg [7:0] sh8out_buf;         //EEPROMĞ´¼Ä´æÆ÷
+reg [8:0] sh8out_state;        //EEPROM Ğ´×´Ì¬¼Ä´æÆ÷
+reg [9:0] sh8in_state;         //EEPROM ¶Á×´Ì¬¼Ä´æÆ÷
+reg [2:0] head_state;          //Æô¶¯×´Ì¬¼Ä´æÆ÷
+reg [2:0] stop_state;          //Í£Ö¹×´Ì¬¼Ä´æÆ÷
+reg [10:0] main_state;        //Ö÷×´Ì¬¼Ä´æÆ÷  
+reg [7:0] data_from_rm;      //EEPROM¶Á¼Ä´æÆ÷
+reg link_sda;               //SDA Êı¾İÊäÈëEEPROM¿ª¹Ø  
+reg link_read;               //EEPROM¶Á²Ù×÷¿ª¹Ø   
+reg link_head;               //Æô¶¯ĞÅºÅ¿ª¹Ø
+reg link_write;              //EEPROMĞ´²Ù×÷¿ª¹Ø
+reg link_stop;               //Í£Ö¹ĞÅºÅ¿ª¹Ø 
 wire sda1,sda2,sda3,sda4;   
-
-
+ 
+//--------------´®ĞĞÊı¾İÔÚ¿ª¹ØµÄ¿ØÖÆÏÂÓĞ´ÎĞòµÄÊä³ö»òÊäÈë-------------------
 assign sda1  = (link_head)     ?   head_buf[1]    :  1'b0;
 assign sda2  = (link_write)    ?   sh8out_buf[7]   :  1'b0;
 assign sda3  = (link_stop)     ?   stop_buf[1]     :  1'b0;
@@ -36,454 +47,452 @@ assign sda4  = (sda1 | sda2 | sda3);
 assign SDA  = (link_sda)       ?  sda4          :  1'bz;
 assign DATA = (link_read)      ?  data_from_rm   :  8'hzz;
 
-
+//--------------------------------Ö÷×´Ì¬»ú×´Ì¬¶¨Òå------------------------------------------
 parameter		
-Idle        = 11'b00000000001,
-	Ready     = 11'b00000000010,	
-	Write_start    = 11'b00000000100,    
-	Ctrl_write    = 11'b00000001000,	
-	Addr_write  = 11'b00000010000, 
-	Data_write   = 11'b00000100000,	 
-	Read_start    = 11'b00001000000,	    
-	Ctrl_read     = 11'b00010000000,	     
-	Data_read    = 11'b00100000000,	     
-	Stop         = 11'b01000000000,	     
-	Ackn        = 11'b10000000000,
+                  Idle        = 11'b00000000001,
+                    Ready     = 11'b00000000010,	
+               Write_start    = 11'b00000000100,    
+                Ctrl_write    = 11'b00000001000,	
+                  Addr_write  = 11'b00000010000, 
+		         Data_write   = 11'b00000100000,	 
+		        Read_start    = 11'b00001000000,	    
+		        Ctrl_read     = 11'b00010000000,	     
+		         Data_read    = 11'b00100000000,	     
+		         Stop         = 11'b01000000000,	     
+ 		          Ackn        = 11'b10000000000,
 
+//-------------------------²¢ĞĞÊı¾İ´®ĞĞÊä³ö×´Ì¬-----------------------------
+                sh8out_bit7     = 9'b000000001,
+                sh8out_bit6     = 9'b000000010,
+                sh8out_bit5     = 9'b000000100,
+                sh8out_bit4     = 9'b000001000,		
+                sh8out_bit3     = 9'b000010000,
+                sh8out_bit2     = 9'b000100000,
+                sh8out_bit1     = 9'b001000000,
+                sh8out_bit0     = 9'b010000000,
+                sh8out_end     = 9'b100000000;
+//--------------------------´®ĞĞÊı¾İ²¢ĞĞÊä³ö×´Ì¬----------------------------
+ parameter      sh8in_begin    = 10'b0000000001,
+                sh8in_bit7     = 10'b0000000010,
+                sh8in_bit6     = 10'b0000000100,
+                sh8in_bit5     = 10'b0000001000,		
+                sh8in_bit4     = 10'b0000010000,
+                sh8in_bit3     = 10'b0000100000,
+                sh8in_bit2     = 10'b0001000000,
+                sh8in_bit1     = 10'b0010000000,
+                sh8in_bit0     = 10'b0100000000,
+                sh8in_end      = 10'b1000000000,
+//---------------------------------Æô¶¯×´Ì¬----------------------------------     
+                head_begin   = 3'b001,
+                head_bit     = 3'b010,
+                head_end     = 3'b100,                
+//---------------------------------Í£Ö¹×´Ì¬----------------------------------
+                stop_begin   = 3'b001,
+                stop_bit     = 3'b010,
+                stop_end     = 3'b100;
+                
+ parameter       YES             = 1,
+                 NO              = 0;                
 
-	sh8out_bit7     = 9'b000000001,
-	sh8out_bit6     = 9'b000000010,
-	sh8out_bit5     = 9'b000000100,
-	sh8out_bit4     = 9'b000001000,		
-	sh8out_bit3     = 9'b000010000,
-	sh8out_bit2     = 9'b000100000,
-	sh8out_bit1     = 9'b001000000,
-	sh8out_bit0     = 9'b010000000,
-	sh8out_end     = 9'b100000000;
-
-parameter      sh8in_begin    = 10'b0000000001,
-	sh8in_bit7     = 10'b0000000010,
-	sh8in_bit6     = 10'b0000000100,
-	sh8in_bit5     = 10'b0000001000,		
-	sh8in_bit4     = 10'b0000010000,
-	sh8in_bit3     = 10'b0000100000,
-	sh8in_bit2     = 10'b0001000000,
-	sh8in_bit1     = 10'b0010000000,
-	sh8in_bit0     = 10'b0100000000,
-	sh8in_end      = 10'b1000000000,
-
-	head_begin   = 3'b001,
-	head_bit     = 3'b010,
-	head_end     = 3'b100,                
-
-	stop_begin   = 3'b001,
-	stop_bit     = 3'b010,
-	stop_end     = 3'b100;
-
-parameter       YES             = 1,
-	NO              = 0;                
-
-
+//-------------²úÉú´®ĞĞÊ±ÖÓscl£¬ÎªÊäÈëÊ±ÖÓµÄ¶ş·ÖÆµ-------------------
 always @(negedge CLK)    
-	if(RESET)
-		SCL <= 0;
-	else   	  
-		SCL <= ~SCL; 
+  if(RESET)
+     SCL <= 0;
+  else   	  
+     SCL <= ~SCL; 
 
+//-----------------------------Ö÷×´Ì¬»ú³ÌĞò----------------------------------
+always @ (posedge CLK)
+  if(RESET)
+    begin     
+     link_read  <= NO;
+     link_write <= NO;
+     link_head  <= NO;
+     link_stop  <= NO;
+     link_sda   <= NO;
+     ACK        <= 0;
+     RF         <= 0;
+     WF         <= 0;
+     FF         <= 0;
+     main_state <= Idle; 
+    end
+  else
+   begin   
+     casex(main_state)
+            Idle:
+                 begin
+                  link_read  <= NO;
+                  link_write <= NO;
+                  link_head  <= NO;
+                  link_stop  <= NO;
+                  link_sda   <= NO;
+                  if(WR)
+                    begin
+                    	 WF <= 1;
+                    	 main_state <= Ready ;
+                    	end
+                  else if(RD)
+                    begin
+                    	 RF <= 1;
+                    	 main_state <= Ready ;
+                    	end
+                 else
+                   begin
+                    WF <= 0;
+                    RF <= 0; 
+                    main_state <= Idle;
+                   end
+                 end 
+         Ready:  
+      	       begin
+      		       link_read        <= NO; 
+ 	   	       link_write       <= NO;
+ 	              link_stop        <= NO;
+ 	              link_head        <= YES;
+ 	              link_sda         <= YES;			 
+	              head_buf[1:0]    <= 2'b10;	
+ 	              stop_buf[1:0]    <= 2'b01;	
+ 	              head_state       <= head_begin;
+	              FF               <= 0;	
+	              ACK         	    <= 0;	 
+	              main_state       <= Write_start;
+	            end
+  Write_start: 
+     	          if(FF == 0)
+	               shift_head;		 
+		          else 
+		            begin
+		              sh8out_buf[7:0]  <= {1'b1,1'b0,1'b1,1'b0,ADDR[10:8],1'b0};
+		              link_head        <= NO;
+		              link_write       <= YES;
+		              FF               <= 0;   
+		              sh8out_state     <= sh8out_bit6;
+		              main_state       <= Ctrl_write;
+		            end
+  Ctrl_write: 
+                if(FF ==0)
+	               shift8_out;
+ 	   	       else
+ 	   	         begin
+ 	   	              sh8out_state    <= sh8out_bit7;
+		              sh8out_buf[7:0] <= ADDR[7:0];
+		              FF              <= 0;
+		              main_state      <= Addr_write;
+		           end	      	    
+  Addr_write: 
+                if(FF == 0)
+		            shift8_out;
+		          else 
+		            begin
+		              FF <= 0;	
+		              if(WF)
+		                begin	 
+		                  sh8out_state    <= sh8out_bit7;		                  
+		                  sh8out_buf[7:0] <= DATA;
+		                  main_state      <= Data_write;
+		                end
+		              if(RF)
+		                begin
+		                  head_buf        <= 2'b10;
+		                  head_state       <= head_begin;
+		                  main_state      <= Read_start; 
+		                end
+		            end  	  
+  Data_write:  
+                 if(FF == 0)
+		             shift8_out;
+      		     else  
+		            begin	
+		             stop_state       <= stop_begin;
+		             main_state       <= Stop;
+		             link_write       <= NO;
+		             FF               <= 0;
+		            end
 
-	always @ (posedge CLK)
-		if(RESET)
-		begin     
-		link_read  <= NO;
-		link_write <= NO;
-		link_head  <= NO;
-		link_stop  <= NO;
-		link_sda   <= NO;
-		ACK        <= 0;
-		RF         <= 0;
-		WF         <= 0;
-		FF         <= 0;
-		main_state <= Idle; 
-	end
-	else
-	begin   
-	casex(main_state)
-		Idle:
-		begin
-			link_read  <= NO;
-			link_write <= NO;
-			link_head  <= NO;
-			link_stop  <= NO;
-			link_sda   <= NO;
-			if(WR)
-			begin
-				WF <= 1;
-				main_state <= Ready ;
-			end
-			else if(RD)
-			begin
-				RF <= 1;
-				main_state <= Ready ;
-			end
-			else
-			begin
-				WF <= 0;
-				RF <= 0; 
-				main_state <= Idle;
-			end
-		end 
-		Ready:  
-		begin
-			link_read        <= NO; 
-			link_write       <= NO;
-			link_stop        <= NO;
-			link_head        <= YES;
-			link_sda         <= YES;			 
-			head_buf[1:0]    <= 2'b10;	
-			stop_buf[1:0]    <= 2'b01;	
-			head_state       <= head_begin;
-			FF               <= 0;	
-			ACK         	    <= 0;	 
-			main_state       <= Write_start;
-		end
-		Write_start: 
-			if(FF == 0)
-				shift_head;		 
-			else 
-			begin
-				sh8out_buf[7:0]  <= {1'b1,1'b0,1'b1,1'b0,ADDR[10:8],1'b0};
-				link_head        <= NO;
-				link_write       <= YES;
-				FF               <= 0;   
-				sh8out_state     <= sh8out_bit6;
-				main_state       <= Ctrl_write;
-			end
-			Ctrl_write: 
-				if(FF ==0)
-					shift8_out;
-				else
-				begin
-					sh8out_state    <= sh8out_bit7;
-					sh8out_buf[7:0] <= ADDR[7:0];
-					FF              <= 0;
-					main_state      <= Addr_write;
-				end	      	    
-				Addr_write: 
-					if(FF == 0)
-						shift8_out;
-					else 
-					begin
-						FF <= 0;	
-						if(WF)
-						begin	 
-						sh8out_state    <= sh8out_bit7;		                  
-						sh8out_buf[7:0] <= DATA;
-						main_state      <= Data_write;
-					end
-					if(RF)
-					begin
-						head_buf        <= 2'b10;
-						head_state       <= head_begin;
-						main_state      <= Read_start; 
-					end
-				end  	  
-				Data_write:  
-					if(FF == 0)
-						shift8_out;
-					else  
-					begin	
-					stop_state       <= stop_begin;
-					main_state       <= Stop;
-					link_write       <= NO;
-					FF               <= 0;
-				end
+  Read_start:  
+                if(FF == 0)
+	                shift_head;
+	             else 
+		            begin	
+		              sh8out_buf       <= {1'b1,1'b0,1'b1,1'b0,ADDR[10:8],1'b1};
+		              link_head        <= NO;
+                            link_sda         <= YES;
+		              link_write       <= YES;
+		              FF               <= 0;
+		              sh8out_state     <= sh8out_bit6;
+		              main_state       <= Ctrl_read;
+ 		            end
+  Ctrl_read:	
+                if(FF == 0)	
+	               shift8_out; 
+      	       else  
+		            begin	
+		              link_sda         <= NO;
+		              link_write       <= NO;
+		              FF               <= 0;
+		              sh8in_state      <= sh8in_begin;
+		              main_state       <= Data_read;
+	               end
+  Data_read:	
+               if(FF == 0) 
+	              shift8in;
+   	         else 
+		           begin	
+		              link_stop        <= YES;
+		              link_sda         <= YES;
+		              stop_state       <= stop_bit;
+		              FF               <= 0;
+		              main_state       <= Stop;
+		           end  
+  Stop: 
+               if(FF == 0)
+		           shift_stop;
+  		         else 
+		           begin
+	                ACK        <= 1; 
+	                FF         <= 0;
+		             main_state <= Ackn;
+                 end	   
+  Ackn:	  
+               begin
+		           ACK         <= 0;
+		           WF          <= 0;
+		           RF          <= 0; 
+		           main_state  <= Idle;
+		         end	  
+  default: 	  main_state <= Idle;
+  endcase
+ end
 
-				Read_start:  
-					if(FF == 0)
-						shift_head;
-					else 
-					begin	
-					sh8out_buf       <= {1'b1,1'b0,1'b1,1'b0,ADDR[10:8],1'b1};
-					link_head        <= NO;
-					link_sda         <= YES;
-					link_write       <= YES;
-					FF               <= 0;
-					sh8out_state     <= sh8out_bit6;
-					main_state       <= Ctrl_read;
-				end
-				Ctrl_read:	
-					if(FF == 0)	
-						shift8_out; 
-					else  
-					begin	
-					link_sda         <= NO;
-					link_write       <= NO;
-					FF               <= 0;
-					sh8in_state      <= sh8in_begin;
-					main_state       <= Data_read;
-				end
-				Data_read:	
-					if(FF == 0) 
-						shift8in;
-					else 
-					begin	
-					link_stop        <= YES;
-					link_sda         <= YES;
-					stop_state       <= stop_bit;
-					FF               <= 0;
-					main_state       <= Stop;
-				end  
-				Stop: 
-					if(FF == 0)
-						shift_stop;
-					else 
-					begin
-						ACK        <= 1; 
-						FF         <= 0;
-						main_state <= Ackn;
-					end	   
-					Ackn:	  
-					begin
-						ACK         <= 0;
-						WF          <= 0;
-						RF          <= 0; 
-						main_state  <= Idle;
-					end	  
-					default: 	  main_state <= Idle;
-				endcase
-			end
-
-
-			task shift8in; 
-				begin 
-				casex(sh8in_state)
-					sh8in_begin:
-						sh8in_state <= sh8in_bit7;
-					sh8in_bit7: if(SCL)   
-					begin 
-					data_from_rm[7] <= SDA;	
-					sh8in_state     <= sh8in_bit6;
-				end
-				else 	   
-					sh8in_state <= sh8in_bit7;                   
-				sh8in_bit6: if(SCL) 
-				begin 
-				data_from_rm[6] <= SDA;
-				sh8in_state     <= sh8in_bit5;
-			end
-			else		
-				sh8in_state <= sh8in_bit6;                 
-			sh8in_bit5: if(SCL) 
-			begin	
-			data_from_rm[5] <= SDA;
-			sh8in_state     <= sh8in_bit4;
-		end
-		else 		
-			sh8in_state <= sh8in_bit5;              
-		sh8in_bit4: if(SCL) 
-		begin	
-		data_from_rm[4] <= SDA;
-		sh8in_state     <= sh8in_bit3;
-	end
-	else 		
-		sh8in_state <= sh8in_bit4;                   
-	sh8in_bit3: if(SCL) 
-	begin 
-	data_from_rm[3] <= SDA;
-	sh8in_state     <= sh8in_bit2;
-end
-else 		
-	sh8in_state <= sh8in_bit3;     
-sh8in_bit2: if(SCL) 
-begin 
-data_from_rm[2] <= SDA;
-sh8in_state     <= sh8in_bit1;
-				  end
-				  else 		
-					  sh8in_state <= sh8in_bit2;  
-				  sh8in_bit1: if(SCL) 
-				  begin 
-				  data_from_rm[1] <= SDA;
-				  sh8in_state     <= sh8in_bit0;
-			  end
-			  else 		
-				  sh8in_state <= sh8in_bit1;                   
-			  sh8in_bit0: if(SCL) 
-			  begin	
-			  data_from_rm[0] <= SDA;
-			  sh8in_state     <= sh8in_end;
-		  end
-		  else 		
-			  sh8in_state <= sh8in_bit0;
-		  sh8in_end: if(SCL)
-		  begin 
-		  link_read   <= YES;
-		  FF          <=  1;                    
-		  sh8in_state <= sh8in_bit7; 
-	  end 
-	  else 		
-		  sh8in_state  <= sh8in_end;
-	  default:	begin
+//------------------------´®ĞĞÊı¾İ×ª»»Îª²¢ĞĞÊı¾İÈÎÎñ----------------------------------
+task shift8in; 
+  begin 
+   casex(sh8in_state)
+    sh8in_begin:
+	   	sh8in_state <= sh8in_bit7;
+    sh8in_bit7: if(SCL)   
+                  begin 
+               	   data_from_rm[7] <= SDA;	
+               	   sh8in_state     <= sh8in_bit6;
+               	  end
+                else 	   
+                  sh8in_state <= sh8in_bit7;                   
+    sh8in_bit6: if(SCL) 
+                  begin 
+                    data_from_rm[6] <= SDA;
+                    sh8in_state     <= sh8in_bit5;
+                  end
+                else		
+                  sh8in_state <= sh8in_bit6;                 
+    sh8in_bit5: if(SCL) 
+                  begin	
+                    data_from_rm[5] <= SDA;
+                    sh8in_state     <= sh8in_bit4;
+                  end
+               else 		
+                 sh8in_state <= sh8in_bit5;              
+    sh8in_bit4: if(SCL) 
+                  begin	
+                    data_from_rm[4] <= SDA;
+                    sh8in_state     <= sh8in_bit3;
+                  end
+               else 		
+                  sh8in_state <= sh8in_bit4;                   
+    sh8in_bit3: if(SCL) 
+                  begin 
+                    data_from_rm[3] <= SDA;
+                    sh8in_state     <= sh8in_bit2;
+                  end
+               else 		
+                 sh8in_state <= sh8in_bit3;     
+    sh8in_bit2: if(SCL) 
+                  begin 
+                    data_from_rm[2] <= SDA;
+                    sh8in_state     <= sh8in_bit1;
+                  end
+                else 		
+                  sh8in_state <= sh8in_bit2;  
+    sh8in_bit1: if(SCL) 
+                  begin 
+                    data_from_rm[1] <= SDA;
+                    sh8in_state     <= sh8in_bit0;
+                  end
+               else 		
+                 sh8in_state <= sh8in_bit1;                   
+    sh8in_bit0: if(SCL) 
+                  begin	
+                    data_from_rm[0] <= SDA;
+                    sh8in_state     <= sh8in_end;
+                  end
+               else 		
+                  sh8in_state <= sh8in_bit0;
+     sh8in_end: if(SCL)
+                  begin 
+                    link_read   <= YES;
+                    FF          <=  1;                    
+                    sh8in_state <= sh8in_bit7; 
+                  end 
+               else 		
+                  sh8in_state  <= sh8in_end;
+      default:	begin
 		  link_read    <= NO;
 		  sh8in_state  <= sh8in_bit7;
-	  end
-  endcase  
+		end
+endcase  
 end  
 endtask
 
-
+//------------------------------ ²¢ĞĞÊı¾İ×ª»»Îª´®ĞĞÊı¾İÈÎÎñ ---------------------------
 task shift8_out;
-	begin
-		casex(sh8out_state)
-			sh8out_bit7:  
-				if(!SCL)
-				begin	
-				link_sda     <= YES;
-				link_write   <= YES;
-				sh8out_state <= sh8out_bit6;
-			end   
-			else  	
-				sh8out_state <= sh8out_bit7;            
-			sh8out_bit6: 
-				if(!SCL) 
-				begin 
-				link_sda      <= YES;
-				link_write    <= YES;
-				sh8out_state  <= sh8out_bit5; 
-				sh8out_buf    <= sh8out_buf<<1;
-			end		 
-			else 		
-				sh8out_state <= sh8out_bit6;    				  
-			sh8out_bit5: 
-				if(!SCL) 
-				begin 
-				sh8out_state <= sh8out_bit4; 
-				sh8out_buf   <= sh8out_buf<<1;
-			end   
-			else		
-				sh8out_state <= sh8out_bit5;   
-			sh8out_bit4: 
-				if(!SCL) 
-				begin 
-				sh8out_state <= sh8out_bit3;
-				sh8out_buf   <= sh8out_buf<<1;
-			end    
-			else 		
-				sh8out_state <= sh8out_bit4; 
-			sh8out_bit3: 
-				if(!SCL) 
-				begin 
-				sh8out_state <= sh8out_bit2; 
-				sh8out_buf   <= sh8out_buf<<1; 
-			end    
-			else 		
-				sh8out_state <= sh8out_bit3;
-			sh8out_bit2: 
-				if(!SCL) 
-				begin 
-				sh8out_state <= sh8out_bit1; 
-				sh8out_buf   <= sh8out_buf<<1;  
-			end    
-			else 		
-				sh8out_state <= sh8out_bit2; 
-			sh8out_bit1: 
-				if(!SCL)	
-				begin 
-				sh8out_state <= sh8out_bit0; 
-				sh8out_buf   <= sh8out_buf<<1; 
-			end    
-			else 		
-				sh8out_state <= sh8out_bit1;  
-			sh8out_bit0: 
-				if(!SCL)	
-				begin 
-				sh8out_state <= sh8out_end; 
-				sh8out_buf   <= sh8out_buf<<1; 
-			end    
-			else 	
-				sh8out_state <= sh8out_bit0;
-			sh8out_end: 
-				if(!SCL) 
-				begin	
-				link_sda         <= NO;
-				link_write       <= NO; 
-				FF               <= 1;
-			end    
-			else     
-				sh8out_state <= sh8out_end;			  
-		endcase     
-	end 
+ begin
+  casex(sh8out_state)
+        sh8out_bit7:  
+	             if(!SCL)
+	               begin	
+	                     link_sda     <= YES;
+	                     link_write   <= YES;
+                         sh8out_state <= sh8out_bit6;
+                       end   
+                     else  	
+                         sh8out_state <= sh8out_bit7;            
+         sh8out_bit6: 
+	             if(!SCL) 
+	               begin 
+	                     link_sda      <= YES;
+	                     link_write    <= YES;
+                         sh8out_state  <= sh8out_bit5; 
+                         sh8out_buf    <= sh8out_buf<<1;
+                   end		 
+ 	             else 		
+                         sh8out_state <= sh8out_bit6;    				  
+         sh8out_bit5: 
+	             if(!SCL) 
+	               begin 
+	                   sh8out_state <= sh8out_bit4; 
+	                   sh8out_buf   <= sh8out_buf<<1;
+	               end   
+                     else		
+                       sh8out_state <= sh8out_bit5;   
+         sh8out_bit4: 
+	             if(!SCL) 
+	               begin 
+	                   sh8out_state <= sh8out_bit3;
+	                   sh8out_buf   <= sh8out_buf<<1;
+	               end    
+	             else 		
+	                   sh8out_state <= sh8out_bit4; 
+         sh8out_bit3: 
+	             if(!SCL) 
+	               begin 
+	                   sh8out_state <= sh8out_bit2; 
+	                   sh8out_buf   <= sh8out_buf<<1; 
+	               end    
+	             else 		
+	                   sh8out_state <= sh8out_bit3;
+        sh8out_bit2: 
+	            if(!SCL) 
+	              begin 
+	                   sh8out_state <= sh8out_bit1; 
+	                   sh8out_buf   <= sh8out_buf<<1;  
+	              end    
+	            else 		
+	                   sh8out_state <= sh8out_bit2; 
+        sh8out_bit1: 
+	            if(!SCL)	
+	              begin 
+	                   sh8out_state <= sh8out_bit0; 
+	                   sh8out_buf   <= sh8out_buf<<1; 
+	              end    
+	            else 		
+	                   sh8out_state <= sh8out_bit1;  
+        sh8out_bit0: 
+	            if(!SCL)	
+	              begin 
+	                   sh8out_state <= sh8out_end; 
+	                   sh8out_buf   <= sh8out_buf<<1; 
+	              end    
+	             else 	
+	                   sh8out_state <= sh8out_bit0;
+        sh8out_end: 
+	            if(!SCL) 
+	              begin	
+	                   link_sda         <= NO;
+	                   link_write       <= NO; 
+                       FF               <= 1;
+                  end    
+	            else     
+	                   sh8out_state <= sh8out_end;			  
+     endcase     
+  end 
 endtask
 
-
-
+//---------------------------  Êä³öÆô¶¯ĞÅºÅÈÎÎñ  ---------------------------------
 task shift_head;
-	begin
-		casex(head_state)
-			head_begin: 
-				if(!SCL)
-				begin 
-				link_write   <= NO;
-				link_sda     <= YES;
-				link_head    <= YES;
-				head_state   <= head_bit;
-			end
-			else		
-				head_state <= head_begin;
-			head_bit:   
-				if(SCL)
-				begin
-					FF          <= 1;	
-					head_buf     <= head_buf<<1;
-					head_state    <= head_end;
-				end    
-				else
-					head_state <= head_bit;
-				head_end: 
-					if(!SCL)
-					begin
-						link_head    <= NO;
-						link_write   <= YES;
-					end	   
-					else
-						head_state <= head_end;
-				endcase
-			end
-		endtask
+ begin
+  casex(head_state)
+        head_begin: 
+                   if(!SCL)
+		                begin 
+			              link_write   <= NO;
+	         	          link_sda     <= YES;
+	         	          link_head    <= YES;
+	                      head_state   <= head_bit;
+		                end
+		             else		
+		                  head_state <= head_begin;
+         head_bit:   
+                   if(SCL)
+               	    begin
+               	          FF          <= 1;	
+ 	                      head_buf     <= head_buf<<1;
+                          head_state    <= head_end;
+ 	       	        end    
+                  else
+                          head_state <= head_bit;
+         head_end: 
+                  if(!SCL)
+                    begin
+               	          link_head    <= NO;
+		                  link_write   <= YES;
+               	    end	   
+	              else
+		                  head_state <= head_end;
+        endcase
+ end
+endtask
 
-
-
-		task shift_stop;
-			begin
-				casex(stop_state)
-					stop_begin:  if(!SCL)
-					begin	
-					link_sda      <= YES;
-					link_write   <= NO;
-					link_stop     <= YES;
-					stop_state    <= stop_bit;
-				end
-				else 		
-					stop_state <= stop_begin;    
-				stop_bit:    if(SCL)
-				begin	
-				stop_buf   <= stop_buf<<1;
-				stop_state <= stop_end;	   
-			end
-			else		
-				stop_state<= stop_bit;
-			stop_end:   if(!SCL)
-			begin	
-			link_head  <= NO;
-			link_stop  <= NO;
-			link_sda   <= NO;
-			FF         <= 1;
-		end
-		else		
-			stop_state  <= stop_end;
-	endcase
-end
+//---------------------------  Êä³öÍ£Ö¹ĞÅºÅÈÎÎñ  --------------------------------------  
+task shift_stop;
+ begin
+  casex(stop_state)
+     stop_begin:  if(!SCL)
+              	    begin	
+              	       link_sda      <= YES;
+  		               link_write   <= NO;
+	                     link_stop     <= YES;
+		              stop_state    <= stop_bit;
+		           end
+	      	      else 		
+	      	           stop_state <= stop_begin;    
+    stop_bit:    if(SCL)
+               	 begin	
+               	       stop_buf   <= stop_buf<<1;
+                       stop_state <= stop_end;	   
+	       	     end
+             	     else		
+             	       stop_state<= stop_bit;
+    stop_end:   if(!SCL)
+                  begin	
+                      link_head  <= NO;
+		              link_stop  <= NO;
+		              link_sda   <= NO;
+		              FF         <= 1;
+ 	       	      end
+	       	    else		
+	       	           stop_state  <= stop_end;
+    endcase
+  end
 endtask
 endmodule
-
+//--------------------------- eeprom_wr.v ÎÄ¼ş½áÊø---------------------------
 

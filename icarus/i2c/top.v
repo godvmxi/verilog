@@ -1,25 +1,30 @@
-ï»¿//
-//
-//
-//
-`include "signal.v"
-`include "eeprom.v"
-`include "eeprom_wr.v" 
-`timescale 1ns/1ns
-module Top;
-wire RESET;
-wire CLK;
-wire RD,WR;
-wire ACK;
-wire[10:0] ADDR;
-wire[7:0]  DATA; 
-wire SCL;
-wire SDA;
-Signal         signal(.RESET(RESET),.CLK(CLK),.RD(RD),
-	.WR(WR),.ADDR(ADDR),.ACK(ACK),.DATA(DATA));
-EEPROM_WR   eeprom_wr(.RESET(RESET),.SDA(SDA),.SCL(SCL),.ACK(ACK),
-	.CLK(CLK),.WR(WR),.RD(RD),.ADDR(ADDR),.DATA(DATA));
-EEPROM         eeprom(.sda(SDA),.scl(SCL));  
-
+//¶¥²ãÄ£¿é£º
+/****************************************************************************
+Ä£¿éÃû³Æ£ºTop  ÎÄ¼þÃû£ºtop.v
+Ä£¿é¹¦ÄÜ£ºÓÃÓÚ°Ñ²úÉú²âÊÔÐÅºÅµÄÄ£¿é£¨Signal£©ÓëÉè¼ÆµÄ¾ßÌåÄ£¿é£¨EEPROM_WR£©
+          ÒÔ¼°EEPROMÐéÄâÄ£¿éÁ¬½ÓÆðÀ´µÄÄ£¿é£¬ÓÃÓÚÈ«Ãæ²âÊÔ¡£
+Ä£¿éËµÃ÷£º±¾Ä£¿éÎªÐÐÎªÄ£¿é£¬²»¿É×ÛºÏÎªÃÅ¼¶Íø±í¡£µ«ÆäÖÐEEPROM_WR¿ÉÒÔ×ÛºÏ
+          ÎªÃÅ¼¶Íø±í£¬ËùÒÔ¿ÉÒÔ¶ÔËùÉè¼ÆµÄEEPROM ¶ÁÐ´Æ÷½øÐÐÃÅ¼¶ºó·ÂÕæ¡£
+****************************************************************************/
+ `include "./Signal.v"
+ `include "./EEPROM.v"
+ `include "./EEPROM_WR.v"  //¿ÉÒÔÓÃEEPROM_WRÄ£¿éÏàÓ¦µÄVerilogÃÅ¼¶Íø±íÀ´Ìæ»»
+ `timescale 1ns/1ns
+  module Top;
+  wire RESET;
+  wire CLK;
+  wire RD,WR;
+  wire ACK;
+  wire[10:0] ADDR;
+  wire[7:0]  DATA; 
+  wire SCL;
+  wire SDA;
+  Signal         signal(.RESET(RESET),.CLK(CLK),.RD(RD),
+                        .WR(WR),.ADDR(ADDR),.ACK(ACK),.DATA(DATA));
+  EEPROM_WR   eeprom_wr(.RESET(RESET),.SDA(SDA),.SCL(SCL),.ACK(ACK),
+                         .CLK(CLK),.WR(WR),.RD(RD),.ADDR(ADDR),.DATA(DATA));
+  EEPROM         eeprom(.sda(SDA),.scl(SCL));  
+ 
 endmodule
+//------------ top.v ÎÄ¼þµÄ½áÊø---------------
 

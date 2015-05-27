@@ -1,17 +1,27 @@
-ï»¿`timescale 1ns/1ns
+ /****************************************************************************
+Ä£¿éÃû³Æ£ºSignal  ÎÄ¼şÃû£ºsignal.v
+Ä£¿é¹¦ÄÜ£ºÓÃÓÚ²úÉú²âÊÔĞÅºÅ£¬¶ÔËùÉè¼ÆµÄEEPROM_WRÄ£¿é½øĞĞ²âÊÔ¡£SignalÄ£¿é
+          ÄÜ¶Ô±»²âÊÔÄ£¿é²úÉúµÄackĞÅºÅ²úÉúÏìÓ¦£¬·¢³öÄ£·ÂMCUµÄÊı¾İ¡¢µØÖ·ĞÅºÅ
+          ºÍ¶Á/Ğ´ĞÅºÅ¡£±»²âÊÔµÄÄ£¿éÔÚ½ÓÊÕµ½ĞÅºÅºó»á·¢³öĞ´/¶ÁEEPROMĞéÄâÄ£¿é
+          µÄĞÅºÅ¡£  
+Ä£¿éËµÃ÷£º±¾Ä£¿éÎªĞĞÎªÄ£¿é£¬²»¿É×ÛºÏÎªÃÅ¼¶Íø±í¡£¶øÇÒ±¾Ä£¿éÎª½ÌÑ§Ä¿µÄ×öÁËĞí
+          ¶à¼ò»¯£¬¹¦ÄÜ²»ÍêÕû£¬²»ÄÜÓÃ×öÉÌÒµÄ¿µÄ¡£
+****************************************************************************/
+// ĞÅºÅÔ´Ä£ĞÍ£º
+`timescale 1ns/1ns
 `define timeslice1 200
 `define CheckByteNum 16
 module Signal(RESET,CLK,RD,WR,ADDR,ACK,DATA); 
-output RESET;        //å¤ä½ä¿¡å·
-output CLK;          //æ—¶é’Ÿä¿¡å·
-output RD,WR;        //è¯»å†™ä¿¡å·
-output[10:0] ADDR;    //11ä½åœ°å€ä¿¡å·
-input ACK;           //è¯»å†™å‘¨æœŸçš„åº”ç­”ä¿¡å·
-inout[7:0] DATA;      //æ•°æ®çº¿
+output RESET;        //¸´Î»ĞÅºÅ
+output CLK;          //Ê±ÖÓĞÅºÅ
+output RD,WR;        //¶ÁĞ´ĞÅºÅ
+output[10:0] ADDR;    //11Î»µØÖ·ĞÅºÅ
+input ACK;           //¶ÁĞ´ÖÜÆÚµÄÓ¦´ğĞÅºÅ
+inout[7:0] DATA;      //Êı¾İÏß
 reg RESET;
 reg CLK;
 reg RD,WR;
-reg W_R;            //ä½ä½ï¼šå†™æ“ä½œï¼›é«˜ä½ï¼šè¯»æ“ä½œ 
+reg W_R;            //µÍÎ»£ºĞ´²Ù×÷£»¸ßÎ»£º¶Á²Ù×÷ 
 reg[10:0] ADDR;  
 reg[7:0]  data_to_eeprom;
 reg[10:0] addr_mem[0:255];
@@ -21,91 +31,91 @@ integer i,j;
 integer OUTFILE;
 assign DATA = (W_R) ?  8'bz : data_to_eeprom ;
 
-//------------------------------------æ—¶é’Ÿä¿¡å·è¾“å…¥------------------------------
+//------------------------------------Ê±ÖÓĞÅºÅÊäÈë------------------------------
 always #(`timeslice1/2)
-	CLK = ~CLK; 
+   CLK = ~CLK; 
 
-//----------------------------------- è¯»å†™ä¿¡å·è¾“å…¥------------------------------
+//----------------------------------- ¶ÁĞ´ĞÅºÅÊäÈë------------------------------
 initial 
-begin
-	RESET = 1;
-	i   = 0; 
-	j   =0;
-	W_R = 0;
-	CLK = 0;    			
-	RD  = 0;
-	WR  = 0;
-	#1000 ;
-	RESET = 0; 
-	repeat(`CheckByteNum)  //è¿ç»­å†™15æ¬¡æ•°æ®ï¼Œè°ƒè¯•æˆåŠŸåå¯ä»¥å¢åŠ åˆ°å…¨éƒ¨åœ°å€è¦†ç›–æµ‹è¯•
-begin	
-# (5 * `timeslice1);
-WR = 1; 
-# (`timeslice1);
-WR = 0;
-@ (posedge ACK);  //EEPROM_WRè½¬æ¢æ¨¡å—è¯·æ±‚å†™æ•°æ®
-	 end
-	 #(10 * `timeslice1);
-	 W_R = 1;   //å¼€å§‹è¯»æ“ä½œ
-	 repeat(`CheckByteNum)  //è¿ç»­è¯»15æ¬¡æ•°æ® 
- begin
-	 # (5 * `timeslice1);
-	 RD = 1;
-	 # ( `timeslice1 );
-	 RD = 0;
-	 @ (posedge ACK);  //EEPROM_WRè½¬æ¢æ¨¡å—è¯·æ±‚è¯»æ•°æ®
- end
+   begin
+     RESET = 1;
+     i   = 0; 
+     j   =0;
+     W_R = 0;
+     CLK = 0;    			
+     RD  = 0;
+     WR  = 0;
+     #1000 ;
+     RESET = 0; 
+repeat(`CheckByteNum)  //Á¬ĞøĞ´15´ÎÊı¾İ£¬µ÷ÊÔ³É¹¦ºó¿ÉÒÔÔö¼Óµ½È«²¿µØÖ·¸²¸Ç²âÊÔ
+      begin	
+        # (5 * `timeslice1);
+	    WR = 1; 
+	    # (`timeslice1);
+	    WR = 0;
+	   @ (posedge ACK);  //EEPROM_WR×ª»»Ä£¿éÇëÇóĞ´Êı¾İ
+     end
+    #(10 * `timeslice1);
+    W_R = 1;   //¿ªÊ¼¶Á²Ù×÷
+    repeat(`CheckByteNum)  //Á¬Ğø¶Á15´ÎÊı¾İ 
+      begin
+     	# (5 * `timeslice1);
+     	RD = 1;
+       # ( `timeslice1 );
+     	RD = 0;
+   	   @ (posedge ACK);  //EEPROM_WR×ª»»Ä£¿éÇëÇó¶ÁÊı¾İ
+      end
    end                 
-   //-----------------------------------------å†™æ“ä½œ-----------------------------
-   initial 
+//-----------------------------------------Ğ´²Ù×÷-----------------------------
+initial 
+  begin
+    $display("writing-----writing-----writing-----writing");
+    # (2*`timeslice1);
+    for(i=0;i<=`CheckByteNum-1;i=i+1)
+      begin
+       ADDR = addr_mem[i];              //Êä³öĞ´²Ù×÷µÄµØÖ·   
+       data_to_eeprom = data_mem[i];    //Êä³öĞèÒª×ª»»µÄÆ½ĞĞÊı¾İ
+       $fdisplay(OUTFILE,"@%0h  %0h",ADDR, data_to_eeprom);
+        //°ÑÊä³öµÄµØÖ·ºÍÊı¾İ¼ÇÂ¼ÔÚÒÑ¾­´ò¿ªµÄeeprom.datÎÄ¼şÖĞ
+       @(posedge ACK) ;    //EEPROM_WR×ª»»Ä£¿éÇëÇóĞ´Êı¾İ        
+     end
+ end   
+
+//----------------------------------------¶Á²Ù×÷----------------------------
+initial
+  @(posedge W_R)
    begin
-	   $display("writing-----writing-----writing-----writing");
-	   # (2*`timeslice1);
-	   for(i=0;i<=`CheckByteNum-1;i=i+1)
-	   begin
-		   ADDR = addr_mem[i];              //è¾“å‡ºå†™æ“ä½œçš„åœ°å€   
-		   data_to_eeprom = data_mem[i];    //è¾“å‡ºéœ€è¦è½¬æ¢çš„å¹³è¡Œæ•°æ®
-		   $fdisplay(OUTFILE,"@%0h  %0h",ADDR, data_to_eeprom);
-		   //æŠŠè¾“å‡ºçš„åœ°å€å’Œæ•°æ®è®°å½•åœ¨å·²ç»æ‰“å¼€çš„eeprom.datæ–‡ä»¶ä¸­
-		   @(posedge ACK) ;    //EEPROM_WRè½¬æ¢æ¨¡å—è¯·æ±‚å†™æ•°æ®        
-	   end
-   end   
+    ADDR = addr_mem[0];
+    $fclose (OUTFILE);    //¹Ø±ÕÒÑ¾­´ò¿ªµÄeeprom.datÎÄ¼ş
+    $readmemh("./eeprom.dat",ROM);  //°ÑÊı¾İÎÄ¼şµÄÊı¾İ¶Áµ½ROMÖĞ
 
-   //----------------------------------------è¯»æ“ä½œ----------------------------
-   initial
-	   @(posedge W_R)
-   begin
-	   ADDR = addr_mem[0];
-	   $fclose (OUTFILE);    //å…³é—­å·²ç»æ‰“å¼€çš„eeprom.datæ–‡ä»¶
-	   $readmemh("./eeprom.dat",ROM);  //æŠŠæ•°æ®æ–‡ä»¶çš„æ•°æ®è¯»åˆ°ROMä¸­
-
-	   $display("Begin READING-----READING-----READING-----READING");
-	   for(j = 0; j <=`CheckByteNum; j = j+1)   // æ£€æŸ¥çš„å†™åˆ°eepromä¸­çš„å­—èŠ‚æ˜¯å¦æ­£ç¡®ï¼Œå…ˆæ£€æŸ¥15ä¸ªå­—èŠ‚     
-	   begin
-		   ADDR = addr_mem[j]; 
-		   if (j<=15)    
-		   begin     
-		   @(posedge ACK);
-		   if(DATA == ROM[ADDR]) //æ¯”è¾ƒå¹¶æ˜¾ç¤ºå‘é€çš„æ•°æ®å’Œæ¥æ”¶åˆ°çš„æ•°æ®æ˜¯å¦ä¸€è‡´
-			   $display("DATA %0h == ROM[%0h]---READ RIGHT",DATA,ADDR);
-		   else
-			   $display("DATA %0h != ROM[%0h]---READ WRONG",DATA,ADDR);  
-	   end
-	   else
-		   $display ("All the bytes written in eeprom have been checked!!");     
-
-   end
-   $stop;
-
+    $display("Begin READING-----READING-----READING-----READING");
+     for(j = 0; j <=`CheckByteNum; j = j+1)   // ¼ì²éµÄĞ´µ½eepromÖĞµÄ×Ö½ÚÊÇ·ñÕıÈ·£¬ÏÈ¼ì²é15¸ö×Ö½Ú     
+     begin
+        ADDR = addr_mem[j]; 
+        if (j<=15)    
+         begin     
+            @(posedge ACK);
+               if(DATA == ROM[ADDR]) //±È½Ï²¢ÏÔÊ¾·¢ËÍµÄÊı¾İºÍ½ÓÊÕµ½µÄÊı¾İÊÇ·ñÒ»ÖÂ
+              $display("DATA %0h == ROM[%0h]---READ RIGHT",DATA,ADDR);
+            else
+                $display("DATA %0h != ROM[%0h]---READ WRONG",DATA,ADDR);  
+         end
+        else
+          $display ("All the bytes written in eeprom have been checked!!");     
+             
+     end
+     $stop;
+     
   end   
 
-  initial
+initial
   begin
-	  OUTFILE = $fopen("./eeprom.dat");  // æ‰“å¼€ä¸€ä¸ªåä¸ºeeprom.datçš„æ–‡ä»¶å¤‡ç”¨
-	  $readmemh("./addr.dat",addr_mem);  // æŠŠåœ°å€æ•°æ®å­˜å…¥åœ°å€å­˜å‚¨å™¨
-	  $readmemh("./data.dat",data_mem);  // æŠŠå‡†å¤‡å†™å…¥EEPROMçš„æ•°æ®å­˜å…¥æ•°æ®å­˜å‚¨å™¨
-  end
+   OUTFILE = $fopen("./eeprom.dat");  // ´ò¿ªÒ»¸öÃûÎªeeprom.datµÄÎÄ¼ş±¸ÓÃ
+   $readmemh("./addr.dat",addr_mem);  // °ÑµØÖ·Êı¾İ´æÈëµØÖ·´æ´¢Æ÷
+   $readmemh("./data.dat",data_mem);  // °Ñ×¼±¸Ğ´ÈëEEPROMµÄÊı¾İ´æÈëÊı¾İ´æ´¢Æ÷
+end
 
-  endmodule
+endmodule
 
 
