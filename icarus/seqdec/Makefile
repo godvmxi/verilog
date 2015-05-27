@@ -1,5 +1,5 @@
 source := detector110.v testbench.v
-target := detector110
+target := detector110.o
 
 object := $(target).o
 wave := $(target).vcd
