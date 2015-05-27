@@ -33,18 +33,24 @@ addr_decode   t_addr_decode (.addr(addr),.ram_sel(ram_sel),.rom_sel(rom_sel));
 
 //--------------------cpu ?????????ROM?RAM???????---------------------------------- 
 initial
-  begin 
+  begin
+	$dumpfile("test.vcd");
+	$dumpvars;
     clock=1;
     //display time in nanoseconds
     $timeformat ( -9,  1, " ns", 12);
     display_debug_message;
     sys_reset;
     test1;
+	$display("*  THE FOLLOWING DEBUG TASK ARE AVAILABLE:    test 1 end      *");
     $stop;
     test2;
+	$display("*  THE FOLLOWING DEBUG TASK ARE AVAILABLE:    test 2 end      *");
     $stop;
     test3;
+	$display("*  THE FOLLOWING DEBUG TASK ARE AVAILABLE:    test 3 end      *");
     $stop;
+    $finish;
 end
   task display_debug_message;
     begin

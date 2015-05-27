@@ -15,8 +15,9 @@
 
 module cpu(clk,reset,halt,rd,wr,addr,data);
  input clk,reset;
- output rd,wr,addr,halt;
- inout data;
+ output rd,wr,halt;
+ output[12:0] addr;
+ inout[7:0] data;
  wire clk,reset,halt;
  wire [7:0]  data;
  wire [12:0] addr;
