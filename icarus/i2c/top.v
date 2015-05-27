@@ -1,14 +1,14 @@
-//����ģ�飺
+//顶层模块：
 /****************************************************************************
-ģ�����ƣ�Top  �ļ�����top.v
-ģ�鹦�ܣ����ڰѲ��������źŵ�ģ�飨Signal������Ƶľ���ģ�飨EEPROM_WR��
-          �Լ�EEPROM����ģ������������ģ�飬����ȫ����ԡ�
-ģ��˵������ģ��Ϊ��Ϊģ�飬�����ۺ�Ϊ�ż�������������EEPROM_WR�����ۺ�
-          Ϊ�ż����������Կ��Զ�����Ƶ�EEPROM ��д�������ż�����档
+模块名称：Top  文件名：top.v
+模块功能：用于把产生测试信号的模块（Signal）与设计的具体模块（EEPROM_WR）
+          以及EEPROM虚拟模块连接起来的模块，用于全面测试。
+模块说明：本模块为行为模块，不可综合为门级网表。但其中EEPROM_WR可以综合
+          为门级网表，所以可以对所设计的EEPROM 读写器进行门级后仿真。
 ****************************************************************************/
- `include "./Signal.v"
- `include "./EEPROM.v"
- `include "./EEPROM_WR.v"  //������EEPROM_WRģ����Ӧ��Verilog�ż��������滻
+ `include "./signal.v"
+ `include "./eeprom.v"
+ `include "./eeprom_wr.v"  //可以用EEPROM_WR模块相应的Verilog门级网表来替换
  `timescale 1ns/1ns
   module Top;
   wire RESET;
@@ -26,5 +26,5 @@
   EEPROM         eeprom(.sda(SDA),.scl(SCL));  
  
 endmodule
-//------------ top.v �ļ��Ľ���---------------
+//------------ top.v 文件的结束---------------
 
