@@ -111,10 +111,12 @@ initial
 
 initial
   begin
+	$dumpfile("test.vcd");
+	$dumpvars;
    OUTFILE = $fopen("./eeprom.dat");  // 打开一个名为eeprom.dat的文件备用
    $readmemh("./addr.dat",addr_mem);  // 把地址数据存入地址存储器
    $readmemh("./data.dat",data_mem);  // 把准备写入EEPROM的数据存入数据存储器
-end
+	end
 
 endmodule
 

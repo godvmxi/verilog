@@ -1,7 +1,8 @@
 source := eeprom.v  eeprom_wr.v  signal.v  top.v
+top := top.v
 target := iic_eeprom.o
 $(target) : $(source)
-	@iverilog -o $(target) $(source) 
+	@iverilog -o $(target)  $(top)
 	@echo "build over"
 
 run : $(target)
