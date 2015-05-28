@@ -2,7 +2,7 @@
 `timescale 1ns/10ps
 `define 	clk_cycle  	20
 `include  "./half_clk.v"   //  包含模块文件。在有的仿真调试环境中并不需要此语句。
-
+`include  "./thinking.v" 
 
 module  testbench;
 
@@ -10,6 +10,7 @@ reg clk_in ,reset;
 
 wire clk_out;
 wire clk_out_n;
+wire clk_out_no_rst;
 
 always   # `clk_cycle   clk_in  = ~clk_in ;
 
@@ -34,6 +35,10 @@ half_clk		 u1(
 	.clk_in(clk_in),
 	.clk_out(clk_out),
 	.clk_out_n(clk_out_n)
+	) ;
+half_div_no_rst		 u2(   
+	.clk_in(clk_in),
+	.clk_out(clk_out_no_rst)
 	) ;
 
 
