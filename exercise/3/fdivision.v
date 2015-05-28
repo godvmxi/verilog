@@ -11,7 +11,7 @@ always @(posedge F10MB) begin
 		F500KB  <= 0;		
 	end
 	else  begin 
-		if (counter == 19) begin
+		if (counter == 9) begin
 			counter <= 8'd0;
 			F500KB <=  ~F500KB;	
 		end
