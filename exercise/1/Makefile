@@ -1,9 +1,12 @@
-source := compare.v  testbench.v
+source := compare.v  testbench.v  practice.v
 top := testbench.v
-target := compare.o
+target := tb.o
 $(target) : $(source)
 	@iverilog -o $(target)  $(top)
 	@echo "build over"
+	@vvp $(target)  -lxt2
+	@echo "build wave over"
+
 
 run : $(target)
 	@vvp $(target)
