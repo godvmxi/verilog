@@ -7,9 +7,10 @@ $(target) : $(source)
 
 run : $(target)
 	@vvp $(target)  -lxt2
-	gtkwave wave.vcd &
 .PHONY  : clean   scan
 clean :
 	@rm -rfv $(target)
 scan :
 	@find . -name "*.v" > files.lst
+show : $(run)
+	gtkwave wave.vcd &

@@ -1,6 +1,6 @@
 // 信号源模型：
 `timescale 1ns/1ns
-`define 	clk_cycle  	500
+`define 	clk_cycle  	50
 `include  "./single_clk.v"   //  包含模块文件。在有的仿真调试环境中并不需要此语句。
 
 module  testbench;
@@ -9,7 +9,7 @@ wire clk_out;
 reg clk_in ,reset, start;
 
 `define   start_last    100000
-always   # `clk_cycle   clk_in  = ~clk_in ;
+always   # `clk_cycle   clk_in  = ~clk_in ;  //10MHz
 
 
 
