@@ -11,6 +11,7 @@ reg clk_in ,reset;
 wire clk_out;
 wire clk_out_n;
 wire clk_out_no_rst;
+wire clk_duty_div_x_no_rst;
 
 always   # `clk_cycle   clk_in  = ~clk_in ;
 
@@ -41,5 +42,10 @@ half_div_no_rst		 u2(
 	.clk_out(clk_out_no_rst)
 	) ;
 
+duty_div_x_no_rst  u3(
+	.clk_in(clk_in),
+	.clk_out(clk_duty_div_x_no_rst),
+	.x(4)
+	);
 
 endmodule   
