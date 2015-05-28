@@ -3,10 +3,11 @@
 `define 	clk_cycle  	10
 `include  "./blocking.v"   //  包含模块文件。在有的仿真调试环境中并不需要此语句。
 `include  "./non_blocking.v" 
+`include  "./thinking.v" 
 
 module compareTop;
 
-  wire [3:0] b1,c1,b2,c2;
+  wire [3:0] b1,c1,b2,c2,tb1,tb2,tc1,tc2;
   reg  [3:0] a;
   reg        clk;
   
@@ -33,8 +34,10 @@ module compareTop;
     # 100  $display("____________________________");
     $finish;
   end
-  non_blocking  non_blocking(clk,a,b2,c2);
-  blocking      blocking(clk,a,b1,c1);
+  non_blocking  nb(clk,a,b2,c2);
+  blocking      b (clk,a,b1,c1);
+  thinking1      t1(clk,a,tb1,tc1);
+  thinking2      t2(clk,a,tb2,tc2);
 
 endmodule
 
