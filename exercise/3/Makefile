@@ -1,4 +1,4 @@
-source := testbench.v    fdivision.v
+source := testbench.v    fdivision.v single_clk.v
 top := testbench.v
 target := fdivision.o
 $(target) : $(source)
