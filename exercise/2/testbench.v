@@ -9,6 +9,7 @@ module  testbench;
 reg clk_in ,reset;
 
 wire clk_out;
+wire clk_out_n;
 
 always   # `clk_cycle   clk_in  = ~clk_in ;
 
@@ -31,7 +32,8 @@ end
 half_clk		 u1(   
 	.reset(reset),
 	.clk_in(clk_in),
-	.clk_out(clk_out)
+	.clk_out(clk_out),
+	.clk_out_n(clk_out_n)
 	) ;
 
 
