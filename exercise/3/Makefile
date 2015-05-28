@@ -7,6 +7,7 @@ $(target) : $(source)
 
 run : $(target)
 	@vvp $(target)  -lxt2
+	gtkwave wave.vcd &
 .PHONY  : clean   scan
 clean :
 	@rm -rfv $(target)
