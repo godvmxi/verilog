@@ -105,7 +105,7 @@ initial
           $display ("All the bytes written in eeprom have been checked!!");     
              
      end
-     $stop;
+     $finish;
      
   end   
 
