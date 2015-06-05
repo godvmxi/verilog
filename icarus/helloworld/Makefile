@@ -1,8 +1,8 @@
 target := hello.o
-$target : hello.v
-	@./build.sh
+${target} : hello.v
+	iverilog -o $(target) hello.v
 	@echo "build over"
 clean :
-	@rm $(target)
+	@rm $(target)  *.o
 run :
 	@vvp $(target)
