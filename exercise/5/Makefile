@@ -1,4 +1,4 @@
-source := testbench.v    blocking.v  non_blocking.v
+source := testbench.v    alu.v
 top := testbench.v
 target := tb.o
 $(target) : $(source)

@@ -8,7 +8,7 @@ module alu(out,opcode,a,b);
   output[7:0]  out ;
   reg[7:0]     out ;
   input[2:0]   opcode ;
-  input[7:0]   a.b;
+  input[7:0]   a,b;
 
   always @( a or b or opcode)
     begin
