@@ -1,7 +1,6 @@
-// ä¿¡å·æºæ¨¡åž‹ï¼š
 `timescale 1ns/1ns
 
-`include  "./alu.v"   //  åŒ…å«æ¨¡å—æ–‡ä»¶ã€‚åœ¨æœ‰çš„ä»¿çœŸè°ƒè¯•çŽ¯å¢ƒä¸­å¹¶ä¸éœ€è¦æ­¤è¯­å¥ã€?
+`include  "./alu.v"   
 `include  "./practice.v"
 
 module testbench;
