@@ -1,6 +1,7 @@
 // 信号源模型：
 `timescale 1ns/100ps
 `include "./tryfunct.v"
+`include "./practice.v"
 
 `define clk_cycle 50
 
@@ -9,9 +10,9 @@ module Testbench;
 	reg[3:0] n,i;
 	reg reset,clk;
 
-	wire[31:0] result;
-
-	always #`clk_cycle clk=~clk; 
+	wire[31:0] result ;
+	wire[7:0] out1,out2,out3;
+	always #`clk_cycle clk <= ~clk;	
 	initial  begin
         $dumpfile("wave.vcd");
         $dumpvars;
@@ -32,7 +33,10 @@ module Testbench;
 	end
 
 
-	tryfunct m(.clk(clk),.n(n),.result(result),.reset(reset));
+	tryfunct  m0(.clk(clk),.n(n),.result(result),.reset(reset));
+	tryfunct2 m1(.n(n),.out(out1),.opcode(3'd0),.reset(reset));
+	tryfunct2 m2(.n(n),.out(out2),.opcode(3'd1),.reset(reset));
+	tryfunct2 m3(.n(n),.out(out3),.opcode(3'd2),.reset(reset));
 
 endmodule
 

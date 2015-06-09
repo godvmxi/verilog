@@ -1,4 +1,4 @@
-source := testbench.v    tryfunct.v
+source := testbench.v    tryfunct.v  practice.v
 top := testbench.v
 target := tb.o
 $(target) : $(source)

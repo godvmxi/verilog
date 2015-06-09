@@ -20,7 +20,7 @@ module tryfunct(clk,n,result,reset);
  			factorial = operand ? 1 : 0;  //先定义操作数为零时函数的输出为零，不为零时为1
 			for(index = 2; index <= operand; index = index + 1)
 				factorial = index * factorial;   //表示阶乘的算术迭代运算
-			end
+		end
 	endfunction
   
 endmodule
