@@ -34,9 +34,9 @@ module Testbench;
 
 
 	tryfunct  m0(.clk(clk),.n(n),.result(result),.reset(reset));
-	tryfunct2 m1(.n(n),.out(out1),.opcode(3'd0),.reset(reset));
-	tryfunct2 m2(.n(n),.out(out2),.opcode(3'd1),.reset(reset));
-	tryfunct2 m3(.n(n),.out(out3),.opcode(3'd2),.reset(reset));
+	tryfunct2 m1(.clk(clk),.n(n),.out(out1),.opcode(3'd0),.reset(reset));
+	tryfunct2 m2(.clk(clk),.n(n),.out(out2),.opcode(3'd1),.reset(reset));
+	tryfunct2 m3(.clk(clk),.n(n),.out(out3),.opcode(3'd2),.reset(reset));
 
 endmodule
 

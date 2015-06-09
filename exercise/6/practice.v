@@ -4,21 +4,23 @@
 `define opcode_factorial  	3'd2 
 
 module  tryfunct2( 
+	clk,
 	reset ,
 	n ,
 	opcode ,
 	out 
 );
+input  clk ;
 input  reset ;
 input[3:0]  n ;
 input[2:0] opcode ;
 output[7:0] out ;
 reg[7:0] out;
-always @(reset or  n or opcode ) begin 
+always @(posedge clk ) begin 
 	if(reset == 1'b0)
 		out <= 0'hz ;
 	else begin
-		$display("test function");
+	//	$display("test function");
 		case (opcode) 
 			`opcode_square : out <=  square (n) ;
 			`opcode_cubic  : out <=  cubic(n);
