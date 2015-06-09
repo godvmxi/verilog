@@ -15,9 +15,10 @@ input[2:0] opcode ;
 output[7:0] out ;
 reg[7:0] out;
 always @(reset or  n or opcode ) begin 
-	if(reset == 1'b1)
+	if(reset == 1'b0)
 		out <= 0'hz ;
 	else begin
+		$display("test function");
 		case (opcode) 
 			`opcode_square : out <=  square (n) ;
 			`opcode_cubic  : out <=  cubic(n);
