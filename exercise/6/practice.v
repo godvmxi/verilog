@@ -42,8 +42,8 @@ function [7:0] factorial   ;
 	reg[3:0]   index ;
 	begin 
  		factorial =  n  ? 1 : 0;  //先定义操作数为零时函数的输出为零，不为零时为1
-		for(index = 0; index <= n ;index = index+1 )
-			factorial = factorial * n ;
+		for(index = 1; index <= n ;index = index+1 )
+			factorial = factorial * index ;
 	end 
 endfunction 
 endmodule 
