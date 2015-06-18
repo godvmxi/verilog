@@ -52,7 +52,7 @@ module S_P(data, Dbit_in, Dbit_ena, clk);
                    end
                1:  begin 
                      data_buf[6] <= Dbit_in;
-                             state <=2;
+                      state <=2;
                    end
                2:  begin 
                      data_buf[5] <= Dbit_in;

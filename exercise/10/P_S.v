@@ -28,7 +28,10 @@
 ***             时钟周期的并行字节数据取入模块，在时钟节拍下转换为字    ***
 ***             节的位流，并产生相应字节位流的有效信号                  ***
 **************************************************************************/ 
-`define YES 1`define NO  0module  P_S(Dbit_out,link_S_out,data,nGet_AD_data,clk);input clk;               //主时钟节拍input nGet_AD_data;     //负电平有效的取并行数据控制信号线                               
+`define YES 1
+`define NO  0
+module  P_S(Dbit_out,link_S_out,data,nGet_AD_data,clk);
+input clk;               //主时钟节拍input nGet_AD_data;     //负电平有效的取并行数据控制信号线                               
 input [7:0] data;     //并行输入的数据端口。
 output Dbit_out;        //串行位流的输出
 output link_S_out;      //允许串行位流输出的控制信号

@@ -5,7 +5,8 @@
 ***    抖动都进行了模拟仿真。本模块无任何工程价值，只有学习价值。        *** 
 ****************************************************************************/
 
-`timescale 1ns/1ns`include "./sys.v"   // 改用不同级别的Verilog 网表文件可进行不同层次的仿真module Top;
+`timescale 1ns/1ns
+`include "./sys.v"   // 改用不同级别的Verilog 网表文件可进行不同层次的仿真module Top;
  reg clk;
  reg[7:0] data_buf;
  reg nGet_AD_data;

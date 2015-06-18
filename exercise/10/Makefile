@@ -1,4 +1,4 @@
-source := testbench.v    eeprom_controler.v  practice.v
+source := testbench.v    P_S.v  S_P.v  practice.v
 top := testbench.v
 target := tb.o
 $(target) : $(source)
