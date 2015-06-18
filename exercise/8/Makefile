@@ -1,4 +1,4 @@
-source := testbench.v    sort4.v  practice.v
+source := testbench.v    seqdet.v  practice.v
 top := testbench.v
 target := tb.o
 $(target) : $(source)
