@@ -86,3 +86,6 @@
 #iverilog
 *.o
 *.vcd
+
+
+*tags*
