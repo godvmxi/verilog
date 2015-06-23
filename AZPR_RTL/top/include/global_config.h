@@ -48,7 +48,7 @@
 		`define RESET_DISABLE 1'b1		// 
 	`endif
 
-	/********** ƒƒ‚ƒŠ§ŒäM†‚Ì‹É« *********/
+	/**********  *********/
 	// Actoive High
 	`ifdef POSITIVE_MEMORY
 		`define MEM_ENABLE	  1'b1		// 
