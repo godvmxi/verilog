@@ -1,42 +1,42 @@
 /*
  -- ============================================================================
  -- FILE NAME	: bus_addr_dec.v
- -- DESCRIPTION : ƒAƒhƒŒƒXƒfƒR[ƒ_
+ -- DESCRIPTION : µØÖ·½âÂëÆ÷
  -- ----------------------------------------------------------------------------
  -- Revision  Date		  Coding_by	 Comment
  -- 1.0.0	  2011/06/27  suito		 V‹Kì¬
  -- ============================================================================
 */
 
-/********** ‹¤’Êƒwƒbƒ_ƒtƒ@ƒCƒ‹ **********/
+/********** common include **********/
 `include "nettype.h"
 `include "stddef.h"
 `include "global_config.h"
 
-/********** ŒÂ•Êƒwƒbƒ_ƒtƒ@ƒCƒ‹ **********/
+/********** bus include **********/
 `include "bus.h"
 
 /********** ƒ‚ƒWƒ…[ƒ‹ **********/
 module bus_addr_dec (
-	/********** ƒAƒhƒŒƒX **********/
-	input  wire [`WordAddrBus] s_addr, // ƒAƒhƒŒƒX
-	/********** ƒ`ƒbƒvƒZƒŒƒNƒg **********/
-	output reg				   s0_cs_, // ƒoƒXƒXƒŒ[ƒu0”Ô
-	output reg				   s1_cs_, // ƒoƒXƒXƒŒ[ƒu1”Ô
-	output reg				   s2_cs_, // ƒoƒXƒXƒŒ[ƒu2”Ô
-	output reg				   s3_cs_, // ƒoƒXƒXƒŒ[ƒu3”Ô
-	output reg				   s4_cs_, // ƒoƒXƒXƒŒ[ƒu4”Ô
-	output reg				   s5_cs_, // ƒoƒXƒXƒŒ[ƒu5”Ô
-	output reg				   s6_cs_, // ƒoƒXƒXƒŒ[ƒu6”Ô
-	output reg				   s7_cs_  // ƒoƒXƒXƒŒ[ƒu7”Ô
+	/********** input signal **********/
+	input  wire [`WordAddrBus] s_addr, // input bus address 
+	/********** output signal **********/
+	output reg				   s0_cs_, //
+	output reg				   s1_cs_, //
+	output reg				   s2_cs_, //
+	output reg				   s3_cs_, //
+	output reg				   s4_cs_, //
+	output reg				   s5_cs_, // 
+	output reg				   s6_cs_, //
+	output reg				   s7_cs_  //
 );
 
-	/********** ƒoƒXƒXƒŒ[ƒuƒCƒ“ƒfƒbƒNƒX **********/
+	/********** decode volid bits in bus address **********/
 	wire [`BusSlaveIndexBus] s_index = s_addr[`BusSlaveIndexLoc];
 
-	/********** ƒoƒXƒXƒŒ[ƒuƒ}ƒ‹ƒ`ƒvƒŒƒNƒT **********/
+	/********** decode the bus address  **********/
 	always @(*) begin
-		/* ƒ`ƒbƒvƒZƒŒƒNƒg‚Ì‰Šú‰» */
+		/* init */
 		s0_cs_ = `DISABLE_;
 		s1_cs_ = `DISABLE_;
 		s2_cs_ = `DISABLE_;
@@ -45,30 +45,30 @@ module bus_addr_dec (
 		s5_cs_ = `DISABLE_;
 		s6_cs_ = `DISABLE_;
 		s7_cs_ = `DISABLE_;
-		/* ƒAƒhƒŒƒX‚É‘Î‰‚·‚éƒXƒŒ[ƒu‚Ì‘I‘ğ */
+		/* decode and enable slave devices */
 		case (s_index)
-			`BUS_SLAVE_0 : begin // ƒoƒXƒXƒŒ[ƒu0”Ô
+			`BUS_SLAVE_0 : begin // slave 0 
 				s0_cs_	= `ENABLE_;
 			end
-			`BUS_SLAVE_1 : begin // ƒoƒXƒXƒŒ[ƒu1”Ô
+			`BUS_SLAVE_1 : begin // slave 1
 				s1_cs_	= `ENABLE_;
 			end
-			`BUS_SLAVE_2 : begin // ƒoƒXƒXƒŒ[ƒu2”Ô
+			`BUS_SLAVE_2 : begin // slave 2
 				s2_cs_	= `ENABLE_;
 			end
-			`BUS_SLAVE_3 : begin // ƒoƒXƒXƒŒ[ƒu3”Ô
+			`BUS_SLAVE_3 : begin // slave 3
 				s3_cs_	= `ENABLE_;
 			end
-			`BUS_SLAVE_4 : begin // ƒoƒXƒXƒŒ[ƒu4”Ô
+			`BUS_SLAVE_4 : begin // slave 4
 				s4_cs_	= `ENABLE_;
 			end
-			`BUS_SLAVE_5 : begin // ƒoƒXƒXƒŒ[ƒu5”Ô
+			`BUS_SLAVE_5 : begin // slave 5
 				s5_cs_	= `ENABLE_;
 			end
-			`BUS_SLAVE_6 : begin // ƒoƒXƒXƒŒ[ƒu6”Ô
+			`BUS_SLAVE_6 : begin // slave 6
 				s6_cs_	= `ENABLE_;
 			end
-			`BUS_SLAVE_7 : begin // ƒoƒXƒXƒŒ[ƒu7”Ô
+			`BUS_SLAVE_7 : begin // slave 7
 				s7_cs_	= `ENABLE_;
 			end
 		endcase
