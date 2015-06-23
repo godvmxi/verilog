@@ -1,7 +1,7 @@
 iverilog \
 	\
-	-D ROM_PRG=$1 \
-	-D SPM_PRG=$2 \
+	-D ROM_PRG=\"$1\" \
+	-D SPM_PRG=\"$2\" \
 	-D SIM_CYCLE=$3 \
 	\
 	-o chip_top.out \
