@@ -1,31 +1,31 @@
 /*
  -- ============================================================================
  -- FILE NAME	: bus_if.v
- -- DESCRIPTION : バスインタフェース
+ -- DESCRIPTION : bus interface
  -- ----------------------------------------------------------------------------
  -- Revision  Date		  Coding_by	 Comment
- -- 1.0.0	  2011/06/27  suito		 新規作成
+ -- 1.0.0	  2011/06/27  suito		 
  -- ============================================================================
 */
 
-/********** 共通ヘッダファイル **********/
+/********** comonn include **********/
 `include "nettype.h"
 `include "global_config.h"
 `include "stddef.h"
 
-/********** 個別ヘッダファイル **********/
+/********** cpu and bus include **********/
 `include "cpu.h"
 `include "bus.h"
 
-/********** モジュール **********/
+/********** module if **********/
 module bus_if (
-	/********** クロック & リセット **********/
-	input  wire				   clk,			   // クロック
-	input  wire				   reset,		   // 非同期リセット
+	/********** clk & reset input **********/
+	input  wire				   clk,			   // 
+	input  wire				   reset,		   // 
 	/********** パイプライン制御信号 **********/
-	input  wire				   stall,		   // ストール
-	input  wire				   flush,		   // フラッシュ信号
-	output reg				   busy,		   // ビジー信号
+	input  wire				   stall,		   // ????
+	input  wire				   flush,		   // ????
+	output reg				   busy,		   // output ? for who
 	/********** CPUインタフェース **********/
 	input  wire [`WordAddrBus] addr,		   // アドレス
 	input  wire				   as_,			   // アドレス有効
