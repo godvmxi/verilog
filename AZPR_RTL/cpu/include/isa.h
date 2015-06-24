@@ -1,10 +1,10 @@
 /*
  -- ============================================================================
  -- FILE NAME	: isa.h
- -- DESCRIPTION : ���߃Z�b�g�A�[�L�e�N�`��
+ -- DESCRIPTION :
  -- ----------------------------------------------------------------------------
  -- Revision  Date		  Coding_by	 Comment
- -- 1.0.0	  2011/06/27  suito		 �V�K�쐬
+ -- 1.0.0	  2011/06/27  suito
  -- ============================================================================
 */
 
@@ -12,16 +12,16 @@
 	`define __ISA_HEADER__			 // Include Guard
 
 //------------------------------------------------------------------------------
-// ����
+//
 //------------------------------------------------------------------------------
-	/********** ���� **********/
+	/********** ISA Operation code define  **********/
 	`define ISA_NOP			   32'h0 // No Operation
-	/********** �I�y�R�[�h **********/
-	// �o�X
+	/********** opcode  define  **********/
+	// bus define
 	`define ISA_OP_W		   6	 // opcode  width
 	`define IsaOpBus		   5:0	 // op code  bits for decode
 	`define IsaOpLoc		   31:26 // op bits range in op code
-	// �I�y�R�[�h
+	// opcode define
 	`define ISA_OP_ANDR		   6'h00 // and   						: GPR[Ra] GPR[Rb] ->GPR[Rc]
 	`define ISA_OP_ANDI		   6'h01 // and   						: GPR[Ra] Im ->GPR[Rb]
 	`define ISA_OP_ORR		   6'h02 // or    						: GPR[Ra] GPR[Rb] ->GPR[Rc]
@@ -50,35 +50,35 @@
 	`define ISA_OP_RDCR		   6'h19 // read ctrl to reg  : ctrl[Ra] ->Gpr[Rb]
 	`define ISA_OP_WRCR		   6'h1a // write reg to ctrl : ctrl[Rb] <- GPR[Ra]
 	`define ISA_OP_EXRT		   6'h1b // exception return  :
-	/********** ���W�X�^�A�h���X **********/
-	// �o�X
-	`define ISA_REG_ADDR_W	   5	 // ���W�X�^�A�h���X��
-	`define IsaRegAddrBus	   4:0	 // ���W�X�^�A�h���X�o�X
-	`define IsaRaAddrLoc	   25:21 // ���W�X�^Ra�̈ʒu
-	`define IsaRbAddrLoc	   20:16 // ���W�X�^Rb�̈ʒu
-	`define IsaRcAddrLoc	   15:11 // ���W�X�^Rc�̈ʒu
-	/********** ���l **********/
-	// �o�X
-	`define ISA_IMM_W		   16	 // ���l�̕�
-	`define ISA_EXT_W		   16	 // ���l�̕����g����
-	`define ISA_IMM_MSB		   15	 // ���l�̍ŏ��ʃr�b�g
-	`define IsaImmBus		   15:0	 // ���l�̃o�X
-	`define IsaImmLoc		   15:0	 // ���l�̈ʒu
+	/**********  ra rb rc bit define  **********/
+	// Rx
+	`define ISA_REG_ADDR_W	   5	 // register address width
+	`define IsaRegAddrBus	   4:0	 // register address bus bits range
+	`define IsaRaAddrLoc	   25:21 // register Ra bits in op code
+	`define IsaRbAddrLoc	   20:16 // register Rb bits in op code
+	`define IsaRcAddrLoc	   15:11 // register Rc bits in op code
+	/********** immediate **********/
+	// Im
+	`define ISA_IMM_W		   16	 // immediate witdh
+	`define ISA_EXT_W		   16	 // immediate extend width
+	`define ISA_IMM_MSB		   15	 // immediate data high bit
+	`define IsaImmBus		   15:0	 // immediate bus bits range
+	`define IsaImmLoc		   15:0	 // immediate bit in op code
 
 //------------------------------------------------------------------------------
-// ���O
+// irq exception define
 //------------------------------------------------------------------------------
-	/********** ���O�R�[�h **********/
-	// �o�X
-	`define ISA_EXP_W		   3	 // ���O�R�[�h��
-	`define IsaExpBus		   2:0	 // ���O�R�[�h�o�X
-	// ���O
-	`define ISA_EXP_NO_EXP	   3'h0	 // ���O�Ȃ�
-	`define ISA_EXP_EXT_INT	   3'h1	 // �O�����荞��
-	`define ISA_EXP_UNDEF_INSN 3'h2	 // �����`����
-	`define ISA_EXP_OVERFLOW   3'h3	 // �Z�p�I�[�o�t���[
-	`define ISA_EXP_MISS_ALIGN 3'h4	 // �A�h���X�~�X�A���C��
-	`define ISA_EXP_TRAP	   3'h5	 // �g���b�v
-	`define ISA_EXP_PRV_VIO	   3'h6	 // �����ᔽ
+	/********** exception define  **********/
+	// exception bus define
+	`define ISA_EXP_W		   3	 // exception index width
+	`define IsaExpBus		   2:0	 // exception index bus width
+	// exception index enum
+	`define ISA_EXP_NO_EXP	   3'h0	 // None
+	`define ISA_EXP_EXT_INT	   3'h1	 // out interrupt
+	`define ISA_EXP_UNDEF_INSN 3'h2	 // undefine exception
+	`define ISA_EXP_OVERFLOW   3'h3	 // overflow exception
+	`define ISA_EXP_MISS_ALIGN 3'h4	 // address not align
+	`define ISA_EXP_TRAP	     3'h5	 // trap exception
+	`define ISA_EXP_PRV_VIO	   3'h6	 // Violation  authority exception
 
 `endif
