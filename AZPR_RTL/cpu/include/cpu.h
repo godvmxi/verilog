@@ -21,31 +21,31 @@
 	/********** cpu irq define  **********/
 	`define CPU_IRQ_CH			 8	  // IRQ channel number
 	/********** ALU cmd define  **********/
-	// ALU OP Define
+	// ALU OP Bus Define
 	`define ALU_OP_W			 4	  // ALU Opcode width
 	`define AluOpBus			 3:0  // ALU opcode bits range
-	// �I�y�R�[�h
-	`define ALU_OP_NOP			 4'h0 // No Operation
-	`define ALU_OP_AND			 4'h1 // AND
-	`define ALU_OP_OR			 4'h2 // OR
-	`define ALU_OP_XOR			 4'h3 // XOR
+	// ALU OP Define
+	`define ALU_OP_NOP			 4'h0  // No Operation
+	`define ALU_OP_AND			 4'h1  // AND
+	`define ALU_OP_OR			   4'h2  // OR
+	`define ALU_OP_XOR			 4'h3  // XOR
 	`define ALU_OP_ADDS			 4'h4  // add signed
 	`define ALU_OP_ADDU			 4'h5  // add unsigned
-	`define ALU_OP_SUBS			 4'h6 //  sub signed
-	`define ALU_OP_SUBU			 4'h7 // sun unsigned
-	`define ALU_OP_SHRL			 4'h8 // shift left
-	`define ALU_OP_SHLL			 4'h9 // shift right
+	`define ALU_OP_SUBS			 4'h6  //  sub signed
+	`define ALU_OP_SUBU			 4'h7  // sun unsigned
+	`define ALU_OP_SHRL			 4'h8  // shift left
+	`define ALU_OP_SHLL			 4'h9  // shift right
 	/********** memory opcode define  **********/
 	// memory opcode define
 	`define MEM_OP_W			 2	  // memory opcode width
-	`define MemOpBus			 1:0  // �������I�y�R�[�h�o�X
+	`define MemOpBus			 1:0  // memory opcode bus
 	// �I�y�R�[�h
 	`define MEM_OP_NOP			 2'h0 // No Operation
-	`define MEM_OP_LDW			 2'h1 // ���[�h�ǂݏo��
-	`define MEM_OP_STW			 2'h2 // ���[�h��������
-	/********** �����I�y�R�[�h **********/
-	// �o�X
-	`define CTRL_OP_W			 2	  // �����I�y�R�[�h��
+	`define MEM_OP_LDW			 2'h1 // load word
+	`define MEM_OP_STW			 2'h2 // store word
+	/********** ctrl code define  **********/
+	//
+	`define CTRL_OP_W			 2	  // ctrl code bus width 
 	`define CtrlOpBus			 1:0  // �����I�y�R�[�h�o�X
 	// �I�y�R�[�h
 	`define CTRL_OP_NOP			 2'h0 // No Operation
