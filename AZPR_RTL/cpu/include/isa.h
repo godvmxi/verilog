@@ -1,10 +1,10 @@
-/* 
+/*
  -- ============================================================================
  -- FILE NAME	: isa.h
- -- DESCRIPTION : –½—ßƒZƒbƒgƒA[ƒLƒeƒNƒ`ƒƒ
+ -- DESCRIPTION : ï¿½ï¿½ï¿½ßƒZï¿½bï¿½gï¿½Aï¿½[ï¿½Lï¿½eï¿½Nï¿½`ï¿½ï¿½
  -- ----------------------------------------------------------------------------
  -- Revision  Date		  Coding_by	 Comment
- -- 1.0.0	  2011/06/27  suito		 V‹Kì¬
+ -- 1.0.0	  2011/06/27  suito		 ï¿½Vï¿½Kï¿½ì¬
  -- ============================================================================
 */
 
@@ -12,73 +12,73 @@
 	`define __ISA_HEADER__			 // Include Guard
 
 //------------------------------------------------------------------------------
-// –½—ß
+// ï¿½ï¿½ï¿½ï¿½
 //------------------------------------------------------------------------------
-	/********** –½—ß **********/
+	/********** ï¿½ï¿½ï¿½ï¿½ **********/
 	`define ISA_NOP			   32'h0 // No Operation
-	/********** ƒIƒyƒR[ƒh **********/
-	// ƒoƒX
-	`define ISA_OP_W		   6	 // ƒIƒyƒR[ƒh•
-	`define IsaOpBus		   5:0	 // ƒIƒyƒR[ƒhƒoƒX
-	`define IsaOpLoc		   31:26 // ƒIƒyƒR[ƒh‚ÌˆÊ’u
-	// ƒIƒyƒR[ƒh
-	`define ISA_OP_ANDR		   6'h00 // ƒŒƒWƒXƒ^“¯m‚Ì˜_—Ï
-	`define ISA_OP_ANDI		   6'h01 // ƒŒƒWƒXƒ^‚Æ’è”‚Ì˜_—Ï
-	`define ISA_OP_ORR		   6'h02 // ƒŒƒWƒXƒ^“¯m‚Ì˜_—˜a
-	`define ISA_OP_ORI		   6'h03 // ƒŒƒWƒXƒ^‚Æ’è”‚Ì˜_—˜a
-	`define ISA_OP_XORR		   6'h04 // ƒŒƒWƒXƒ^“¯m‚Ì”r‘¼“I˜_—˜a
-	`define ISA_OP_XORI		   6'h05 // ƒŒƒWƒXƒ^‚Æ’è”‚Ì”r‘¼“I˜_—˜a
-	`define ISA_OP_ADDSR	   6'h06 // ƒŒƒWƒXƒ^“¯m‚Ì•„†•t‚«‰ÁZ
-	`define ISA_OP_ADDSI	   6'h07 // ƒŒƒWƒXƒ^‚Æ’è”‚Ì•„†•t‚«‰ÁZ
-	`define ISA_OP_ADDUR	   6'h08 // ƒŒƒWƒXƒ^“¯m‚Ì•„†‚È‚µ‰ÁZ
-	`define ISA_OP_ADDUI	   6'h09 // ƒŒƒWƒXƒ^‚Æ’è”‚Ì•„†‚È‚µ‰ÁZ
-	`define ISA_OP_SUBSR	   6'h0a // ƒŒƒWƒXƒ^“¯m‚Ì•„†•t‚«Œ¸Z
-	`define ISA_OP_SUBUR	   6'h0b // ƒŒƒWƒXƒ^“¯m‚Ì•„†‚È‚µŒ¸Z
-	`define ISA_OP_SHRLR	   6'h0c // ƒŒƒWƒXƒ^“¯m‚Ì˜_—‰EƒVƒtƒg
-	`define ISA_OP_SHRLI	   6'h0d // ƒŒƒWƒXƒ^‚Æ’è”‚Ì˜_—‰EƒVƒtƒg
-	`define ISA_OP_SHLLR	   6'h0e // ƒŒƒWƒXƒ^“¯m‚Ì˜_—¶ƒVƒtƒg
-	`define ISA_OP_SHLLI	   6'h0f // ƒŒƒWƒXƒ^‚Æ’è”‚Ì˜_—¶ƒVƒtƒg
-	`define ISA_OP_BE		   6'h10 // ƒŒƒWƒXƒ^“¯m‚Ì•„†•t‚«”äŠr(==)
-	`define ISA_OP_BNE		   6'h11 // ƒŒƒWƒXƒ^“¯m‚Ì•„†•t‚«”äŠr(!=)
-	`define ISA_OP_BSGT		   6'h12 // ƒŒƒWƒXƒ^“¯m‚Ì•„†•t‚«”äŠr(<)
-	`define ISA_OP_BUGT		   6'h13 // ƒŒƒWƒXƒ^“¯m‚Ì•„†‚È‚µ”äŠr(<)
-	`define ISA_OP_JMP		   6'h14 // ƒŒƒWƒXƒ^w’è‚Ìâ‘Î•ªŠò
-	`define ISA_OP_CALL		   6'h15 // ƒŒƒWƒXƒ^w’è‚ÌƒTƒuƒ‹[ƒ`ƒ“ƒR[ƒ‹
-	`define ISA_OP_LDW		   6'h16 // ƒ[ƒh“Ç‚İo‚µ
-	`define ISA_OP_STW		   6'h17 // ƒ[ƒh‘‚«‚İ
-	`define ISA_OP_TRAP		   6'h18 // ƒgƒ‰ƒbƒv
-	`define ISA_OP_RDCR		   6'h19 // §ŒäƒŒƒWƒXƒ^‚Ì“Ç‚İo‚µ
-	`define ISA_OP_WRCR		   6'h1a // §ŒäƒŒƒWƒXƒ^‚Ö‚Ì‘‚«‚İ
-	`define ISA_OP_EXRT		   6'h1b // —áŠO‚©‚ç‚Ì•œ‹A
-	/********** ƒŒƒWƒXƒ^ƒAƒhƒŒƒX **********/
-	// ƒoƒX
-	`define ISA_REG_ADDR_W	   5	 // ƒŒƒWƒXƒ^ƒAƒhƒŒƒX•
-	`define IsaRegAddrBus	   4:0	 // ƒŒƒWƒXƒ^ƒAƒhƒŒƒXƒoƒX
-	`define IsaRaAddrLoc	   25:21 // ƒŒƒWƒXƒ^Ra‚ÌˆÊ’u
-	`define IsaRbAddrLoc	   20:16 // ƒŒƒWƒXƒ^Rb‚ÌˆÊ’u
-	`define IsaRcAddrLoc	   15:11 // ƒŒƒWƒXƒ^Rc‚ÌˆÊ’u
-	/********** ‘¦’l **********/
-	// ƒoƒX
-	`define ISA_IMM_W		   16	 // ‘¦’l‚Ì•
-	`define ISA_EXT_W		   16	 // ‘¦’l‚Ì•„†Šg’£•
-	`define ISA_IMM_MSB		   15	 // ‘¦’l‚ÌÅãˆÊƒrƒbƒg
-	`define IsaImmBus		   15:0	 // ‘¦’l‚ÌƒoƒX
-	`define IsaImmLoc		   15:0	 // ‘¦’l‚ÌˆÊ’u
+	/********** ï¿½Iï¿½yï¿½Rï¿½[ï¿½h **********/
+	// ï¿½oï¿½X
+	`define ISA_OP_W		   6	 // opcode  width
+	`define IsaOpBus		   5:0	 // op code  bits for decode
+	`define IsaOpLoc		   31:26 // op bits range in op code
+	// ï¿½Iï¿½yï¿½Rï¿½[ï¿½h
+	`define ISA_OP_ANDR		   6'h00 // and   						: GPR[Ra] GPR[Rb] ->GPR[Rc]
+	`define ISA_OP_ANDI		   6'h01 // and   						: GPR[Ra] Im ->GPR[Rb]
+	`define ISA_OP_ORR		   6'h02 // or    						: GPR[Ra] GPR[Rb] ->GPR[Rc]
+	`define ISA_OP_ORI		   6'h03 // or    						: GPR[Ra] Im ->GPR[Rb]
+	`define ISA_OP_XORR		   6'h04 // xor   						: GPR[Ra] GPR[Rb] ->GPR[Rc]
+	`define ISA_OP_XORI		   6'h05 // xor   						: GPR[Ra] Im ->GPR[Rb]
+	`define ISA_OP_ADDSR	   6'h06 // add signed        : GPR[Ra] GPR[Rb] ->GPR[Rc]
+	`define ISA_OP_ADDSI	   6'h07 // add signed im     : GPR[Ra] Im ->GPR[Rb]
+	`define ISA_OP_ADDUR	   6'h08 // add unsigned      : GPR[Ra] GPR[Rb] ->GPR[Rc]
+	`define ISA_OP_ADDUI	   6'h09 // add unsigned im   : GPR[Ra] Im ->GPR[Rb]
+	`define ISA_OP_SUBSR	   6'h0a // sub signed   			: GPR[Ra] GPR[Rb] ->GPR[Rc]
+	`define ISA_OP_SUBUR	   6'h0b // sub unsigned 			: GPR[Ra] GPR[Rb] ->GPR[Rc]
+	`define ISA_OP_SHRLR	   6'h0c // shift left 				: GPR[Ra] >> GPR[Rb][4:0]  -> GPR[Rc]
+	`define ISA_OP_SHRLI	   6'h0d // shift left Im 		: GPR[Ra] >> Im[4:0]  -> GPR[Rc]
+	`define ISA_OP_SHLLR	   6'h0e // shift right 		 	: GPR[Ra] >> GPR[Rb][4:0]  -> GPR[Rc]
+	`define ISA_OP_SHLLI	   6'h0f // shift right Im    : GPR[Ra] >> Im[4:0]  -> GPR[Rc]
+	`define ISA_OP_BE		   	 6'h10 // be jump 					: GPR[Ra] == GPR[Rb] ->PC = PC+IM
+	`define ISA_OP_BNE		   6'h11 // bne jump 					: GPR[Ra] != GPR[Rb] ->PC = PC+IM
+	`define ISA_OP_BSGT		   6'h12 // signed compare    : GPR[Ra] <  GPR[Rb] ->PC = PC+IM
+	`define ISA_OP_BUGT		   6'h13 // unsigned compare  : GPR[Ra] <  GPR[Rb] ->PC = PC+IM
+	`define ISA_OP_JMP		   6'h14 // jump 							: jump GPR[Ra]
+	`define ISA_OP_CALL		   6'h15 // call 							: jump GPR[Ra] ,PC ->Reg[31]
+	`define ISA_OP_LDW		   6'h16 // load word 				: load GPR[Ra]+Im ->  GPR[Rb]
+	`define ISA_OP_STW		   6'h17 // store word				: store GPR[Ra]+Im <- GPR[Rb]
+	`define ISA_OP_TRAP		   6'h18 // trap exception    :
+	`define ISA_OP_RDCR		   6'h19 // read ctrl to reg  : ctrl[Ra] ->Gpr[Rb]
+	`define ISA_OP_WRCR		   6'h1a // write reg to ctrl : ctrl[Rb] <- GPR[Ra]
+	`define ISA_OP_EXRT		   6'h1b // exception return  :
+	/********** ï¿½ï¿½ï¿½Wï¿½Xï¿½^ï¿½Aï¿½hï¿½ï¿½ï¿½X **********/
+	// ï¿½oï¿½X
+	`define ISA_REG_ADDR_W	   5	 // ï¿½ï¿½ï¿½Wï¿½Xï¿½^ï¿½Aï¿½hï¿½ï¿½ï¿½Xï¿½ï¿½
+	`define IsaRegAddrBus	   4:0	 // ï¿½ï¿½ï¿½Wï¿½Xï¿½^ï¿½Aï¿½hï¿½ï¿½ï¿½Xï¿½oï¿½X
+	`define IsaRaAddrLoc	   25:21 // ï¿½ï¿½ï¿½Wï¿½Xï¿½^Raï¿½ÌˆÊ’u
+	`define IsaRbAddrLoc	   20:16 // ï¿½ï¿½ï¿½Wï¿½Xï¿½^Rbï¿½ÌˆÊ’u
+	`define IsaRcAddrLoc	   15:11 // ï¿½ï¿½ï¿½Wï¿½Xï¿½^Rcï¿½ÌˆÊ’u
+	/********** ï¿½ï¿½ï¿½l **********/
+	// ï¿½oï¿½X
+	`define ISA_IMM_W		   16	 // ï¿½ï¿½ï¿½lï¿½Ì•ï¿½
+	`define ISA_EXT_W		   16	 // ï¿½ï¿½ï¿½lï¿½Ì•ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½
+	`define ISA_IMM_MSB		   15	 // ï¿½ï¿½ï¿½lï¿½ÌÅï¿½ï¿½Êƒrï¿½bï¿½g
+	`define IsaImmBus		   15:0	 // ï¿½ï¿½ï¿½lï¿½Ìƒoï¿½X
+	`define IsaImmLoc		   15:0	 // ï¿½ï¿½ï¿½lï¿½ÌˆÊ’u
 
 //------------------------------------------------------------------------------
-// —áŠO
+// ï¿½ï¿½ï¿½O
 //------------------------------------------------------------------------------
-	/********** —áŠOƒR[ƒh **********/
-	// ƒoƒX
-	`define ISA_EXP_W		   3	 // —áŠOƒR[ƒh•
-	`define IsaExpBus		   2:0	 // —áŠOƒR[ƒhƒoƒX
-	// —áŠO
-	`define ISA_EXP_NO_EXP	   3'h0	 // —áŠO‚È‚µ
-	`define ISA_EXP_EXT_INT	   3'h1	 // ŠO•”Š„‚è‚İ
-	`define ISA_EXP_UNDEF_INSN 3'h2	 // –¢’è‹`–½—ß
-	`define ISA_EXP_OVERFLOW   3'h3	 // ZpƒI[ƒoƒtƒ[
-	`define ISA_EXP_MISS_ALIGN 3'h4	 // ƒAƒhƒŒƒXƒ~ƒXƒAƒ‰ƒCƒ“
-	`define ISA_EXP_TRAP	   3'h5	 // ƒgƒ‰ƒbƒv
-	`define ISA_EXP_PRV_VIO	   3'h6	 // “ÁŒ ˆá”½
+	/********** ï¿½ï¿½ï¿½Oï¿½Rï¿½[ï¿½h **********/
+	// ï¿½oï¿½X
+	`define ISA_EXP_W		   3	 // ï¿½ï¿½ï¿½Oï¿½Rï¿½[ï¿½hï¿½ï¿½
+	`define IsaExpBus		   2:0	 // ï¿½ï¿½ï¿½Oï¿½Rï¿½[ï¿½hï¿½oï¿½X
+	// ï¿½ï¿½ï¿½O
+	`define ISA_EXP_NO_EXP	   3'h0	 // ï¿½ï¿½ï¿½Oï¿½È‚ï¿½
+	`define ISA_EXP_EXT_INT	   3'h1	 // ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½èï¿½ï¿½
+	`define ISA_EXP_UNDEF_INSN 3'h2	 // ï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½ï¿½
+	`define ISA_EXP_OVERFLOW   3'h3	 // ï¿½Zï¿½pï¿½Iï¿½[ï¿½oï¿½tï¿½ï¿½ï¿½[
+	`define ISA_EXP_MISS_ALIGN 3'h4	 // ï¿½Aï¿½hï¿½ï¿½ï¿½Xï¿½~ï¿½Xï¿½Aï¿½ï¿½ï¿½Cï¿½ï¿½
+	`define ISA_EXP_TRAP	   3'h5	 // ï¿½gï¿½ï¿½ï¿½bï¿½v
+	`define ISA_EXP_PRV_VIO	   3'h6	 // ï¿½ï¿½ï¿½ï¿½ï¿½á”½
 
 `endif

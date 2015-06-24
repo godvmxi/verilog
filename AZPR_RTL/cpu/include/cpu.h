@@ -1,113 +1,113 @@
-/* 
+/*
  -- ============================================================================
  -- FILE NAME	: cpu.h
- -- DESCRIPTION : CPUƒwƒbƒ_
+ -- DESCRIPTION : CPU define
  -- ----------------------------------------------------------------------------
  -- Revision  Date		  Coding_by	 Comment
- -- 1.0.0	  2011/06/27  suito		 V‹Kì¬
+ -- 1.0.0	  2011/06/27  suito		 ï¿½Vï¿½Kï¿½ì¬
  -- ============================================================================
 */
 
 `ifndef __CPU_HEADER__
-	`define __CPU_HEADER__	// ƒCƒ“ƒNƒ‹[ƒhƒK[ƒh
+	`define __CPU_HEADER__	// avoid reinclude
 
 //------------------------------------------------------------------------------
 // Operation
 //------------------------------------------------------------------------------
-	/********** ƒŒƒWƒXƒ^ **********/
-	`define REG_NUM				 32	  // ƒŒƒWƒXƒ^”
-	`define REG_ADDR_W			 5	  // ƒŒƒWƒXƒ^ƒAƒhƒŒƒX•
-	`define RegAddrBus			 4:0  // ƒŒƒWƒXƒ^ƒAƒhƒŒƒXƒoƒX
-	/********** Š„‚è‚İ—v‹M† **********/
-	`define CPU_IRQ_CH			 8	  // IRQ•
-	/********** ALUƒIƒyƒR[ƒh **********/
-	// ƒoƒX
-	`define ALU_OP_W			 4	  // ALUƒIƒyƒR[ƒh•
-	`define AluOpBus			 3:0  // ALUƒIƒyƒR[ƒhƒoƒX
-	// ƒIƒyƒR[ƒh
+	/********** register define  **********/
+	`define REG_NUM				 32	  // register number
+	`define REG_ADDR_W			 5	  // register address width
+	`define RegAddrBus			 4:0  // register address bits range
+	/********** cpu irq define  **********/
+	`define CPU_IRQ_CH			 8	  // IRQ channel number
+	/********** ALU cmd define  **********/
+	// ALU OP Define
+	`define ALU_OP_W			 4	  // ALU Opcode width
+	`define AluOpBus			 3:0  // ALU opcode bits range
+	// ï¿½Iï¿½yï¿½Rï¿½[ï¿½h
 	`define ALU_OP_NOP			 4'h0 // No Operation
 	`define ALU_OP_AND			 4'h1 // AND
 	`define ALU_OP_OR			 4'h2 // OR
 	`define ALU_OP_XOR			 4'h3 // XOR
-	`define ALU_OP_ADDS			 4'h4 // •„†•t‚«‰ÁZ
-	`define ALU_OP_ADDU			 4'h5 // •„†‚È‚µ‰ÁZ
-	`define ALU_OP_SUBS			 4'h6 // •„†•t‚«Œ¸Z
-	`define ALU_OP_SUBU			 4'h7 // •„†‚È‚µŒ¸Z
-	`define ALU_OP_SHRL			 4'h8 // ˜_—‰EƒVƒtƒg
-	`define ALU_OP_SHLL			 4'h9 // ˜_—¶ƒVƒtƒg
-	/********** ƒƒ‚ƒŠƒIƒyƒR[ƒh **********/
-	// ƒoƒX
-	`define MEM_OP_W			 2	  // ƒƒ‚ƒŠƒIƒyƒR[ƒh•
-	`define MemOpBus			 1:0  // ƒƒ‚ƒŠƒIƒyƒR[ƒhƒoƒX
-	// ƒIƒyƒR[ƒh
+	`define ALU_OP_ADDS			 4'h4  // add signed
+	`define ALU_OP_ADDU			 4'h5  // add unsigned
+	`define ALU_OP_SUBS			 4'h6 //  sub signed
+	`define ALU_OP_SUBU			 4'h7 // sun unsigned
+	`define ALU_OP_SHRL			 4'h8 // shift left
+	`define ALU_OP_SHLL			 4'h9 // shift right
+	/********** memory opcode define  **********/
+	// memory opcode define
+	`define MEM_OP_W			 2	  // memory opcode width
+	`define MemOpBus			 1:0  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½yï¿½Rï¿½[ï¿½hï¿½oï¿½X
+	// ï¿½Iï¿½yï¿½Rï¿½[ï¿½h
 	`define MEM_OP_NOP			 2'h0 // No Operation
-	`define MEM_OP_LDW			 2'h1 // ƒ[ƒh“Ç‚İo‚µ
-	`define MEM_OP_STW			 2'h2 // ƒ[ƒh‘‚«‚İ
-	/********** §ŒäƒIƒyƒR[ƒh **********/
-	// ƒoƒX
-	`define CTRL_OP_W			 2	  // §ŒäƒIƒyƒR[ƒh•
-	`define CtrlOpBus			 1:0  // §ŒäƒIƒyƒR[ƒhƒoƒX
-	// ƒIƒyƒR[ƒh
+	`define MEM_OP_LDW			 2'h1 // ï¿½ï¿½ï¿½[ï¿½hï¿½Ç‚İoï¿½ï¿½
+	`define MEM_OP_STW			 2'h2 // ï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	/********** ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½yï¿½Rï¿½[ï¿½h **********/
+	// ï¿½oï¿½X
+	`define CTRL_OP_W			 2	  // ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½yï¿½Rï¿½[ï¿½hï¿½ï¿½
+	`define CtrlOpBus			 1:0  // ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½yï¿½Rï¿½[ï¿½hï¿½oï¿½X
+	// ï¿½Iï¿½yï¿½Rï¿½[ï¿½h
 	`define CTRL_OP_NOP			 2'h0 // No Operation
-	`define CTRL_OP_WRCR		 2'h1 // §ŒäƒŒƒWƒXƒ^‚Ö‚Ì‘‚«‚İ
-	`define CTRL_OP_EXRT		 2'h2 // —áŠO‚©‚ç‚Ì•œ‹A
+	`define CTRL_OP_WRCR		 2'h1 // ï¿½ï¿½ï¿½äƒŒï¿½Wï¿½Xï¿½^ï¿½Ö‚Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	`define CTRL_OP_EXRT		 2'h2 // ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½Ì•ï¿½ï¿½A
 
-	/********** Àsƒ‚[ƒh **********/
-	// ƒoƒX
-	`define CPU_EXE_MODE_W		 1	  // Àsƒ‚[ƒh•
-	`define CpuExeModeBus		 0:0  // Àsƒ‚[ƒhƒoƒX
-	// Àsƒ‚[ƒh
-	`define CPU_KERNEL_MODE		 1'b0 // ƒJ[ƒlƒ‹ƒ‚[ƒh
-	`define CPU_USER_MODE		 1'b1 // ƒ†[ƒUƒ‚[ƒh
-
-//------------------------------------------------------------------------------
-// §ŒäƒŒƒWƒXƒ^
-//------------------------------------------------------------------------------
-	/********** ƒAƒhƒŒƒXƒ}ƒbƒv **********/
-	`define CREG_ADDR_STATUS	 5'h0  // ƒXƒe[ƒ^ƒX
-	`define CREG_ADDR_PRE_STATUS 5'h1  // ‘O‚ÌƒXƒe[ƒ^ƒX
-	`define CREG_ADDR_PC		 5'h2  // ƒvƒƒOƒ‰ƒ€ƒJƒEƒ“ƒ^
-	`define CREG_ADDR_EPC		 5'h3  // —áŠOƒvƒƒOƒ‰ƒ€ƒJƒEƒ“ƒ^
-	`define CREG_ADDR_EXP_VECTOR 5'h4  // —áŠOƒxƒNƒ^
-	`define CREG_ADDR_CAUSE		 5'h5  // —áŠOŒ´ˆöƒŒƒWƒXƒ^
-	`define CREG_ADDR_INT_MASK	 5'h6  // Š„‚è‚İƒ}ƒXƒN
-	`define CREG_ADDR_IRQ		 5'h7  // Š„‚è‚İ—v‹
-	// “Ç‚İo‚µê—p—Ìˆæ
-	`define CREG_ADDR_ROM_SIZE	 5'h1d // ROMƒTƒCƒY
-	`define CREG_ADDR_SPM_SIZE	 5'h1e // SPMƒTƒCƒY
-	`define CREG_ADDR_CPU_INFO	 5'h1f // CPUî•ñ
-	/********** ƒrƒbƒgƒ}ƒbƒv **********/
-	`define CregExeModeLoc		 0	   // Àsƒ‚[ƒh‚ÌˆÊ’u
-	`define CregIntEnableLoc	 1	   // Š„‚è‚İ—LŒø‚ÌˆÊ’u
-	`define CregExpCodeLoc		 2:0   // —áŠOƒR[ƒh‚ÌˆÊ’u
-	`define CregDlyFlagLoc		 3	   // ƒfƒBƒŒƒCƒXƒƒbƒgƒtƒ‰ƒO‚ÌˆÊ’u
+	/********** ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½[ï¿½h **********/
+	// ï¿½oï¿½X
+	`define CPU_EXE_MODE_W		 1	  // ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½
+	`define CpuExeModeBus		 0:0  // ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½[ï¿½hï¿½oï¿½X
+	// ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½[ï¿½h
+	`define CPU_KERNEL_MODE		 1'b0 // ï¿½Jï¿½[ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½h
+	`define CPU_USER_MODE		 1'b1 // ï¿½ï¿½ï¿½[ï¿½Uï¿½ï¿½ï¿½[ï¿½h
 
 //------------------------------------------------------------------------------
-// ƒoƒXƒCƒ“ƒ^ƒtƒF[ƒX
+// ï¿½ï¿½ï¿½äƒŒï¿½Wï¿½Xï¿½^
 //------------------------------------------------------------------------------
-	/********** ƒoƒXƒCƒ“ƒ^ƒtƒF[ƒX‚Ìó‘Ô **********/
-	// ƒoƒX
-	`define BusIfStateBus		 1:0   // ó‘ÔƒoƒX
-	// ó‘Ô
-	`define BUS_IF_STATE_IDLE	 2'h0  // ƒAƒCƒhƒ‹
-	`define BUS_IF_STATE_REQ	 2'h1  // ƒoƒXƒŠƒNƒGƒXƒg
-	`define BUS_IF_STATE_ACCESS	 2'h2  // ƒoƒXƒAƒNƒZƒX
-	`define BUS_IF_STATE_STALL	 2'h3  // ƒXƒg[ƒ‹
+	/********** ï¿½Aï¿½hï¿½ï¿½ï¿½Xï¿½}ï¿½bï¿½v **********/
+	`define CREG_ADDR_STATUS	 5'h0  // ï¿½Xï¿½eï¿½[ï¿½^ï¿½X
+	`define CREG_ADDR_PRE_STATUS 5'h1  // ï¿½Oï¿½ÌƒXï¿½eï¿½[ï¿½^ï¿½X
+	`define CREG_ADDR_PC		 5'h2  // ï¿½vï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½Eï¿½ï¿½ï¿½^
+	`define CREG_ADDR_EPC		 5'h3  // ï¿½ï¿½ï¿½Oï¿½vï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½Eï¿½ï¿½ï¿½^
+	`define CREG_ADDR_EXP_VECTOR 5'h4  // ï¿½ï¿½ï¿½Oï¿½xï¿½Nï¿½^
+	`define CREG_ADDR_CAUSE		 5'h5  // ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½òƒŒƒWï¿½Xï¿½^
+	`define CREG_ADDR_INT_MASK	 5'h6  // ï¿½ï¿½ï¿½èï¿½İƒ}ï¿½Xï¿½N
+	`define CREG_ADDR_IRQ		 5'h7  // ï¿½ï¿½ï¿½èï¿½İ—vï¿½ï¿½
+	// ï¿½Ç‚İoï¿½ï¿½ï¿½ï¿½ï¿½pï¿½Ìˆï¿½
+	`define CREG_ADDR_ROM_SIZE	 5'h1d // ROMï¿½Tï¿½Cï¿½Y
+	`define CREG_ADDR_SPM_SIZE	 5'h1e // SPMï¿½Tï¿½Cï¿½Y
+	`define CREG_ADDR_CPU_INFO	 5'h1f // CPUï¿½ï¿½ï¿½ï¿½
+	/********** ï¿½rï¿½bï¿½gï¿½}ï¿½bï¿½v **********/
+	`define CregExeModeLoc		 0	   // ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½[ï¿½hï¿½ÌˆÊ’u
+	`define CregIntEnableLoc	 1	   // ï¿½ï¿½ï¿½èï¿½İ—Lï¿½ï¿½ï¿½ÌˆÊ’u
+	`define CregExpCodeLoc		 2:0   // ï¿½ï¿½ï¿½Oï¿½Rï¿½[ï¿½hï¿½ÌˆÊ’u
+	`define CregDlyFlagLoc		 3	   // ï¿½fï¿½Bï¿½ï¿½ï¿½Cï¿½Xï¿½ï¿½ï¿½bï¿½gï¿½tï¿½ï¿½ï¿½Oï¿½ÌˆÊ’u
+
+//------------------------------------------------------------------------------
+// ï¿½oï¿½Xï¿½Cï¿½ï¿½ï¿½^ï¿½tï¿½Fï¿½[ï¿½X
+//------------------------------------------------------------------------------
+	/********** ï¿½oï¿½Xï¿½Cï¿½ï¿½ï¿½^ï¿½tï¿½Fï¿½[ï¿½Xï¿½Ìï¿½ï¿½ï¿½ **********/
+	// ï¿½oï¿½X
+	`define BusIfStateBus		 1:0   // ï¿½ï¿½ï¿½Ôƒoï¿½X
+	// ï¿½ï¿½ï¿½ï¿½
+	`define BUS_IF_STATE_IDLE	 2'h0  // ï¿½Aï¿½Cï¿½hï¿½ï¿½
+	`define BUS_IF_STATE_REQ	 2'h1  // ï¿½oï¿½Xï¿½ï¿½ï¿½Nï¿½Gï¿½Xï¿½g
+	`define BUS_IF_STATE_ACCESS	 2'h2  // ï¿½oï¿½Xï¿½Aï¿½Nï¿½Zï¿½X
+	`define BUS_IF_STATE_STALL	 2'h3  // ï¿½Xï¿½gï¿½[ï¿½ï¿½
 
 //------------------------------------------------------------------------------
 // MISC
 //------------------------------------------------------------------------------
-	/********** ƒxƒNƒ^ **********/
-	`define RESET_VECTOR		 30'h0 // ƒŠƒZƒbƒgƒxƒNƒ^
-	/********** ƒVƒtƒg—Ê **********/
-	`define ShAmountBus			 4:0   // ƒVƒtƒg—ÊƒoƒX
-	`define ShAmountLoc			 4:0   // ƒVƒtƒg—Ê‚ÌˆÊ’u
+	/********** ï¿½xï¿½Nï¿½^ **********/
+	`define RESET_VECTOR		 30'h0 // ï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½xï¿½Nï¿½^
+	/********** ï¿½Vï¿½tï¿½gï¿½ï¿½ **********/
+	`define ShAmountBus			 4:0   // ï¿½Vï¿½tï¿½gï¿½Êƒoï¿½X
+	`define ShAmountLoc			 4:0   // ï¿½Vï¿½tï¿½gï¿½Ê‚ÌˆÊ’u
 
-	/********** CPUî•ñ *********/
-	`define RELEASE_YEAR		 8'd41 // ì¬”N (YYYY - 1970)
-	`define RELEASE_MONTH		 8'd7  // ì¬Œ
-	`define RELEASE_VERSION		 8'd1  // ƒo[ƒWƒ‡ƒ“
-	`define RELEASE_REVISION	 8'd0  // ƒŠƒrƒWƒ‡ƒ“
+	/********** CPUï¿½ï¿½ï¿½ï¿½ *********/
+	`define RELEASE_YEAR		 8'd41 // ï¿½ì¬ï¿½N (YYYY - 1970)
+	`define RELEASE_MONTH		 8'd7  // ï¿½ì¬ï¿½ï¿½
+	`define RELEASE_VERSION		 8'd1  // ï¿½oï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½
+	`define RELEASE_REVISION	 8'd0  // ï¿½ï¿½ï¿½rï¿½Wï¿½ï¿½ï¿½ï¿½
 
 
 `endif
