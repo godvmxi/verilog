@@ -1,79 +1,79 @@
 /*
  -- ============================================================================
  -- FILE NAME	: bus_master_mux.v
- -- DESCRIPTION : バスマスタマルチプレクサ
+ -- DESCRIPTION : bus master multiple multiplexer
  -- ----------------------------------------------------------------------------
  -- Revision  Date		  Coding_by	 Comment
- -- 1.0.0	  2011/06/27  suito		 新規作成
+ -- 1.0.0	  2011/06/27  suito		 Jap
  -- ============================================================================
 */
 
-/********** 共通ヘッダファイル **********/
+/********** common include  **********/
 `include "nettype.h"
 `include "stddef.h"
 `include "global_config.h"
 
-/********** 個別ヘッダファイル **********/
+/********** bus define include **********/
 `include "bus.h"
 
-/********** モジュール **********/
+/********** bus master mux module  **********/
 module bus_master_mux (
-	/********** バスマスタ信号 **********/
-	// バスマスタ0番
-	input  wire [`WordAddrBus] m0_addr,	   // アドレス
-	input  wire				   m0_as_,	   // アドレスストローブ
-	input  wire				   m0_rw,	   // 読み／書き
-	input  wire [`WordDataBus] m0_wr_data, // 書き込みデータ
-	input  wire				   m0_grnt_,   // バスグラント
-	// バスマスタ1番
-	input  wire [`WordAddrBus] m1_addr,	   // アドレス
-	input  wire				   m1_as_,	   // アドレスストローブ
-	input  wire				   m1_rw,	   // 読み／書き
-	input  wire [`WordDataBus] m1_wr_data, // 書き込みデータ
-	input  wire				   m1_grnt_,   // バスグラント
-	// バスマスタ2番
-	input  wire [`WordAddrBus] m2_addr,	   // アドレス
-	input  wire				   m2_as_,	   // アドレスストローブ
-	input  wire				   m2_rw,	   // 読み／書き
-	input  wire [`WordDataBus] m2_wr_data, // 書き込みデータ
-	input  wire				   m2_grnt_,   // バスグラント
-	// バスマスタ3番
-	input  wire [`WordAddrBus] m3_addr,	   // アドレス
-	input  wire				   m3_as_,	   // アドレスストローブ
-	input  wire				   m3_rw,	   // 読み／書き
-	input  wire [`WordDataBus] m3_wr_data, // 書き込みデータ
-	input  wire				   m3_grnt_,   // バスグラント
-	/********** バススレーブ共通信号 **********/
-	output reg	[`WordAddrBus] s_addr,	   // アドレス
-	output reg				   s_as_,	   // アドレスストローブ
-	output reg				   s_rw,	   // 読み／書き
-	output reg	[`WordDataBus] s_wr_data   // 書き込みデータ
+	/********** input signals **********/
+	// master 0
+	input  wire [`WordAddrBus] m0_addr,	   // address
+	input  wire				   m0_as_,	   // address valid
+	input  wire				   m0_rw,	   // read write
+	input  wire [`WordDataBus] m0_wr_data, // write data
+	input  wire				   m0_grnt_,   //bus arbiter gating
+	//master 1
+	input  wire [`WordAddrBus] m1_addr,	   //
+	input  wire				   m1_as_,	   //
+	input  wire				   m1_rw,	   //
+	input  wire [`WordDataBus] m1_wr_data, //
+	input  wire				   m1_grnt_,   //
+	// /master 2
+	input  wire [`WordAddrBus] m2_addr,	   //
+	input  wire				   m2_as_,	   //
+	input  wire				   m2_rw,	   //
+	input  wire [`WordDataBus] m2_wr_data, //
+	input  wire				   m2_grnt_,   //
+	// /master 3
+	input  wire [`WordAddrBus] m3_addr,	   //
+	input  wire				   m3_as_,	   //
+	input  wire				   m3_rw,	   //
+	input  wire [`WordDataBus] m3_wr_data, //
+	input  wire				   m3_grnt_,   //
+	/********** multiplexer output  **********/
+	output reg	[`WordAddrBus] s_addr,	   // address
+	output reg				   s_as_,	   // address valid
+	output reg				   s_rw,	   // read write
+	output reg	[`WordDataBus] s_wr_data   // write data
 );
 
-	/********** バスマスタマルチプレクサ **********/
+	/**********  **********/
 	always @(*) begin
-		/* バス権を持っているマスタの選択 */
-		if (m0_grnt_ == `ENABLE_) begin			 // バスマスタ0番
+		/* select the master input */
+		if (m0_grnt_ == `ENABLE_) begin			 //
 			s_addr	  = m0_addr;
 			s_as_	  = m0_as_;
 			s_rw	  = m0_rw;
 			s_wr_data = m0_wr_data;
-		end else if (m1_grnt_ == `ENABLE_) begin // バスマスタ0番
+		end else if (m1_grnt_ == `ENABLE_) begin //
 			s_addr	  = m1_addr;
 			s_as_	  = m1_as_;
 			s_rw	  = m1_rw;
 			s_wr_data = m1_wr_data;
-		end else if (m2_grnt_ == `ENABLE_) begin // バスマスタ0番
+		end else if (m2_grnt_ == `ENABLE_) begin //
 			s_addr	  = m2_addr;
 			s_as_	  = m2_as_;
 			s_rw	  = m2_rw;
 			s_wr_data = m2_wr_data;
-		end else if (m3_grnt_ == `ENABLE_) begin // バスマスタ0番
+		end else if (m3_grnt_ == `ENABLE_) begin //
 			s_addr	  = m3_addr;
 			s_as_	  = m3_as_;
 			s_rw	  = m3_rw;
 			s_wr_data = m3_wr_data;
-		end else begin							 // デフォルト値
+		end else begin							 // clean status 
 			s_addr	  = `WORD_ADDR_W'h0;
 			s_as_	  = `DISABLE_;
 			s_rw	  = `READ;
