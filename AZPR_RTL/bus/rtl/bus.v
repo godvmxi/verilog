@@ -4,7 +4,7 @@
  -- DESCRIPTION : bus
  -- ----------------------------------------------------------------------------
  -- Revision  Date		  Coding_by	 Comment
- -- 1.0.0	  2011/06/27  suito		 
+ -- 1.0.0	  2011/06/27  suito
  -- ============================================================================
 */
 
@@ -13,194 +13,194 @@
 `include "stddef.h"
 `include "global_config.h"
 
-/********** 個別ヘッダファイル **********/
+/********** bus define inlcude **********/
 `include "bus.h"
 
-/********** モジュール **********/
+/********** module define **********/
 module bus (
-	/********** クロック & リセット **********/
-	input  wire				   clk,		   // クロック
-	input  wire				   reset,	   // 非同期リセット
-	/********** バスマスタ信号 **********/
-	// バスマスタ共通信号
-	output wire [`WordDataBus] m_rd_data,  // 読み出しデータ
-	output wire				   m_rdy_,	   // レディ
-	// バスマスタ0番
-	input  wire				   m0_req_,	   // バスリクエスト
-	input  wire [`WordAddrBus] m0_addr,	   // アドレス
-	input  wire				   m0_as_,	   // アドレスストローブ
-	input  wire				   m0_rw,	   // 読み／書き
-	input  wire [`WordDataBus] m0_wr_data, // 書き込みデータ
-	output wire				   m0_grnt_,   // バスグラント
-	// バスマスタ1番
-	input  wire				   m1_req_,	   // バスリクエスト
-	input  wire [`WordAddrBus] m1_addr,	   // アドレス
-	input  wire				   m1_as_,	   // アドレスストローブ
-	input  wire				   m1_rw,	   // 読み／書き
-	input  wire [`WordDataBus] m1_wr_data, // 書き込みデータ
-	output wire				   m1_grnt_,   // バスグラント
-	// バスマスタ2番
-	input  wire				   m2_req_,	   // バスリクエスト
-	input  wire [`WordAddrBus] m2_addr,	   // アドレス
-	input  wire				   m2_as_,	   // アドレスストローブ
-	input  wire				   m2_rw,	   // 読み／書き
-	input  wire [`WordDataBus] m2_wr_data, // 書き込みデータ
-	output wire				   m2_grnt_,   // バスグラント
-	// バスマスタ3番
-	input  wire				   m3_req_,	   // バスリクエスト
-	input  wire [`WordAddrBus] m3_addr,	   // アドレス
-	input  wire				   m3_as_,	   // アドレスストローブ
-	input  wire				   m3_rw,	   // 読み／書き
-	input  wire [`WordDataBus] m3_wr_data, // 書き込みデータ
-	output wire				   m3_grnt_,   // バスグラント
-	/********** バススレーブ信号 **********/
-	// バススレーブ共通信号
-	output wire [`WordAddrBus] s_addr,	   // アドレス
-	output wire				   s_as_,	   // アドレスストローブ
-	output wire				   s_rw,	   // 読み／書き
-	output wire [`WordDataBus] s_wr_data,  // 書き込みデータ
-	// バススレーブ0番
-	input  wire [`WordDataBus] s0_rd_data, // 読み出しデータ
-	input  wire				   s0_rdy_,	   // レディ
-	output wire				   s0_cs_,	   // チップセレクト
-	// バススレーブ1番
-	input  wire [`WordDataBus] s1_rd_data, // 読み出しデータ
-	input  wire				   s1_rdy_,	   // レディ
-	output wire				   s1_cs_,	   // チップセレクト
-	// バススレーブ2番
-	input  wire [`WordDataBus] s2_rd_data, // 読み出しデータ
-	input  wire				   s2_rdy_,	   // レディ
-	output wire				   s2_cs_,	   // チップセレクト
-	// バススレーブ3番
-	input  wire [`WordDataBus] s3_rd_data, // 読み出しデータ
-	input  wire				   s3_rdy_,	   // レディ
-	output wire				   s3_cs_,	   // チップセレクト
-	// バススレーブ4番
-	input  wire [`WordDataBus] s4_rd_data, // 読み出しデータ
-	input  wire				   s4_rdy_,	   // レディ
-	output wire				   s4_cs_,	   // チップセレクト
-	// バススレーブ5番
-	input  wire [`WordDataBus] s5_rd_data, // 読み出しデータ
-	input  wire				   s5_rdy_,	   // レディ
-	output wire				   s5_cs_,	   // チップセレクト
-	// バススレーブ6番
-	input  wire [`WordDataBus] s6_rd_data, // 読み出しデータ
-	input  wire				   s6_rdy_,	   // レディ
-	output wire				   s6_cs_,	   // チップセレクト
-	// バススレーブ7番
-	input  wire [`WordDataBus] s7_rd_data, // 読み出しデータ
-	input  wire				   s7_rdy_,	   // レディ
-	output wire				   s7_cs_	   // チップセレクト
+	/********** input signal  **********/
+	input  wire				   clk,		   //
+	input  wire				   reset,	   //
+	/********** output signal **********/
+	//master comon siganls for read
+	output wire [`WordDataBus] m_rd_data,  //
+	output wire				   m_rdy_,	   //
+	// master 0
+	input  wire				   m0_req_,	   // request siganl of master 0 's aribitration
+	input  wire [`WordAddrBus] m0_addr,	   // address of master 0
+	input  wire				   m0_as_,	   // address gating siganl of master 0
+	input  wire				   m0_rw,	   	// read  write siganl of master 0
+	input  wire [`WordDataBus] m0_wr_data, // read wirte data of mater 0
+	output wire				   m0_grnt_,   // ok signal of master 0 's aribitration
+	// master 1
+	input  wire				   m1_req_,	   //
+	input  wire [`WordAddrBus] m1_addr,	   //
+	input  wire				   m1_as_,	   //
+	input  wire				   m1_rw,	   //
+	input  wire [`WordDataBus] m1_wr_data, //
+	output wire				   m1_grnt_,   //
+	//master 2
+	input  wire				   m2_req_,	   //
+	input  wire [`WordAddrBus] m2_addr,	   //
+	input  wire				   m2_as_,	   //
+	input  wire				   m2_rw,	   //
+	input  wire [`WordDataBus] m2_wr_data, //
+	output wire				   m2_grnt_,   //
+	//master 3
+	input  wire				   m3_req_,	   //
+	input  wire [`WordAddrBus] m3_addr,	   //
+	input  wire				   m3_as_,	   //
+	input  wire				   m3_rw,	   //
+	input  wire [`WordDataBus] m3_wr_data, //
+	output wire				   m3_grnt_,   //
+	/********** slave device signals **********/
+	// slave common signal
+	output wire [`WordAddrBus] s_addr,	   // slave device addresss
+	output wire				   s_as_,	   // slave device address gating signal
+	output wire				   s_rw,	   // slave decice read wirte signal
+	output wire [`WordDataBus] s_wr_data,  // slave device write data signal
+	// slave 0
+	input  wire [`WordDataBus] s0_rd_data, // slave read data
+	input  wire				   s0_rdy_,	   // slave read data ready
+	output wire				   s0_cs_,	   // slave chip enable
+	// slave 1
+	input  wire [`WordDataBus] s1_rd_data, //
+	input  wire				   s1_rdy_,	   //
+	output wire				   s1_cs_,	   //
+	// slave 2
+	input  wire [`WordDataBus] s2_rd_data, //
+	input  wire				   s2_rdy_,	   //
+	output wire				   s2_cs_,	   //
+	// slave 3
+	input  wire [`WordDataBus] s3_rd_data, //
+	input  wire				   s3_rdy_,	   //
+	output wire				   s3_cs_,	   //
+	// slave 4
+	input  wire [`WordDataBus] s4_rd_data, //
+	input  wire				   s4_rdy_,	   //
+	output wire				   s4_cs_,	   //
+	// slave 5
+	input  wire [`WordDataBus] s5_rd_data, //
+	input  wire				   s5_rdy_,	   //
+	output wire				   s5_cs_,	   //
+	// slave 6
+	input  wire [`WordDataBus] s6_rd_data, //
+	input  wire				   s6_rdy_,	   //
+	output wire				   s6_cs_,	   //
+	// slave 7
+	input  wire [`WordDataBus] s7_rd_data, //
+	input  wire				   s7_rdy_,	   //
+	output wire				   s7_cs_	   //
 );
 
-	/********** バスアービタ **********/
+	/********** bus arbiter  **********/
 	bus_arbiter bus_arbiter (
-		/********** クロック & リセット **********/
-		.clk		(clk),		  // クロック
-		.reset		(reset),	  // 非同期リセット
-		/********** アービトレーション信号 **********/
-		// バスマスタ0番
-		.m0_req_	(m0_req_),	  // バスリクエスト
-		.m0_grnt_	(m0_grnt_),	  // バスグラント
-		// バスマスタ1番
-		.m1_req_	(m1_req_),	  // バスリクエスト
-		.m1_grnt_	(m1_grnt_),	  // バスグラント
-		// バスマスタ2番
-		.m2_req_	(m2_req_),	  // バスリクエスト
-		.m2_grnt_	(m2_grnt_),	  // バスグラント
-		// バスマスタ3番
-		.m3_req_	(m3_req_),	  // バスリクエスト
-		.m3_grnt_	(m3_grnt_)	  // バスグラント
+		/********** clk && reset **********/
+		.clk		(clk),		  //
+		.reset		(reset),	  //
+		/********** request and ack to master n **********/
+		// master 0
+		.m0_req_	(m0_req_),	  //
+		.m0_grnt_	(m0_grnt_),	  //
+		// master 1
+		.m1_req_	(m1_req_),	  //
+		.m1_grnt_	(m1_grnt_),	  //
+		//  master 2
+		.m2_req_	(m2_req_),	  //
+		.m2_grnt_	(m2_grnt_),	  //
+		//  master 3
+		.m3_req_	(m3_req_),	  //
+		.m3_grnt_	(m3_grnt_)	  //
 	);
 
-	/********** バスマスタマルチプレクサ **********/
+	/********** master mux **********/
 	bus_master_mux bus_master_mux (
-		/********** バスマスタ信号 **********/
-		// バスマスタ0番
-		.m0_addr	(m0_addr),	  // アドレス
-		.m0_as_		(m0_as_),	  // アドレスストローブ
-		.m0_rw		(m0_rw),	  // 読み／書き
-		.m0_wr_data (m0_wr_data), // 書き込みデータ
-		.m0_grnt_	(m0_grnt_),	  // バスグラント
-		// バスマスタ1番
-		.m1_addr	(m1_addr),	  // アドレス
-		.m1_as_		(m1_as_),	  // アドレスストローブ
-		.m1_rw		(m1_rw),	  // 読み／書き
-		.m1_wr_data (m1_wr_data), // 書き込みデータ
-		.m1_grnt_	(m1_grnt_),	  // バスグラント
-		// バスマスタ2番
-		.m2_addr	(m2_addr),	  // アドレス
-		.m2_as_		(m2_as_),	  // アドレスストローブ
-		.m2_rw		(m2_rw),	  // 読み／書き
-		.m2_wr_data (m2_wr_data), // 書き込みデータ
-		.m2_grnt_	(m2_grnt_),	  // バスグラント
-		// バスマスタ3番
-		.m3_addr	(m3_addr),	  // アドレス
-		.m3_as_		(m3_as_),	  // アドレスストローブ
-		.m3_rw		(m3_rw),	  // 読み／書き
-		.m3_wr_data (m3_wr_data), // 書き込みデータ
-		.m3_grnt_	(m3_grnt_),	  // バスグラント
-		/********** バススレーブ共通信号 **********/
-		.s_addr		(s_addr),	  // アドレス
-		.s_as_		(s_as_),	  // アドレスストローブ
-		.s_rw		(s_rw),		  // 読み／書き
-		.s_wr_data	(s_wr_data)	  // 書き込みデータ
+		/********** **********/
+		// master 0
+		.m0_addr	(m0_addr),	  // address
+		.m0_as_		(m0_as_),	  // address valid
+		.m0_rw		(m0_rw),	  // read write select
+		.m0_wr_data (m0_wr_data), // write data
+		.m0_grnt_	(m0_grnt_),	  // master 0 arbiter control
+		// master 1
+		.m1_addr	(m1_addr),	  //
+		.m1_as_		(m1_as_),	  //
+		.m1_rw		(m1_rw),	  //
+		.m1_wr_data (m1_wr_data), //
+		.m1_grnt_	(m1_grnt_),	  //
+		//
+		.m2_addr	(m2_addr),	  //
+		.m2_as_		(m2_as_),	  //
+		.m2_rw		(m2_rw),	  //
+		.m2_wr_data (m2_wr_data), //
+		.m2_grnt_	(m2_grnt_),	  //
+		//
+		.m3_addr	(m3_addr),	  //
+		.m3_as_		(m3_as_),	  //
+		.m3_rw		(m3_rw),	  //
+		.m3_wr_data (m3_wr_data), //
+		.m3_grnt_	(m3_grnt_),	  //
+		/**********  **********/
+		.s_addr		(s_addr),	  // address output
+		.s_as_		(s_as_),	  // address valid output
+		.s_rw		(s_rw),		  //   read write output
+		.s_wr_data	(s_wr_data)	  // write data output
 	);
 
-	/********** アドレスデコーダ **********/
+	/********** bus address decider **********/
 	bus_addr_dec bus_addr_dec (
-		/********** アドレス **********/
-		.s_addr		(s_addr),	  // アドレス
-		/********** チップセレクト **********/
-		.s0_cs_		(s0_cs_),	  // バススレーブ0番
-		.s1_cs_		(s1_cs_),	  // バススレーブ1番
-		.s2_cs_		(s2_cs_),	  // バススレーブ2番
-		.s3_cs_		(s3_cs_),	  // バススレーブ3番
-		.s4_cs_		(s4_cs_),	  // バススレーブ4番
-		.s5_cs_		(s5_cs_),	  // バススレーブ5番
-		.s6_cs_		(s6_cs_),	  // バススレーブ6番
-		.s7_cs_		(s7_cs_)	  // バススレーブ7番
+		/**********  **********/
+		.s_addr		(s_addr),	  // slave device address
+		/**********  **********/
+		.s0_cs_		(s0_cs_),	  // slave 0 enable
+		.s1_cs_		(s1_cs_),	  //
+		.s2_cs_		(s2_cs_),	  //
+		.s3_cs_		(s3_cs_),	  //
+		.s4_cs_		(s4_cs_),	  //
+		.s5_cs_		(s5_cs_),	  //
+		.s6_cs_		(s6_cs_),	  //
+		.s7_cs_		(s7_cs_)	  //
 	);
 
-	/********** バススレーブマルチプレクサ **********/
+	/********** bus slave mux **********/
 	bus_slave_mux bus_slave_mux (
-		/********** チップセレクト **********/
-		.s0_cs_		(s0_cs_),	  // バススレーブ0番
-		.s1_cs_		(s1_cs_),	  // バススレーブ1番
-		.s2_cs_		(s2_cs_),	  // バススレーブ2番
-		.s3_cs_		(s3_cs_),	  // バススレーブ3番
-		.s4_cs_		(s4_cs_),	  // バススレーブ4番
-		.s5_cs_		(s5_cs_),	  // バススレーブ5番
-		.s6_cs_		(s6_cs_),	  // バススレーブ6番
-		.s7_cs_		(s7_cs_),	  // バススレーブ7番
-		/********** バススレーブ信号 **********/
-		// バススレーブ0番
-		.s0_rd_data (s0_rd_data), // 読み出しデータ
-		.s0_rdy_	(s0_rdy_),	  // レディ
-		// バススレーブ1番
-		.s1_rd_data (s1_rd_data), // 読み出しデータ
-		.s1_rdy_	(s1_rdy_),	  // レディ
-		// バススレーブ2番
-		.s2_rd_data (s2_rd_data), // 読み出しデータ
-		.s2_rdy_	(s2_rdy_),	  // レディ
-		// バススレーブ3番
-		.s3_rd_data (s3_rd_data), // 読み出しデータ
-		.s3_rdy_	(s3_rdy_),	  // レディ
-		// バススレーブ4番
-		.s4_rd_data (s4_rd_data), // 読み出しデータ
-		.s4_rdy_	(s4_rdy_),	  // レディ
-		// バススレーブ5番
-		.s5_rd_data (s5_rd_data), // 読み出しデータ
-		.s5_rdy_	(s5_rdy_),	  // レディ
-		// バススレーブ6番
-		.s6_rd_data (s6_rd_data), // 読み出しデータ
-		.s6_rdy_	(s6_rdy_),	  // レディ
-		// バススレーブ7番
-		.s7_rd_data (s7_rd_data), // 読み出しデータ
-		.s7_rdy_	(s7_rdy_),	  // レディ
-		/********** バスマスタ共通信号 **********/
-		.m_rd_data	(m_rd_data),  // 読み出しデータ
-		.m_rdy_		(m_rdy_)	  // レディ
+		/**********  slave x enable input **********/
+		.s0_cs_		(s0_cs_),	  // slave 0
+		.s1_cs_		(s1_cs_),	  //
+		.s2_cs_		(s2_cs_),	  //
+		.s3_cs_		(s3_cs_),	  //
+		.s4_cs_		(s4_cs_),	  //
+		.s5_cs_		(s5_cs_),	  //
+		.s6_cs_		(s6_cs_),	  //
+		.s7_cs_		(s7_cs_),	  //
+		/********** slave x read && ready signal **********/
+		// slave 0
+		.s0_rd_data (s0_rd_data), // read data
+		.s0_rdy_	(s0_rdy_),	  // read ready
+		//
+		.s1_rd_data (s1_rd_data), //
+		.s1_rdy_	(s1_rdy_),	  //
+		//
+		.s2_rd_data (s2_rd_data), //
+		.s2_rdy_	(s2_rdy_),	  //
+		//
+		.s3_rd_data (s3_rd_data), //
+		.s3_rdy_	(s3_rdy_),	  //
+		//
+		.s4_rd_data (s4_rd_data), //
+		.s4_rdy_	(s4_rdy_),	  //
+		//
+		.s5_rd_data (s5_rd_data), //
+		.s5_rdy_	(s5_rdy_),	  //
+		//
+		.s6_rd_data (s6_rd_data), //
+		.s6_rdy_	(s6_rdy_),	  //
+		//
+		.s7_rd_data (s7_rd_data), //
+		.s7_rdy_	(s7_rdy_),	  //
+		/********** read data output  **********/
+		.m_rd_data	(m_rd_data),  //
+		.m_rdy_		(m_rdy_)	  // 
 	);
 
 endmodule
