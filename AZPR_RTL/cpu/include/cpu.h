@@ -4,7 +4,7 @@
  -- DESCRIPTION : CPU define
  -- ----------------------------------------------------------------------------
  -- Revision  Date		  Coding_by	 Comment
- -- 1.0.0	  2011/06/27  suito		 �V�K�쐬
+ -- 1.0.0	  2011/06/27  suito		 
  -- ============================================================================
 */
 
@@ -39,75 +39,75 @@
 	// memory opcode define
 	`define MEM_OP_W			 2	  // memory opcode width
 	`define MemOpBus			 1:0  // memory opcode bus
-	// �I�y�R�[�h
+	//
 	`define MEM_OP_NOP			 2'h0 // No Operation
 	`define MEM_OP_LDW			 2'h1 // load word
 	`define MEM_OP_STW			 2'h2 // store word
 	/********** ctrl code define  **********/
 	//
-	`define CTRL_OP_W			 2	  // ctrl code bus width 
-	`define CtrlOpBus			 1:0  // �����I�y�R�[�h�o�X
-	// �I�y�R�[�h
+	`define CTRL_OP_W			 2	  // ctrl code bus width
+	`define CtrlOpBus			 1:0  // ctrl code bus
+	//
 	`define CTRL_OP_NOP			 2'h0 // No Operation
-	`define CTRL_OP_WRCR		 2'h1 // ���䃌�W�X�^�ւ̏�������
-	`define CTRL_OP_EXRT		 2'h2 // ���O�����̕��A
+	`define CTRL_OP_WRCR		 2'h1 // ctrl op write ctrl register
+	`define CTRL_OP_EXRT		 2'h2 // return from exception
 
-	/********** ���s���[�h **********/
-	// �o�X
-	`define CPU_EXE_MODE_W		 1	  // ���s���[�h��
-	`define CpuExeModeBus		 0:0  // ���s���[�h�o�X
-	// ���s���[�h
-	`define CPU_KERNEL_MODE		 1'b0 // �J�[�l�����[�h
-	`define CPU_USER_MODE		 1'b1 // ���[�U���[�h
-
-//------------------------------------------------------------------------------
-// ���䃌�W�X�^
-//------------------------------------------------------------------------------
-	/********** �A�h���X�}�b�v **********/
-	`define CREG_ADDR_STATUS	 5'h0  // �X�e�[�^�X
-	`define CREG_ADDR_PRE_STATUS 5'h1  // �O�̃X�e�[�^�X
-	`define CREG_ADDR_PC		 5'h2  // �v���O�����J�E���^
-	`define CREG_ADDR_EPC		 5'h3  // ���O�v���O�����J�E���^
-	`define CREG_ADDR_EXP_VECTOR 5'h4  // ���O�x�N�^
-	`define CREG_ADDR_CAUSE		 5'h5  // ���O���򃌃W�X�^
-	`define CREG_ADDR_INT_MASK	 5'h6  // ���荞�݃}�X�N
-	`define CREG_ADDR_IRQ		 5'h7  // ���荞�ݗv��
-	// �ǂݏo�����p�̈�
-	`define CREG_ADDR_ROM_SIZE	 5'h1d // ROM�T�C�Y
-	`define CREG_ADDR_SPM_SIZE	 5'h1e // SPM�T�C�Y
-	`define CREG_ADDR_CPU_INFO	 5'h1f // CPU����
-	/********** �r�b�g�}�b�v **********/
-	`define CregExeModeLoc		 0	   // ���s���[�h�̈ʒu
-	`define CregIntEnableLoc	 1	   // ���荞�ݗL���̈ʒu
-	`define CregExpCodeLoc		 2:0   // ���O�R�[�h�̈ʒu
-	`define CregDlyFlagLoc		 3	   // �f�B���C�X���b�g�t���O�̈ʒu
+	/**********  cpu mode define  **********/
+	//
+	`define CPU_EXE_MODE_W		 1	  // cpu execute mode width
+	`define CpuExeModeBus		 0:0  // cpu execute mode bus
+	//
+	`define CPU_KERNEL_MODE		 1'b0 // cpu kernel mode
+	`define CPU_USER_MODE		 1'b1 // cpu user mode
 
 //------------------------------------------------------------------------------
-// �o�X�C���^�t�F�[�X
+//
 //------------------------------------------------------------------------------
-	/********** �o�X�C���^�t�F�[�X�̏��� **********/
-	// �o�X
-	`define BusIfStateBus		 1:0   // ���ԃo�X
-	// ����
-	`define BUS_IF_STATE_IDLE	 2'h0  // �A�C�h��
-	`define BUS_IF_STATE_REQ	 2'h1  // �o�X���N�G�X�g
-	`define BUS_IF_STATE_ACCESS	 2'h2  // �o�X�A�N�Z�X
-	`define BUS_IF_STATE_STALL	 2'h3  // �X�g�[��
+	/********** CREG address define  **********/
+	`define CREG_ADDR_STATUS	 5'h0  // address status
+	`define CREG_ADDR_PRE_STATUS 5'h1  // address pre status
+	`define CREG_ADDR_PC		 5'h2  //   PC
+	`define CREG_ADDR_EPC		 5'h3  //   exception count
+	`define CREG_ADDR_EXP_VECTOR 5'h4  // exception Vector
+	`define CREG_ADDR_CAUSE		 5'h5  // exception cause
+	`define CREG_ADDR_INT_MASK	 5'h6  //irq mask
+	`define CREG_ADDR_IRQ		 5'h7  // irq
+	//
+	`define CREG_ADDR_ROM_SIZE	 5'h1d // Rom size
+	`define CREG_ADDR_SPM_SIZE	 5'h1e // SPM Size
+	`define CREG_ADDR_CPU_INFO	 5'h1f // CPU para
+	/**********  **********/
+	`define CregExeModeLoc		 0	   // execute mode location
+	`define CregIntEnableLoc	 1	   // interrupt enable location
+	`define CregExpCodeLoc		 2:0   // exception code location
+	`define CregDlyFlagLoc		 3	   // delay flag location
+
+//------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+	/********** bus interface define  **********/
+	//
+	`define BusIfStateBus		 1:0   // bus interface status bus
+	//
+	`define BUS_IF_STATE_IDLE	 2'h0  // bus interface status idle
+	`define BUS_IF_STATE_REQ	 2'h1  // request
+	`define BUS_IF_STATE_ACCESS	 2'h2  // access
+	`define BUS_IF_STATE_STALL	 2'h3  // stall pause
 
 //------------------------------------------------------------------------------
 // MISC
 //------------------------------------------------------------------------------
-	/********** �x�N�^ **********/
-	`define RESET_VECTOR		 30'h0 // ���Z�b�g�x�N�^
-	/********** �V�t�g�� **********/
-	`define ShAmountBus			 4:0   // �V�t�g�ʃo�X
-	`define ShAmountLoc			 4:0   // �V�t�g�ʂ̈ʒu
+	/**********  **********/
+	`define RESET_VECTOR		 30'h0 // reset vector
+	/**********  **********/
+	`define ShAmountBus			 4:0   // shift amount bus
+	`define ShAmountLoc			 4:0   // shift amount location
 
-	/********** CPU���� *********/
-	`define RELEASE_YEAR		 8'd41 // �쐬�N (YYYY - 1970)
-	`define RELEASE_MONTH		 8'd7  // �쐬��
-	`define RELEASE_VERSION		 8'd1  // �o�[�W����
-	`define RELEASE_REVISION	 8'd0  // ���r�W����
+	/********** CPU info  *********/
+	`define RELEASE_YEAR		 8'd41 //  (YYYY - 1970)
+	`define RELEASE_MONTH		 8'd7  //
+	`define RELEASE_VERSION		 8'd1  //
+	`define RELEASE_REVISION	 8'd0  //
 
 
 `endif
