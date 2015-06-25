@@ -1,63 +1,63 @@
-/* 
+/*
  -- ============================================================================
  -- FILE NAME	: gpr.v
- -- DESCRIPTION : ”Ä—pƒŒƒWƒXƒ^
+ -- DESCRIPTION : general register ,include two read port and one write port
  -- ----------------------------------------------------------------------------
  -- Revision  Date		  Coding_by	 Comment
- -- 1.0.0	  2011/06/27  suito		 V‹Kì¬
+ -- 1.0.0	  2011/06/27  suito
  -- ============================================================================
 */
 
-/********** ‹¤’Êƒwƒbƒ_ƒtƒ@ƒCƒ‹ **********/
+/********** common include  **********/
 `include "nettype.h"
 `include "global_config.h"
 `include "stddef.h"
 
-/********** ŒÂ•Êƒwƒbƒ_ƒtƒ@ƒCƒ‹ **********/
+/********** cpu include  **********/
 `include "cpu.h"
 
-/********** ƒ‚ƒWƒ…[ƒ‹ **********/
+/********** module define **********/
 module gpr (
-	/********** ƒNƒƒbƒN & ƒŠƒZƒbƒg **********/
-	input  wire				   clk,				   // ƒNƒƒbƒN
-	input  wire				   reset,			   // ”ñ“¯ŠúƒŠƒZƒbƒg
-	/********** “Ç‚İo‚µƒ|[ƒg 0 **********/
-	input  wire [`RegAddrBus]  rd_addr_0,		   // “Ç‚İo‚µƒAƒhƒŒƒX
-	output wire [`WordDataBus] rd_data_0,		   // “Ç‚İo‚µƒf[ƒ^
-	/********** “Ç‚İo‚µƒ|[ƒg 1 **********/
-	input  wire [`RegAddrBus]  rd_addr_1,		   // “Ç‚İo‚µƒAƒhƒŒƒX
-	output wire [`WordDataBus] rd_data_1,		   // “Ç‚İo‚µƒf[ƒ^
-	/********** ‘‚«‚İƒ|[ƒg **********/
-	input  wire				   we_,				   // ‘‚«‚İ—LŒø
-	input  wire [`RegAddrBus]  wr_addr,			   // ‘‚«‚İƒAƒhƒŒƒX
-	input  wire [`WordDataBus] wr_data			   // ‘‚«‚İƒf[ƒ^
+	/********** clk & reset**********/
+	input  wire				   clk,				   //
+	input  wire				   reset,			   //
+	/********** read 0 **********/
+	input  wire [`RegAddrBus]  rd_addr_0,		   // address
+	output wire [`WordDataBus] rd_data_0,		   // data
+	/********** read 1 **********/
+	input  wire [`RegAddrBus]  rd_addr_1,		   //
+	output wire [`WordDataBus] rd_data_1,		   //
+	/********** write**********/
+	input  wire				   we_,				   //
+	input  wire [`RegAddrBus]  wr_addr,			   // address
+	input  wire [`WordDataBus] wr_data			   // data
 );
 
-	/********** “à•”M† **********/
-	reg [`WordDataBus]		   gpr [`REG_NUM-1:0]; // ƒŒƒWƒXƒ^”z—ñ
-	integer					   i;				   // ƒCƒeƒŒ[ƒ^
+	/**********  **********/
+	reg [`WordDataBus]		   gpr [`REG_NUM-1:0]; // regist array
+	integer					   i;				   //
 
-	/********** “Ç‚İo‚µƒAƒNƒZƒX (Write After Read) **********/
-	// “Ç‚İo‚µƒ|[ƒg 0
-	assign rd_data_0 = ((we_ == `ENABLE_) && (wr_addr == rd_addr_0)) ? 
+	/********** (Write After Read) **********/
+	// ï¿½Ç‚İoï¿½ï¿½ï¿½|ï¿½[ï¿½g 0
+	assign rd_data_0 = ((we_ == `ENABLE_) && (wr_addr == rd_addr_0)) ?
 					   wr_data : gpr[rd_addr_0];
-	// “Ç‚İo‚µƒ|[ƒg 1
-	assign rd_data_1 = ((we_ == `ENABLE_) && (wr_addr == rd_addr_1)) ? 
+	// ï¿½Ç‚İoï¿½ï¿½ï¿½|ï¿½[ï¿½g 1
+	assign rd_data_1 = ((we_ == `ENABLE_) && (wr_addr == rd_addr_1)) ?
 					   wr_data : gpr[rd_addr_1];
-   
-	/********** ‘‚«‚İƒAƒNƒZƒX **********/
+
+	/********** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İƒAï¿½Nï¿½Zï¿½X **********/
 	always @ (posedge clk or `RESET_EDGE reset) begin
-		if (reset == `RESET_ENABLE) begin 
-			/* ”ñ“¯ŠúƒŠƒZƒbƒg */
+		if (reset == `RESET_ENABLE) begin
+			/* ï¿½ñ“¯Šï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½g */
 			for (i = 0; i < `REG_NUM; i = i + 1) begin
 				gpr[i]		 <= #1 `WORD_DATA_W'h0;
 			end
 		end else begin
-			/* ‘‚«‚İƒAƒNƒZƒX */
-			if (we_ == `ENABLE_) begin 
+			/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İƒAï¿½Nï¿½Zï¿½X */
+			if (we_ == `ENABLE_) begin
 				gpr[wr_addr] <= #1 wr_data;
 			end
 		end
 	end
 
-endmodule 
+endmodule
