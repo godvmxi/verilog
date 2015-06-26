@@ -38,22 +38,22 @@ module gpr (
 	integer					   i;				   //
 
 	/********** (Write After Read) **********/
-	// �ǂݏo���|�[�g 0
+	//  0
 	assign rd_data_0 = ((we_ == `ENABLE_) && (wr_addr == rd_addr_0)) ?
 					   wr_data : gpr[rd_addr_0];
-	// �ǂݏo���|�[�g 1
+	//  1
 	assign rd_data_1 = ((we_ == `ENABLE_) && (wr_addr == rd_addr_1)) ?
 					   wr_data : gpr[rd_addr_1];
 
-	/********** �������݃A�N�Z�X **********/
+	/**********  **********/
 	always @ (posedge clk or `RESET_EDGE reset) begin
 		if (reset == `RESET_ENABLE) begin
-			/* �񓯊����Z�b�g */
+			/*  */
 			for (i = 0; i < `REG_NUM; i = i + 1) begin
 				gpr[i]		 <= #1 `WORD_DATA_W'h0;
 			end
 		end else begin
-			/* �������݃A�N�Z�X */
+			/*  */
 			if (we_ == `ENABLE_) begin
 				gpr[wr_addr] <= #1 wr_data;
 			end
