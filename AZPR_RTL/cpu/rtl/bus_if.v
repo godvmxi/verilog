@@ -4,7 +4,7 @@
  -- DESCRIPTION : bus interface
  -- ----------------------------------------------------------------------------
  -- Revision  Date		  Coding_by	 Comment
- -- 1.0.0	  2011/06/27  suito		 
+ -- 1.0.0	  2011/06/27  suito
  -- ============================================================================
 */
 
@@ -20,97 +20,97 @@
 /********** module if **********/
 module bus_if (
 	/********** clk & reset input **********/
-	input  wire				   clk,			   // 
-	input  wire				   reset,		   // 
-	/********** ƒpƒCƒvƒ‰ƒCƒ“§ŒäM† **********/
-	input  wire				   stall,		   // ????
-	input  wire				   flush,		   // ????
-	output reg				   busy,		   // output ? for who
-	/********** CPUƒCƒ“ƒ^ƒtƒF[ƒX **********/
-	input  wire [`WordAddrBus] addr,		   // ƒAƒhƒŒƒX
-	input  wire				   as_,			   // ƒAƒhƒŒƒX—LŒø
-	input  wire				   rw,			   // “Ç‚İ^‘‚«
-	input  wire [`WordDataBus] wr_data,		   // ‘‚«‚İƒf[ƒ^
-	output reg	[`WordDataBus] rd_data,		   // “Ç‚İo‚µƒf[ƒ^
-	/********** SPMƒCƒ“ƒ^ƒtƒF[ƒX **********/
-	input  wire [`WordDataBus] spm_rd_data,	   // “Ç‚İo‚µƒf[ƒ^
-	output wire [`WordAddrBus] spm_addr,	   // ƒAƒhƒŒƒX
-	output reg				   spm_as_,		   // ƒAƒhƒŒƒXƒXƒgƒ[ƒu
-	output wire				   spm_rw,		   // “Ç‚İ^‘‚«
-	output wire [`WordDataBus] spm_wr_data,	   // ‘‚«‚İƒf[ƒ^
-	/********** ƒoƒXƒCƒ“ƒ^ƒtƒF[ƒX **********/
-	input  wire [`WordDataBus] bus_rd_data,	   // “Ç‚İo‚µƒf[ƒ^
-	input  wire				   bus_rdy_,	   // ƒŒƒfƒB
-	input  wire				   bus_grnt_,	   // ƒoƒXƒOƒ‰ƒ“ƒg
-	output reg				   bus_req_,	   // ƒoƒXƒŠƒNƒGƒXƒg
-	output reg	[`WordAddrBus] bus_addr,	   // ƒAƒhƒŒƒX
-	output reg				   bus_as_,		   // ƒAƒhƒŒƒXƒXƒgƒ[ƒu
-	output reg				   bus_rw,		   // “Ç‚İ^‘‚«
-	output reg	[`WordDataBus] bus_wr_data	   // ‘‚«‚İƒf[ƒ^
+	input  wire				   clk,			   //
+	input  wire				   reset,		   //
+	/********** flow control **********/
+	input  wire				   stall,		   // delay signal
+	input  wire				   flush,		   // flush signal
+	output reg				   busy,		   // bus busy
+	/********** CPU  interface **********/
+	input  wire [`WordAddrBus] addr,		   // address
+	input  wire				   as_,			   // address gating
+	input  wire				   rw,			   //  write read flag
+	input  wire [`WordDataBus] wr_data,		   // write data
+	output reg	[`WordDataBus] rd_data,		   //  read data^
+	/********** SPM interface **********/
+	input  wire [`WordDataBus] spm_rd_data,	   // spm read data
+	output wire [`WordAddrBus] spm_addr,	   // spm address
+	output reg				   spm_as_,		   // spm address gating
+	output wire				   spm_rw,		   // spm read write flag
+	output wire [`WordDataBus] spm_wr_data,	   // spm write data
+	/********** bus interface  **********/
+	input  wire [`WordDataBus] bus_rd_data,	   // bus read data
+	input  wire				   bus_rdy_,	   // bus read ready
+	input  wire				   bus_grnt_,	   // bus use agree
+	output reg				   bus_req_,	   // bus use request
+	output reg	[`WordAddrBus] bus_addr,	   // bus address
+	output reg				   bus_as_,		   // bus address gating
+	output reg				   bus_rw,		   // bus read write flag
+	output reg	[`WordDataBus] bus_wr_data	   // bus write data
 );
 
-	/********** “à•”M† **********/
-	reg	 [`BusIfStateBus]	   state;		   // ƒoƒXƒCƒ“ƒ^ƒtƒF[ƒX‚Ìó‘Ô
-	reg	 [`WordDataBus]		   rd_buf;		   // “Ç‚İo‚µƒoƒbƒtƒ@
-	wire [`BusSlaveIndexBus]   s_index;		   // ƒoƒXƒXƒŒ[ƒuƒCƒ“ƒfƒbƒNƒX
+	/********** internal signals **********/
+	reg	 [`BusIfStateBus]	   state;		   // bus interface state
+	reg	 [`WordDataBus]		   rd_buf;		   // bus read buffer
+	wire [`BusSlaveIndexBus]   s_index;		   // bus slave index
 
-	/********** ƒoƒXƒXƒŒ[ƒu‚ÌƒCƒ“ƒfƒbƒNƒX **********/
+	/********** get bus slave index **********/
 	assign s_index	   = addr[`BusSlaveIndexLoc];
 
-	/********** o—Í‚ÌƒAƒTƒCƒ“ **********/
+	/********** ï¿½oï¿½Í‚ÌƒAï¿½Tï¿½Cï¿½ï¿½ **********/
 	assign spm_addr	   = addr;
 	assign spm_rw	   = rw;
 	assign spm_wr_data = wr_data;
-						 
-	/********** ƒƒ‚ƒŠƒAƒNƒZƒX‚Ì§Œä **********/
+
+	/********** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Nï¿½Zï¿½Xï¿½Ìï¿½ï¿½ï¿½ **********/
 	always @(*) begin
-		/* ƒfƒtƒHƒ‹ƒg’l */
+		/* ï¿½fï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½l */
 		rd_data	 = `WORD_DATA_W'h0;
 		spm_as_	 = `DISABLE_;
 		busy	 = `DISABLE;
-		/* ƒoƒXƒCƒ“ƒ^ƒtƒF[ƒX‚Ìó‘Ô */
+		/* ï¿½oï¿½Xï¿½Cï¿½ï¿½ï¿½^ï¿½tï¿½Fï¿½[ï¿½Xï¿½Ìï¿½ï¿½ï¿½ */
 		case (state)
-			`BUS_IF_STATE_IDLE	 : begin // ƒAƒCƒhƒ‹
-				/* ƒƒ‚ƒŠƒAƒNƒZƒX */
+			`BUS_IF_STATE_IDLE	 : begin // ï¿½Aï¿½Cï¿½hï¿½ï¿½
+				/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Nï¿½Zï¿½X */
 				if ((flush == `DISABLE) && (as_ == `ENABLE_)) begin
-					/* ƒAƒNƒZƒXæ‚Ì‘I‘ğ */
-					if (s_index == `BUS_SLAVE_1) begin // SPM‚ÖƒAƒNƒZƒX
-						if (stall == `DISABLE) begin // ƒXƒg[ƒ‹”­¶‚Ìƒ`ƒFƒbƒN
+					/* ï¿½Aï¿½Nï¿½Zï¿½Xï¿½ï¿½ï¿½Ì‘Iï¿½ï¿½ */
+					if (s_index == `BUS_SLAVE_1) begin // SPMï¿½ÖƒAï¿½Nï¿½Zï¿½X
+						if (stall == `DISABLE) begin // ï¿½Xï¿½gï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒ`ï¿½Fï¿½bï¿½N
 							spm_as_	 = `ENABLE_;
-							if (rw == `READ) begin // “Ç‚İo‚µƒAƒNƒZƒX
+							if (rw == `READ) begin // ï¿½Ç‚İoï¿½ï¿½ï¿½Aï¿½Nï¿½Zï¿½X
 								rd_data	 = spm_rd_data;
 							end
 						end
-					end else begin					   // ƒoƒX‚ÖƒAƒNƒZƒX
+					end else begin					   // ï¿½oï¿½Xï¿½ÖƒAï¿½Nï¿½Zï¿½X
 						busy	 = `ENABLE;
 					end
 				end
 			end
-			`BUS_IF_STATE_REQ	 : begin // ƒoƒXƒŠƒNƒGƒXƒg
+			`BUS_IF_STATE_REQ	 : begin // ï¿½oï¿½Xï¿½ï¿½ï¿½Nï¿½Gï¿½Xï¿½g
 				busy	 = `ENABLE;
 			end
-			`BUS_IF_STATE_ACCESS : begin // ƒoƒXƒAƒNƒZƒX
-				/* ƒŒƒfƒB‘Ò‚¿ */
-				if (bus_rdy_ == `ENABLE_) begin // ƒŒƒfƒB“’…
-					if (rw == `READ) begin // “Ç‚İo‚µƒAƒNƒZƒX
+			`BUS_IF_STATE_ACCESS : begin // ï¿½oï¿½Xï¿½Aï¿½Nï¿½Zï¿½X
+				/* ï¿½ï¿½ï¿½fï¿½Bï¿½Ò‚ï¿½ */
+				if (bus_rdy_ == `ENABLE_) begin // ï¿½ï¿½ï¿½fï¿½Bï¿½ï¿½ï¿½ï¿½
+					if (rw == `READ) begin // ï¿½Ç‚İoï¿½ï¿½ï¿½Aï¿½Nï¿½Zï¿½X
 						rd_data	 = bus_rd_data;
 					end
-				end else begin					// ƒŒƒfƒB–¢“’…
+				end else begin					// ï¿½ï¿½ï¿½fï¿½Bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					busy	 = `ENABLE;
 				end
 			end
-			`BUS_IF_STATE_STALL	 : begin // ƒXƒg[ƒ‹
-				if (rw == `READ) begin // “Ç‚İo‚µƒAƒNƒZƒX
+			`BUS_IF_STATE_STALL	 : begin // ï¿½Xï¿½gï¿½[ï¿½ï¿½
+				if (rw == `READ) begin // ï¿½Ç‚İoï¿½ï¿½ï¿½Aï¿½Nï¿½Zï¿½X
 					rd_data	 = rd_buf;
 				end
 			end
 		endcase
 	end
 
-   /********** ƒoƒXƒCƒ“ƒ^ƒtƒF[ƒX‚Ìó‘Ô§Œä **********/ 
+   /********** ï¿½oï¿½Xï¿½Cï¿½ï¿½ï¿½^ï¿½tï¿½Fï¿½[ï¿½Xï¿½Ìï¿½ï¿½Ôï¿½ï¿½ï¿½ **********/
    always @(posedge clk or `RESET_EDGE reset) begin
 		if (reset == `RESET_ENABLE) begin
-			/* ”ñ“¯ŠúƒŠƒZƒbƒg */
+			/* ï¿½ñ“¯Šï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½g */
 			state		<= #1 `BUS_IF_STATE_IDLE;
 			bus_req_	<= #1 `DISABLE_;
 			bus_addr	<= #1 `WORD_ADDR_W'h0;
@@ -119,13 +119,13 @@ module bus_if (
 			bus_wr_data <= #1 `WORD_DATA_W'h0;
 			rd_buf		<= #1 `WORD_DATA_W'h0;
 		end else begin
-			/* ƒoƒXƒCƒ“ƒ^ƒtƒF[ƒX‚Ìó‘Ô */
+			/* ï¿½oï¿½Xï¿½Cï¿½ï¿½ï¿½^ï¿½tï¿½Fï¿½[ï¿½Xï¿½Ìï¿½ï¿½ï¿½ */
 			case (state)
-				`BUS_IF_STATE_IDLE	 : begin // ƒAƒCƒhƒ‹
-					/* ƒƒ‚ƒŠƒAƒNƒZƒX */
-					if ((flush == `DISABLE) && (as_ == `ENABLE_)) begin 
-						/* ƒAƒNƒZƒXæ‚Ì‘I‘ğ */
-						if (s_index != `BUS_SLAVE_1) begin // ƒoƒX‚ÖƒAƒNƒZƒX
+				`BUS_IF_STATE_IDLE	 : begin // ï¿½Aï¿½Cï¿½hï¿½ï¿½
+					/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Nï¿½Zï¿½X */
+					if ((flush == `DISABLE) && (as_ == `ENABLE_)) begin
+						/* ï¿½Aï¿½Nï¿½Zï¿½Xï¿½ï¿½ï¿½Ì‘Iï¿½ï¿½ */
+						if (s_index != `BUS_SLAVE_1) begin // ï¿½oï¿½Xï¿½ÖƒAï¿½Nï¿½Zï¿½X
 							state		<= #1 `BUS_IF_STATE_REQ;
 							bus_req_	<= #1 `ENABLE_;
 							bus_addr	<= #1 addr;
@@ -134,37 +134,37 @@ module bus_if (
 						end
 					end
 				end
-				`BUS_IF_STATE_REQ	 : begin // ƒoƒXƒŠƒNƒGƒXƒg
-					/* ƒoƒXƒOƒ‰ƒ“ƒg‘Ò‚¿ */
-					if (bus_grnt_ == `ENABLE_) begin // ƒoƒXŒ Šl“¾
+				`BUS_IF_STATE_REQ	 : begin // ï¿½oï¿½Xï¿½ï¿½ï¿½Nï¿½Gï¿½Xï¿½g
+					/* ï¿½oï¿½Xï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Ò‚ï¿½ */
+					if (bus_grnt_ == `ENABLE_) begin // ï¿½oï¿½Xï¿½ï¿½ï¿½lï¿½ï¿½
 						state		<= #1 `BUS_IF_STATE_ACCESS;
 						bus_as_		<= #1 `ENABLE_;
 					end
 				end
-				`BUS_IF_STATE_ACCESS : begin // ƒoƒXƒAƒNƒZƒX
-					/* ƒAƒhƒŒƒXƒXƒgƒ[ƒu‚ÌƒlƒQ[ƒg */
+				`BUS_IF_STATE_ACCESS : begin // ï¿½oï¿½Xï¿½Aï¿½Nï¿½Zï¿½X
+					/* ï¿½Aï¿½hï¿½ï¿½ï¿½Xï¿½Xï¿½gï¿½ï¿½ï¿½[ï¿½uï¿½Ìƒlï¿½Qï¿½[ï¿½g */
 					bus_as_		<= #1 `DISABLE_;
-					/* ƒŒƒfƒB‘Ò‚¿ */
-					if (bus_rdy_ == `ENABLE_) begin // ƒŒƒfƒB“’…
+					/* ï¿½ï¿½ï¿½fï¿½Bï¿½Ò‚ï¿½ */
+					if (bus_rdy_ == `ENABLE_) begin // ï¿½ï¿½ï¿½fï¿½Bï¿½ï¿½ï¿½ï¿½
 						bus_req_	<= #1 `DISABLE_;
 						bus_addr	<= #1 `WORD_ADDR_W'h0;
 						bus_rw		<= #1 `READ;
 						bus_wr_data <= #1 `WORD_DATA_W'h0;
-						/* “Ç‚İo‚µƒf[ƒ^‚Ì•Û‘¶ */
-						if (bus_rw == `READ) begin // “Ç‚İo‚µƒAƒNƒZƒX
+						/* ï¿½Ç‚İoï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½Ì•Û‘ï¿½ */
+						if (bus_rw == `READ) begin // ï¿½Ç‚İoï¿½ï¿½ï¿½Aï¿½Nï¿½Zï¿½X
 							rd_buf		<= #1 bus_rd_data;
 						end
-						/* ƒXƒg[ƒ‹”­¶‚Ìƒ`ƒFƒbƒN */
-						if (stall == `ENABLE) begin // ƒXƒg[ƒ‹”­¶
+						/* ï¿½Xï¿½gï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒ`ï¿½Fï¿½bï¿½N */
+						if (stall == `ENABLE) begin // ï¿½Xï¿½gï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 							state		<= #1 `BUS_IF_STATE_STALL;
-						end else begin				// ƒXƒg[ƒ‹–¢”­¶
+						end else begin				// ï¿½Xï¿½gï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 							state		<= #1 `BUS_IF_STATE_IDLE;
 						end
 					end
 				end
-				`BUS_IF_STATE_STALL	 : begin // ƒXƒg[ƒ‹
-					/* ƒXƒg[ƒ‹”­¶‚Ìƒ`ƒFƒbƒN */
-					if (stall == `DISABLE) begin // ƒXƒg[ƒ‹‰ğœ
+				`BUS_IF_STATE_STALL	 : begin // ï¿½Xï¿½gï¿½[ï¿½ï¿½
+					/* ï¿½Xï¿½gï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒ`ï¿½Fï¿½bï¿½N */
+					if (stall == `DISABLE) begin // ï¿½Xï¿½gï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						state		<= #1 `BUS_IF_STATE_IDLE;
 					end
 				end
