@@ -38,7 +38,7 @@ module gpr (
 	integer					   i;				   //
 
 	/********** (Write After Read) **********/
-	//  0
+	//  direct output the gpr[addr] data , 0
 	assign rd_data_0 = ((we_ == `ENABLE_) && (wr_addr == rd_addr_0)) ?
 					   wr_data : gpr[rd_addr_0];
 	//  1
