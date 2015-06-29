@@ -57,60 +57,60 @@ module bus_if (
 	/********** get bus slave index **********/
 	assign s_index	   = addr[`BusSlaveIndexLoc];
 
-	/********** �o�͂̃A�T�C�� **********/
+	/********** output assign **********/
 	assign spm_addr	   = addr;
 	assign spm_rw	   = rw;
 	assign spm_wr_data = wr_data;
 
-	/********** �������A�N�Z�X�̐��� **********/
+	/********** spm acess control **********/
 	always @(*) begin
-		/* �f�t�H���g�l */
+		/* set default value  */
 		rd_data	 = `WORD_DATA_W'h0;
 		spm_as_	 = `DISABLE_;
 		busy	 = `DISABLE;
-		/* �o�X�C���^�t�F�[�X�̏��� */
+		/* bus interface state switch */
 		case (state)
-			`BUS_IF_STATE_IDLE	 : begin // �A�C�h��
-				/* �������A�N�Z�X */
+			`BUS_IF_STATE_IDLE	 : begin // idle
+				/* check flush && as_ */
 				if ((flush == `DISABLE) && (as_ == `ENABLE_)) begin
-					/* �A�N�Z�X���̑I�� */
-					if (s_index == `BUS_SLAVE_1) begin // SPM�փA�N�Z�X
-						if (stall == `DISABLE) begin // �X�g�[�������̃`�F�b�N
+					/* select the access target  */
+					if (s_index == `BUS_SLAVE_1) begin // SPM acess ,no need bus cycle
+						if (stall == `DISABLE) begin // delay signal check
 							spm_as_	 = `ENABLE_;
-							if (rw == `READ) begin // �ǂݏo���A�N�Z�X
+							if (rw == `READ) begin // spm read
 								rd_data	 = spm_rd_data;
 							end
 						end
-					end else begin					   // �o�X�փA�N�Z�X
+					end else begin					   // other slave access ,set busy
 						busy	 = `ENABLE;
 					end
 				end
 			end
-			`BUS_IF_STATE_REQ	 : begin // �o�X���N�G�X�g
+			`BUS_IF_STATE_REQ	 : begin // bus aribitration request
 				busy	 = `ENABLE;
 			end
-			`BUS_IF_STATE_ACCESS : begin // �o�X�A�N�Z�X
-				/* ���f�B�҂� */
-				if (bus_rdy_ == `ENABLE_) begin // ���f�B����
-					if (rw == `READ) begin // �ǂݏo���A�N�Z�X
+			`BUS_IF_STATE_ACCESS : begin // bus access stage
+				/* wait for ready sigal  */
+				if (bus_rdy_ == `ENABLE_) begin //
+					if (rw == `READ) begin // bus read  reach
 						rd_data	 = bus_rd_data;
 					end
-				end else begin					// ���f�B������
+				end else begin					// ready signal not avavilable
 					busy	 = `ENABLE;
 				end
 			end
-			`BUS_IF_STATE_STALL	 : begin // �X�g�[��
-				if (rw == `READ) begin // �ǂݏo���A�N�Z�X
+			`BUS_IF_STATE_STALL	 : begin //
+				if (rw == `READ) begin //
 					rd_data	 = rd_buf;
 				end
 			end
 		endcase
 	end
 
-   /********** �o�X�C���^�t�F�[�X�̏��Ԑ��� **********/
+   /********** bus interface state control  **********/
    always @(posedge clk or `RESET_EDGE reset) begin
 		if (reset == `RESET_ENABLE) begin
-			/* �񓯊����Z�b�g */
+			/* async reset  */
 			state		<= #1 `BUS_IF_STATE_IDLE;
 			bus_req_	<= #1 `DISABLE_;
 			bus_addr	<= #1 `WORD_ADDR_W'h0;
@@ -119,13 +119,13 @@ module bus_if (
 			bus_wr_data <= #1 `WORD_DATA_W'h0;
 			rd_buf		<= #1 `WORD_DATA_W'h0;
 		end else begin
-			/* �o�X�C���^�t�F�[�X�̏��� */
+			/* bus interface state */
 			case (state)
-				`BUS_IF_STATE_IDLE	 : begin // �A�C�h��
-					/* �������A�N�Z�X */
+				`BUS_IF_STATE_IDLE	 : begin //
+					/*   */
 					if ((flush == `DISABLE) && (as_ == `ENABLE_)) begin
-						/* �A�N�Z�X���̑I�� */
-						if (s_index != `BUS_SLAVE_1) begin // �o�X�փA�N�Z�X
+						/*  memory access */
+						if (s_index != `BUS_SLAVE_1) begin // access spm
 							state		<= #1 `BUS_IF_STATE_REQ;
 							bus_req_	<= #1 `ENABLE_;
 							bus_addr	<= #1 addr;
@@ -135,8 +135,8 @@ module bus_if (
 					end
 				end
 				`BUS_IF_STATE_REQ	 : begin // �o�X���N�G�X�g
-					/* �o�X�O�����g�҂� */
-					if (bus_grnt_ == `ENABLE_) begin // �o�X���l��
+					/* wait for aribitration permit */
+					if (bus_grnt_ == `ENABLE_) begin // get bus grant
 						state		<= #1 `BUS_IF_STATE_ACCESS;
 						bus_as_		<= #1 `ENABLE_;
 					end
