@@ -134,37 +134,37 @@ module bus_if (
 						end
 					end
 				end
-				`BUS_IF_STATE_REQ	 : begin // �o�X���N�G�X�g
+				`BUS_IF_STATE_REQ	 : begin // wait for request ack
 					/* wait for aribitration permit */
 					if (bus_grnt_ == `ENABLE_) begin // get bus grant
 						state		<= #1 `BUS_IF_STATE_ACCESS;
 						bus_as_		<= #1 `ENABLE_;
 					end
 				end
-				`BUS_IF_STATE_ACCESS : begin // �o�X�A�N�Z�X
-					/* �A�h���X�X�g���[�u�̃l�Q�[�g */
-					bus_as_		<= #1 `DISABLE_;
-					/* ���f�B�҂� */
-					if (bus_rdy_ == `ENABLE_) begin // ���f�B����
+				`BUS_IF_STATE_ACCESS : begin // access data ing
+					/* disable address select  */
+					bus_as_		<= #1 `DISABLE_; //??
+					/* wait for bus ready  */
+					if (bus_rdy_ == `ENABLE_) begin // ok
 						bus_req_	<= #1 `DISABLE_;
 						bus_addr	<= #1 `WORD_ADDR_W'h0;
 						bus_rw		<= #1 `READ;
 						bus_wr_data <= #1 `WORD_DATA_W'h0;
-						/* �ǂݏo���f�[�^�̕ۑ� */
-						if (bus_rw == `READ) begin // �ǂݏo���A�N�Z�X
+						/* save read data */
+						if (bus_rw == `READ) begin // read action
 							rd_buf		<= #1 bus_rd_data;
 						end
-						/* �X�g�[�������̃`�F�b�N */
-						if (stall == `ENABLE) begin // �X�g�[������
+						/* check whether delay  */
+						if (stall == `ENABLE) begin //
 							state		<= #1 `BUS_IF_STATE_STALL;
-						end else begin				// �X�g�[��������
+						end else begin				//
 							state		<= #1 `BUS_IF_STATE_IDLE;
 						end
 					end
 				end
-				`BUS_IF_STATE_STALL	 : begin // �X�g�[��
-					/* �X�g�[�������̃`�F�b�N */
-					if (stall == `DISABLE) begin // �X�g�[������
+				`BUS_IF_STATE_STALL	 : begin //
+					/*  */
+					if (stall == `DISABLE) begin // 
 						state		<= #1 `BUS_IF_STATE_IDLE;
 					end
 				end
