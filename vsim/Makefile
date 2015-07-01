@@ -1,5 +1,5 @@
-EXECUTABLE := tb #to be correct
-MODULE := tb #to be correct
+EXECUTABLE := tb
+MODULE := counter
 
 CC := vlog
 CFLAGS := -reportprogress 300 +incdir+./include -work work -incr # add more option here if you want to compile with some library
@@ -9,7 +9,8 @@ SIM := vsim
 VIEW := vsim
 TIME := -all
 #ACTION := “log -ports -internal $(EXECUTABLE)/*;log -r $(EXECUTABLE)/$(MODULE)/*;run $(TIME);quit”
-ACTION := “do wave.do;run $(TIME);quit”
+ACTION := “log -ports -internal $(EXECUTABLE)/*;log -r $(EXECUTABLE)/$(MODULE)/*;run $(TIME);quit”
+#ACTION := “do wave.do;run $(TIME);quit”
 SFLAGS := -c -do $(ACTION) -wlf $(EXECUTABLE).wlf
 SIMULATE := $(SIM) $(SFLAGS)
 
