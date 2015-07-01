@@ -1,32 +1,32 @@
 /*
  -- ============================================================================
  -- FILE NAME	: gpio.h
- -- DESCRIPTION : General Purpose I/Oƒwƒbƒ_
+ -- DESCRIPTION : General Purpose I/O
  -- ----------------------------------------------------------------------------
  -- Revision  Date		  Coding_by	 Comment
- -- 1.0.0	  2011/06/27  suito		 V‹Kì¬
+ -- 1.0.0	  2011/06/27  suito		 ï¿½Vï¿½Kï¿½ì¬
  -- ============================================================================
 */
 
 `ifndef __GPIO_HEADER__
-   `define __GPIO_HEADER__			// ƒCƒ“ƒNƒ‹[ƒhƒK[ƒh
+   `define __GPIO_HEADER__			//
 
-	/********** ƒ|[ƒg”‚Ì’è‹` **********/
-	`define GPIO_IN_CH		   4	// “ü—Íƒ|[ƒg”
-	`define GPIO_OUT_CH		   18	// o—Íƒ|[ƒg”
-	`define GPIO_IO_CH		   16	// “üo—Íƒ|[ƒg”
-  
-	/********** ƒoƒX **********/
-	`define GpioAddrBus		   1:0	// ƒAƒhƒŒƒXƒoƒX
-	`define GPIO_ADDR_W		   2	// ƒAƒhƒŒƒX•
-	`define GpioAddrLoc		   1:0	// ƒAƒhƒŒƒX‚ÌˆÊ’u
-	/********** ƒAƒhƒŒƒXƒ}ƒbƒv **********/
-	`define GPIO_ADDR_IN_DATA  2'h0 // §ŒäƒŒƒWƒXƒ^ 0 : “ü—Íƒ|[ƒg
-	`define GPIO_ADDR_OUT_DATA 2'h1 // §ŒäƒŒƒWƒXƒ^ 1 : o—Íƒ|[ƒg
-	`define GPIO_ADDR_IO_DATA  2'h2 // §ŒäƒŒƒWƒXƒ^ 2 : “üo—Íƒ|[ƒg
-	`define GPIO_ADDR_IO_DIR   2'h3 // §ŒäƒŒƒWƒXƒ^ 3 : “üo—Í•ûŒü
-	/********** “üo—Í•ûŒü **********/
-	`define GPIO_DIR_IN		   1'b0 // “ü—Í
-	`define GPIO_DIR_OUT	   1'b1 // o—Í
+	/********** ï¿½|ï¿½[ï¿½gï¿½ï¿½ï¿½Ì’ï¿½ï¿½` **********/
+	`define GPIO_IN_CH		   4	// IO INPUT Channel
+	`define GPIO_OUT_CH		   18	// IO Output Channel
+	`define GPIO_IO_CH		   16	// Input Output Channel
+
+	/********** bus define  **********/
+	`define GpioAddrBus		   1:0	// address bus
+	`define GPIO_ADDR_W		   2	// address bus width
+	`define GpioAddrLoc		   1:0	//address location
+	/********** io data define  **********/
+	`define GPIO_ADDR_IN_DATA  2'h0 // control reg 0 : input data
+	`define GPIO_ADDR_OUT_DATA 2'h1 // control reg 1 : output data
+	`define GPIO_ADDR_IO_DATA  2'h2 // control reg 2 : input output data
+	`define GPIO_ADDR_IO_DIR   2'h3 // control reg 3 : io direction
+	/********** io direction define  **********/
+	`define GPIO_DIR_IN		   1'b0 // input
+	`define GPIO_DIR_OUT	   1'b1 // output 
 
 `endif

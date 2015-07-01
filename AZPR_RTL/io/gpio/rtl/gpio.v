@@ -4,56 +4,56 @@
  -- DESCRIPTION :  General Purpose I/O
  -- ----------------------------------------------------------------------------
  -- Revision  Date		  Coding_by	 Comment
- -- 1.0.0	  2011/06/27  suito		 V‹Kì¬
+ -- 1.0.0	  2011/06/27  suito		 ï¿½Vï¿½Kï¿½ì¬
  -- ============================================================================
 */
 
-/********** ‹¤’Êƒwƒbƒ_ƒtƒ@ƒCƒ‹ **********/
+/********** common include  **********/
 `include "nettype.h"
 `include "stddef.h"
 `include "global_config.h"
 
-/********** ŒÂ•Êƒwƒbƒ_ƒtƒ@ƒCƒ‹ **********/
+/********** gpio include  **********/
 `include "gpio.h"
 
-/********** ƒ‚ƒWƒ…[ƒ‹ **********/
+/********** module define  **********/
 module gpio (
-	/********** ƒNƒƒbƒN & ƒŠƒZƒbƒg **********/
-	input  wire						clk,	 // ƒNƒƒbƒN
-	input  wire						reset,	 // ƒŠƒZƒbƒg
-	/********** ƒoƒXƒCƒ“ƒ^ƒtƒF[ƒX **********/
-	input  wire						cs_,	 // ƒ`ƒbƒvƒZƒŒƒNƒg
-	input  wire						as_,	 // ƒAƒhƒŒƒXƒXƒgƒ[ƒu
+	/**********  &  **********/
+	input  wire						clk,	 //
+	input  wire						reset,	 //
+	/********** bus interface signals  **********/
+	input  wire						cs_,	 // chip select
+	input  wire						as_,	 // address select
 	input  wire						rw,		 // Read / Write
-	input  wire [`GpioAddrBus]		addr,	 // ƒAƒhƒŒƒX
-	input  wire [`WordDataBus]		wr_data, // ‘‚«‚İƒf[ƒ^
-	output reg	[`WordDataBus]		rd_data, // “Ç‚İo‚µƒf[ƒ^
-	output reg						rdy_	 // ƒŒƒfƒB
-	/********** ”Ä—p“üo—Íƒ|[ƒg **********/
-`ifdef GPIO_IN_CH	 // “ü—Íƒ|[ƒg‚ÌÀ‘•
-	, input wire [`GPIO_IN_CH-1:0]	gpio_in	 // “ü—Íƒ|[ƒgi§ŒäƒŒƒWƒXƒ^0j
+	input  wire [`GpioAddrBus]		addr,	 // gpio address bus
+	input  wire [`WordDataBus]		wr_data, // write data
+	output reg	[`WordDataBus]		rd_data, // read data
+	output reg						rdy_	 // read ready
+	/**********  **********/
+`ifdef GPIO_IN_CH	 //
+	, input wire [`GPIO_IN_CH-1:0]	gpio_in	 // gpio input
 `endif
-`ifdef GPIO_OUT_CH	 // o—Íƒ|[ƒg‚ÌÀ‘•
-	, output reg [`GPIO_OUT_CH-1:0] gpio_out // o—Íƒ|[ƒgi§ŒäƒŒƒWƒXƒ^1j
+`ifdef GPIO_OUT_CH	 //
+	, output reg [`GPIO_OUT_CH-1:0] gpio_out // output
 `endif
-`ifdef GPIO_IO_CH	 // “üo—Íƒ|[ƒg‚ÌÀ‘•
-	, inout wire [`GPIO_IO_CH-1:0]	gpio_io	 // “üo—Íƒ|[ƒgi§ŒäƒŒƒWƒXƒ^2j
+`ifdef GPIO_IO_CH	 //
+	, inout wire [`GPIO_IO_CH-1:0]	gpio_io	 // input output
 `endif
 );
 
-`ifdef GPIO_IO_CH	 // “üo—Íƒ|[ƒg‚Ì§Œä
-	/********** “üo—ÍM† **********/
-	wire [`GPIO_IO_CH-1:0]			io_in;	 // “ü—Íƒf[ƒ^
-	reg	 [`GPIO_IO_CH-1:0]			io_out;	 // o—Íƒf[ƒ^
-	reg	 [`GPIO_IO_CH-1:0]			io_dir;	 // “üo—Í•ûŒüi§ŒäƒŒƒWƒXƒ^3j
-	reg	 [`GPIO_IO_CH-1:0]			io;		 // “üo—Í
-	integer							i;		 // ƒCƒeƒŒ[ƒ^
-   
-	/********** “üo—ÍM†‚ÌŒp‘±‘ã“ü **********/
-	assign io_in	   = gpio_io;			 // “ü—Íƒf[ƒ^
-	assign gpio_io	   = io;				 // “üo—Í
+`ifdef GPIO_IO_CH	 //
+	/**********  **********/
+	wire [`GPIO_IO_CH-1:0]			io_in;	 // internal input
+	reg	 [`GPIO_IO_CH-1:0]			io_out;	 // internal output
+	reg	 [`GPIO_IO_CH-1:0]			io_dir;	 // internal direction
+	reg	 [`GPIO_IO_CH-1:0]			io;		 // input output
+	integer							i;		 //
 
-	/********** “üo—Í•ûŒü‚Ì§Œä **********/
+	/********** input output assign **********/
+	assign io_in	   = gpio_io;			 //
+	assign gpio_io	   = io;				 //
+
+	/********** gpio direction control **********/
 	always @(*) begin
 		for (i = 0; i < `GPIO_IO_CH; i = i + 1) begin : IO_DIR
 			io[i] = (io_dir[i] == `GPIO_DIR_IN) ? 1'bz : io_out[i];
@@ -61,49 +61,49 @@ module gpio (
 	end
 
 `endif
-   
-	/********** GPIO‚Ì§Œä **********/
+
+	/********** GPIO control  **********/
 	always @(posedge clk or `RESET_EDGE reset) begin
 		if (reset == `RESET_ENABLE) begin
-			/* ”ñ“¯ŠúƒŠƒZƒbƒg */
+			/* reset */
 			rd_data	 <= #1 `WORD_DATA_W'h0;
 			rdy_	 <= #1 `DISABLE_;
-`ifdef GPIO_OUT_CH	 // o—Íƒ|[ƒg‚ÌƒŠƒZƒbƒg
+`ifdef GPIO_OUT_CH	 //
 			gpio_out <= #1 {`GPIO_OUT_CH{`LOW}};
 `endif
-`ifdef GPIO_IO_CH	 // “üo—Íƒ|[ƒg‚ÌƒŠƒZƒbƒg
+`ifdef GPIO_IO_CH	 // gpio in out port
 			io_out	 <= #1 {`GPIO_IO_CH{`LOW}};
 			io_dir	 <= #1 {`GPIO_IO_CH{`GPIO_DIR_IN}};
 `endif
 		end else begin
-			/* ƒŒƒfƒB‚Ì¶¬ */
+			/*  */
 			if ((cs_ == `ENABLE_) && (as_ == `ENABLE_)) begin
 				rdy_	 <= #1 `ENABLE_;
 			end else begin
 				rdy_	 <= #1 `DISABLE_;
-			end 
-			/* “Ç‚İo‚µƒAƒNƒZƒX */
+			end
+			/* read control register  */
 			if ((cs_ == `ENABLE_) && (as_ == `ENABLE_) && (rw == `READ)) begin
 				case (addr)
-`ifdef GPIO_IN_CH	// “ü—Íƒ|[ƒg‚Ì“Ç‚İo‚µ
-					`GPIO_ADDR_IN_DATA	: begin // §ŒäƒŒƒWƒXƒ^ 0
-						rd_data	 <= #1 {{`WORD_DATA_W-`GPIO_IN_CH{1'b0}}, 
+`ifdef GPIO_IN_CH	//
+					`GPIO_ADDR_IN_DATA	: begin // control reg  0
+						rd_data	 <= #1 {{`WORD_DATA_W-`GPIO_IN_CH{1'b0}},
 										gpio_in};
 					end
 `endif
-`ifdef GPIO_OUT_CH	// o—Íƒ|[ƒg‚Ì“Ç‚İo‚µ
-					`GPIO_ADDR_OUT_DATA : begin // §ŒäƒŒƒWƒXƒ^ 1
-						rd_data	 <= #1 {{`WORD_DATA_W-`GPIO_OUT_CH{1'b0}}, 
+`ifdef GPIO_OUT_CH	//
+					`GPIO_ADDR_OUT_DATA : begin // control reg  1
+						rd_data	 <= #1 {{`WORD_DATA_W-`GPIO_OUT_CH{1'b0}},
 										gpio_out};
 					end
 `endif
-`ifdef GPIO_IO_CH	// “üo—Íƒ|[ƒg‚Ì“Ç‚İo‚µ
-					`GPIO_ADDR_IO_DATA	: begin // §ŒäƒŒƒWƒXƒ^ 2
-						rd_data	 <= #1 {{`WORD_DATA_W-`GPIO_IO_CH{1'b0}}, 
+`ifdef GPIO_IO_CH	//
+					`GPIO_ADDR_IO_DATA	: begin // control reg  2
+						rd_data	 <= #1 {{`WORD_DATA_W-`GPIO_IO_CH{1'b0}},
 										io_in};
 					 end
-					`GPIO_ADDR_IO_DIR	: begin // §ŒäƒŒƒWƒXƒ^ 3
-						rd_data	 <= #1 {{`WORD_DATA_W-`GPIO_IO_CH{1'b0}}, 
+					`GPIO_ADDR_IO_DIR	: begin // control reg  3
+						rd_data	 <= #1 {{`WORD_DATA_W-`GPIO_IO_CH{1'b0}},
 										io_dir};
 					end
 `endif
@@ -111,19 +111,19 @@ module gpio (
 			end else begin
 				rd_data	 <= #1 `WORD_DATA_W'h0;
 			end
-			/* ‘‚«‚İƒAƒNƒZƒX */
+			/* write control reg */
 			if ((cs_ == `ENABLE_) && (as_ == `ENABLE_) && (rw == `WRITE)) begin
 				case (addr)
-`ifdef GPIO_OUT_CH	// o—Íƒ|[ƒg‚Ö‚Ì‘‚«‚±‚İ
-					`GPIO_ADDR_OUT_DATA : begin // §ŒäƒŒƒWƒXƒ^ 1
+`ifdef GPIO_OUT_CH	//
+					`GPIO_ADDR_OUT_DATA : begin // creg 1
 						gpio_out <= #1 wr_data[`GPIO_OUT_CH-1:0];
 					end
 `endif
-`ifdef GPIO_IO_CH	// “üo—Íƒ|[ƒg‚Ö‚Ì‘‚«‚±‚İ
-					`GPIO_ADDR_IO_DATA	: begin // §ŒäƒŒƒWƒXƒ^ 2
+`ifdef GPIO_IO_CH	// 
+					`GPIO_ADDR_IO_DATA	: begin // creg 2
 						io_out	 <= #1 wr_data[`GPIO_IO_CH-1:0];
 					 end
-					`GPIO_ADDR_IO_DIR	: begin // §ŒäƒŒƒWƒXƒ^ 3
+					`GPIO_ADDR_IO_DIR	: begin // creg 3
 						io_dir	 <= #1 wr_data[`GPIO_IO_CH-1:0];
 					end
 `endif

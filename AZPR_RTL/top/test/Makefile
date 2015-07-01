@@ -1,4 +1,4 @@
-target=chip_top.out 
+target=chip_top.out
 
 ${target} : test.dat
 	./sim.sh rom.dat spm.dat  100
