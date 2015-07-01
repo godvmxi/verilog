@@ -1,5 +1,5 @@
-EXECUTABLE := top_module #to be correct
-MODULE := module_to_be_sim #to be correct
+EXECUTABLE := tb #to be correct
+MODULE := tb #to be correct
 
 CC := vlog
 CFLAGS := -reportprogress 300 +incdir+./include -work work -incr # add more option here if you want to compile with some library
@@ -8,7 +8,8 @@ COMPILE := $(CC) $(CFLAGS)
 SIM := vsim
 VIEW := vsim
 TIME := -all
-ACTION := “log -ports -internal $(EXECUTABLE)/*;log -r $(EXECUTABLE)/$(MODULE)/*;run $(TIME);quit”
+#ACTION := “log -ports -internal $(EXECUTABLE)/*;log -r $(EXECUTABLE)/$(MODULE)/*;run $(TIME);quit”
+ACTION := “do wave.do;run $(TIME);quit”
 SFLAGS := -c -do $(ACTION) -wlf $(EXECUTABLE).wlf
 SIMULATE := $(SIM) $(SFLAGS)
 
