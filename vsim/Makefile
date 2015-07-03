@@ -9,9 +9,9 @@ SIM := vsim
 VIEW := vsim
 TIME := -all
 #ACTION := “log -ports -internal $(EXECUTABLE)/*;log -r $(EXECUTABLE)/$(MODULE)/*;run $(TIME);quit”
-ACTION := “log -ports -internal $(EXECUTABLE)/*;log -r $(EXECUTABLE)/$(MODULE)/*;run $(TIME);quit”
+ACTION := “log -r /*;run $(TIME);quit”
 #ACTION := “do wave.do;run $(TIME);quit”
-SFLAGS := -c -do $(ACTION) -wlf $(EXECUTABLE).wlf
+SFLAGS := -c -do  $(ACTION) -wlf $(EXECUTABLE).wlf
 SIMULATE := $(SIM) $(SFLAGS)
 
 SRCS := $(wildcard *.v )

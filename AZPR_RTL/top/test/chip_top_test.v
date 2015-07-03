@@ -1,158 +1,158 @@
-/* 
+/*
  -- ============================================================================
  -- FILE NAME	: chip_top_test.v
- -- DESCRIPTION : ƒeƒXƒgƒxƒ“ƒ`
+ -- DESCRIPTION : ï¿½eï¿½Xï¿½gï¿½xï¿½ï¿½ï¿½`
  -- ----------------------------------------------------------------------------
  -- Revision  Date		  Coding_by	 Comment
- -- 1.0.0	  2012/04/02  suito		 V‹Kì¬
+ -- 1.0.0	  2012/04/02  suito		 ï¿½Vï¿½Kï¿½ì¬
  -- ============================================================================
 */
 
-/********** ƒ^ƒCƒ€ƒXƒP[ƒ‹ **********/
-`timescale 1ns/1ps					 // ƒ^ƒCƒ€ƒXƒP[ƒ‹
+/********** time  define **********/
+`timescale 1ns/1ps					 //
 
-/********** ‹¤’Êƒwƒbƒ_ƒtƒ@ƒCƒ‹ **********/
+/********** common include  **********/
 `include "nettype.h"
 `include "stddef.h"
 `include "global_config.h"
 
-/********** ŒÂ•Êƒwƒbƒ_ƒtƒ@ƒCƒ‹ **********/
+/********** include  **********/
 `include "bus.h"
 `include "cpu.h"
 `include "gpio.h"
 
-/********** ƒ‚ƒWƒ…[ƒ‹ **********/
+/********** chip top test **********/
 module chip_top_test;
-	/********** “üo—ÍM† **********/
-	// ƒNƒƒbƒN & ƒŠƒZƒbƒg
-	reg						clk_ref;	   // Šî’êƒNƒƒbƒN
-	reg						reset_sw;	   // ƒOƒ[ƒoƒ‹ƒŠƒZƒbƒg
+	/********** ï¿½ï¿½ï¿½oï¿½ÍMï¿½ï¿½ **********/
+	// ï¿½Nï¿½ï¿½ï¿½bï¿½N & ï¿½ï¿½ï¿½Zï¿½bï¿½g
+	reg						clk_ref;	   // ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½bï¿½N
+	reg						reset_sw;	   // ï¿½Oï¿½ï¿½ï¿½[ï¿½oï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½g
 	// UART
-`ifdef IMPLEMENT_UART // UARTÀ‘•
-	wire					uart_rx;	   // UARTóMM†
-	wire					uart_tx;	   // UART‘—MM†
+`ifdef IMPLEMENT_UART // UARTï¿½ï¿½ï¿½ï¿½
+	wire					uart_rx;	   // UARTï¿½ï¿½ï¿½Mï¿½Mï¿½ï¿½
+	wire					uart_tx;	   // UARTï¿½ï¿½ï¿½Mï¿½Mï¿½ï¿½
 `endif
-	// ”Ä—p“üo—Íƒ|[ƒg
-`ifdef IMPLEMENT_GPIO // GPIOÀ‘•
-`ifdef GPIO_IN_CH	 // “ü—Íƒ|[ƒg‚ÌÀ‘•
-	wire [`GPIO_IN_CH-1:0]	gpio_in = {`GPIO_IN_CH{1'b0}}; // “ü—Íƒ|[ƒg
+	// ï¿½Ä—pï¿½ï¿½ï¿½oï¿½Íƒ|ï¿½[ï¿½g
+`ifdef IMPLEMENT_GPIO // GPIOï¿½ï¿½ï¿½ï¿½
+`ifdef GPIO_IN_CH	 // ï¿½ï¿½ï¿½Íƒ|ï¿½[ï¿½gï¿½Ìï¿½ï¿½ï¿½
+	wire [`GPIO_IN_CH-1:0]	gpio_in = {`GPIO_IN_CH{1'b0}}; // ï¿½ï¿½ï¿½Íƒ|ï¿½[ï¿½g
 `endif
-`ifdef GPIO_OUT_CH	 // o—Íƒ|[ƒg‚ÌÀ‘•
-	wire [`GPIO_OUT_CH-1:0] gpio_out;					   // o—Íƒ|[ƒg
+`ifdef GPIO_OUT_CH	 // ï¿½oï¿½Íƒ|ï¿½[ï¿½gï¿½Ìï¿½ï¿½ï¿½
+	wire [`GPIO_OUT_CH-1:0] gpio_out;					   // ï¿½oï¿½Íƒ|ï¿½[ï¿½g
 `endif
-`ifdef GPIO_IO_CH	 // “üo—Íƒ|[ƒg‚ÌÀ‘•
-	wire [`GPIO_IO_CH-1:0]	gpio_io = {`GPIO_IO_CH{1'bz}}; // “üo—Íƒ|[ƒg
+`ifdef GPIO_IO_CH	 // ï¿½ï¿½ï¿½oï¿½Íƒ|ï¿½[ï¿½gï¿½Ìï¿½ï¿½ï¿½
+	wire [`GPIO_IO_CH-1:0]	gpio_io = {`GPIO_IO_CH{1'bz}}; // ï¿½ï¿½ï¿½oï¿½Íƒ|ï¿½[ï¿½g
 `endif
-`endif
-						 
-	/********** UARTƒ‚ƒfƒ‹ **********/
-`ifdef IMPLEMENT_UART // UARTÀ‘•
-	wire					 rx_busy;		  // óM’†ƒtƒ‰ƒO
-	wire					 rx_end;		  // óMŠ®—¹M†
-	wire [`ByteDataBus]		 rx_data;		  // óMƒf[ƒ^
 `endif
 
-	/********** ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“ƒTƒCƒNƒ‹ **********/
+	/********** UARTï¿½ï¿½ï¿½fï¿½ï¿½ **********/
+`ifdef IMPLEMENT_UART // UARTï¿½ï¿½ï¿½ï¿½
+	wire					 rx_busy;		  // ï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½tï¿½ï¿½ï¿½O
+	wire					 rx_end;		  // ï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½ï¿½ï¿½Mï¿½ï¿½
+	wire [`ByteDataBus]		 rx_data;		  // ï¿½ï¿½ï¿½Mï¿½fï¿½[ï¿½^
+`endif
+
+	/********** ï¿½Vï¿½~ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Tï¿½Cï¿½Nï¿½ï¿½ **********/
 	parameter				 STEP = 100.0000; // 10 M
 
-	/********** ƒNƒƒbƒN¶¬ **********/
+	/********** ï¿½Nï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½ **********/
 	always #( STEP / 2 ) begin
 		clk_ref <= ~clk_ref;
 	end
 
-	/********** chip_top‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‰» **********/  
+	/********** chip_topï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ï¿½ **********/
 	chip_top chip_top (
-		/********** ƒNƒƒbƒN & ƒŠƒZƒbƒg **********/
-		.clk_ref	(clk_ref), // Šî’êƒNƒƒbƒN
-		.reset_sw	(reset_sw) // ƒOƒ[ƒoƒ‹ƒŠƒZƒbƒg
+		/********** ï¿½Nï¿½ï¿½ï¿½bï¿½N & ï¿½ï¿½ï¿½Zï¿½bï¿½g **********/
+		.clk_ref	(clk_ref), // ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½bï¿½N
+		.reset_sw	(reset_sw) // ï¿½Oï¿½ï¿½ï¿½[ï¿½oï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½g
 		/********** UART **********/
-`ifdef IMPLEMENT_UART // UARTÀ‘•
-		, .uart_rx	(uart_rx)  // UARTóMM†
-		, .uart_tx	(uart_tx)  // UART‘—MM†
+`ifdef IMPLEMENT_UART // UARTï¿½ï¿½ï¿½ï¿½
+		, .uart_rx	(uart_rx)  // UARTï¿½ï¿½ï¿½Mï¿½Mï¿½ï¿½
+		, .uart_tx	(uart_tx)  // UARTï¿½ï¿½ï¿½Mï¿½Mï¿½ï¿½
 `endif
-	/********** ”Ä—p“üo—Íƒ|[ƒg **********/
-`ifdef IMPLEMENT_GPIO // GPIOÀ‘•
-`ifdef GPIO_IN_CH			   // “ü—Íƒ|[ƒg‚ÌÀ‘•
-		, .gpio_in	(gpio_in)  // “ü—Íƒ|[ƒg
+	/********** ï¿½Ä—pï¿½ï¿½ï¿½oï¿½Íƒ|ï¿½[ï¿½g **********/
+`ifdef IMPLEMENT_GPIO // GPIOï¿½ï¿½ï¿½ï¿½
+`ifdef GPIO_IN_CH			   // ï¿½ï¿½ï¿½Íƒ|ï¿½[ï¿½gï¿½Ìï¿½ï¿½ï¿½
+		, .gpio_in	(gpio_in)  // ï¿½ï¿½ï¿½Íƒ|ï¿½[ï¿½g
 `endif
-`ifdef GPIO_OUT_CH	 // o—Íƒ|[ƒg‚ÌÀ‘•
-		, .gpio_out (gpio_out) // o—Íƒ|[ƒg
+`ifdef GPIO_OUT_CH	 // ï¿½oï¿½Íƒ|ï¿½[ï¿½gï¿½Ìï¿½ï¿½ï¿½
+		, .gpio_out (gpio_out) // ï¿½oï¿½Íƒ|ï¿½[ï¿½g
 `endif
-`ifdef GPIO_IO_CH	 // “üo—Íƒ|[ƒg‚ÌÀ‘•
-		, .gpio_io	(gpio_io)  // “üo—Íƒ|[ƒg
+`ifdef GPIO_IO_CH	 // ï¿½ï¿½ï¿½oï¿½Íƒ|ï¿½[ï¿½gï¿½Ìï¿½ï¿½ï¿½
+		, .gpio_io	(gpio_io)  // ï¿½ï¿½ï¿½oï¿½Íƒ|ï¿½[ï¿½g
 `endif
 `endif
 );
 
-	/********** GPIO‚Ìƒ‚ƒjƒ^ƒŠƒ“ƒO **********/	
-`ifdef IMPLEMENT_GPIO // GPIOÀ‘•
-`ifdef GPIO_IN_CH	 // “ü—Íƒ|[ƒg‚ÌÀ‘•
-	always @(gpio_in) begin	 // gpio_in‚ª•Ï‰»‚µ‚½‚ç’l‚ğƒvƒŠƒ“ƒg
+	/********** GPIO **********/
+`ifdef IMPLEMENT_GPIO // GPIO
+`ifdef GPIO_IN_CH	 //
+	always @(gpio_in) begin	 // gpio_in monitor
 		$display($time, " gpio_in changed  : %b", gpio_in);
 	end
 `endif
-`ifdef GPIO_OUT_CH	 // o—Íƒ|[ƒg‚ÌÀ‘•
-	always @(gpio_out) begin // gpio_out‚ª•Ï‰»‚µ‚½‚ç’l‚ğƒvƒŠƒ“ƒg
+`ifdef GPIO_OUT_CH	 //
+	always @(gpio_out) begin // gpio_out monitor
 		$display($time, " gpio_out changed : %b", gpio_out);
 	end
 `endif
-`ifdef GPIO_IO_CH	 // “üo—Íƒ|[ƒg‚ÌÀ‘•
-	always @(gpio_io) begin // gpio_io‚ª•Ï‰»‚µ‚½‚ç’l‚ğƒvƒŠƒ“ƒg
+`ifdef GPIO_IO_CH	 //
+	always @(gpio_io) begin // gpio_io monitor
 		$display($time, " gpio_io changed  : %b", gpio_io);
 	end
 `endif
 `endif
 
-	/********** UARTƒ‚ƒfƒ‹‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‰» **********/	
-`ifdef IMPLEMENT_UART // UARTÀ‘•
-	/********** óMM† **********/  
-	assign uart_rx = `HIGH;		// ƒAƒCƒhƒ‹
-//	  assign uart_rx = uart_tx; // ƒ‹[ƒvƒoƒbƒN
+	/********** UARTï¿½ï¿½ï¿½fï¿½ï¿½ï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ï¿½ **********/
+`ifdef IMPLEMENT_UART // UARTï¿½ï¿½ï¿½ï¿½
+	/********** ï¿½ï¿½ï¿½Mï¿½Mï¿½ï¿½ **********/
+	assign uart_rx = `HIGH;		// ï¿½Aï¿½Cï¿½hï¿½ï¿½
+//	  assign uart_rx = uart_tx; // ï¿½ï¿½ï¿½[ï¿½vï¿½oï¿½bï¿½N
 
-	/********** UARTƒ‚ƒfƒ‹ **********/	
+	/********** UARTï¿½ï¿½ï¿½fï¿½ï¿½ **********/
 	uart_rx uart_model (
-		/********** ƒNƒƒbƒN & ƒŠƒZƒbƒg **********/
-		.clk	  (chip_top.clk),		 // ƒNƒƒbƒN
-		.reset	  (chip_top.chip_reset), // ”ñ“¯ŠúƒŠƒZƒbƒg
-		/********** §ŒäM† **********/
-		.rx_busy  (rx_busy),			 // óM’†ƒtƒ‰ƒO
-		.rx_end	  (rx_end),				 // óMŠ®—¹M†
-		.rx_data  (rx_data),			 // óMƒf[ƒ^
+		/********** ï¿½Nï¿½ï¿½ï¿½bï¿½N & ï¿½ï¿½ï¿½Zï¿½bï¿½g **********/
+		.clk	  (chip_top.clk),		 // ï¿½Nï¿½ï¿½ï¿½bï¿½N
+		.reset	  (chip_top.chip_reset), // ï¿½ñ“¯Šï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½g
+		/********** ï¿½ï¿½ï¿½ï¿½ï¿½Mï¿½ï¿½ **********/
+		.rx_busy  (rx_busy),			 // ï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½tï¿½ï¿½ï¿½O
+		.rx_end	  (rx_end),				 // ï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½ï¿½ï¿½Mï¿½ï¿½
+		.rx_data  (rx_data),			 // ï¿½ï¿½ï¿½Mï¿½fï¿½[ï¿½^
 		/********** Receive Signal **********/
-		.rx		  (uart_tx)				 // UARTóMM†
+		.rx		  (uart_tx)				 // UARTï¿½ï¿½ï¿½Mï¿½Mï¿½ï¿½
 	);
 
-	/********** ‘—MM†‚Ìƒ‚ƒjƒ^ƒŠƒ“ƒO **********/	
+	/********** ï¿½ï¿½ï¿½Mï¿½Mï¿½ï¿½ï¿½Ìƒï¿½ï¿½jï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½O **********/
 	always @(posedge chip_top.clk) begin
-		if (rx_end == `ENABLE) begin // óM‚µ‚½‚ç•¶š‚ğo—Í
+		if (rx_end == `ENABLE) begin // ï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½ï¿½ï¿½ç•¶ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½
 			$write("%c", rx_data);
 		end
 	end
 `endif
 
-	/********** ƒeƒXƒgƒV[ƒPƒ“ƒX **********/  
+	/********** ï¿½eï¿½Xï¿½gï¿½Vï¿½[ï¿½Pï¿½ï¿½ï¿½X **********/
 	initial begin
 		# 0 begin
 			clk_ref	 <= `HIGH;
 			reset_sw <= `RESET_ENABLE;
 		end
 		# ( STEP / 2 )
-		# ( STEP / 4 ) begin		  // ƒƒ‚ƒŠƒCƒ[ƒW‚Ì“Ç‚İ‚İ
+		# ( STEP / 4 ) begin		  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Wï¿½Ì“Ç‚İï¿½ï¿½ï¿½
 			$readmemh(`ROM_PRG, chip_top.chip.rom.x_s3e_sprom.mem);
 			$readmemh(`SPM_PRG, chip_top.chip.cpu.spm.x_s3e_dpram.mem);
 		end
-		# ( STEP * 20 ) begin		  // ƒŠƒZƒbƒg‚Ì‰ğœ
+		# ( STEP * 20 ) begin		  // ï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½Ì‰ï¿½ï¿½ï¿½
 			reset_sw <= `RESET_DISABLE;
 		end
-		# ( STEP * `SIM_CYCLE ) begin // ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“‚ÌÀs
+		# ( STEP * `SIM_CYCLE ) begin // ï¿½Vï¿½~ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½s
 			$finish;
 		end
 	end
 
-	/********** ”gŒ`‚Ìo—Í **********/	
+	/********** ï¿½gï¿½`ï¿½Ìoï¿½ï¿½ **********/
 	initial begin
 		$dumpfile("chip_top.vcd");
 		$dumpvars(0, chip_top);
 	end
-  
-endmodule	
+
+endmodule
